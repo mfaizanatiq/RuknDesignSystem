@@ -1,0 +1,9 @@
+# Netlify redirects file
+# This ensures proper routing for your static site
+
+# Redirect default Netlify subdomain to custom domain (optional)
+# https://ruknds.netlify.app/* https://yourdomain.com/:splat 301!
+
+# SPA-style routing - serve index.html for non-existent routes
+/*    /index.html   200
+
