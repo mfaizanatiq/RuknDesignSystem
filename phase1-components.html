@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 1 Components - Rukn Design System</title>
+  
+  <!-- Rukn DS -->
+  <link rel="stylesheet" href="design-system-variables.css">
+  <link rel="stylesheet" href="design-system.css">
+  
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 2rem;
+    }
+    
+    .demo-section {
+      margin-bottom: 4rem;
+    }
+    
+    .demo-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: hsl(var(--foreground));
+    }
+    
+    .demo-subtitle {
+      color: hsl(var(--muted-foreground));
+      margin-bottom: 2rem;
+    }
+    
+    .demo-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .demo-card {
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1rem;
+      padding: 2rem;
+      backdrop-filter: blur(20px);
+    }
+    
+    .demo-card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: hsl(var(--foreground));
+    }
+    
+    .demo-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .demo-label {
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+      margin-bottom: 0.5rem;
+    }
+    
+    .code-block {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: #a0aec0;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="ds-navbar">
+    <div class="ds-navbar-container">
+      <a href="index.html" class="ds-navbar-brand">
+        <span class="ds-navbar-logo">🏛️</span>
+        <span>Rukn DS</span>
+      </a>
+      
+      <nav class="ds-navbar-nav">
+        <div class="ds-navbar-menu">
+          <a href="index.html"><button class="btn-ghost btn-sm">Home</button></a>
+          <a href="components.html"><button class="btn-ghost btn-sm">All Components</button></a>
+          <a href="phase1-components.html"><button class="btn-primary btn-sm">Phase 1 New</button></a>
+        </div>
+      </nav>
+    </div>
+  </nav>
+  
+  <div class="ds-navbar-spacer"></div>
+  
+  <!-- Main Content -->
+  <div class="ds-container ds-container-4xl">
+    
+    <!-- Header -->
+    <header style="text-align: center; margin-bottom: 4rem;">
+      <h1 class="ds-h1">Phase 1 Components 🎉</h1>
+      <p class="ds-text-lg" style="color: hsl(var(--muted-foreground)); margin-top: 1rem;">
+        New feedback and loading components with Rukn's glass morphism style
+      </p>
+      <div style="margin-top: 2rem;">
+        <span class="ds-badge ds-badge-success">✓ Tooltip</span>
+        <span class="ds-badge ds-badge-success">✓ Alert</span>
+        <span class="ds-badge ds-badge-success">✓ Toast</span>
+        <span class="ds-badge ds-badge-success">✓ Progress</span>
+        <span class="ds-badge ds-badge-success">✓ Spinner</span>
+      </div>
+    </header>
+    
+    <!-- ===== TOOLTIP SECTION ===== -->
+    <section class="demo-section">
+      <h2 class="demo-title">Tooltip</h2>
+      <p class="demo-subtitle">Floating help text with glass morphism</p>
+      
+      <div class="demo-grid">
+        <div class="demo-card">
+          <h3 class="demo-card-title">Tooltip Positions</h3>
+          <div class="demo-card-content">
+            <div class="demo-label">Hover over buttons to see tooltips</div>
+            <div class="demo-row" style="justify-content: center; gap: 2rem; margin: 2rem 0;">
+              <button class="btn-primary btn-sm" data-tooltip="Top tooltip" data-tooltip-side="top">
+                Top
+              </button>
+            </div>
+            <div class="demo-row" style="justify-content: space-between;">
+              <button class="btn-secondary btn-sm" data-tooltip="Left tooltip" data-tooltip-side="left">
+                Left
+              </button>
+              <button class="btn-secondary btn-sm" data-tooltip="Right tooltip" data-tooltip-side="right">
+                Right
+              </button>
+            </div>
+            <div class="demo-row" style="justify-content: center; gap: 2rem; margin: 2rem 0;">
+              <button class="btn-outline btn-sm" data-tooltip="Bottom tooltip" data-tooltip-side="bottom">
+                Bottom
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <h3 class="demo-card-title">Usage Example</h3>
+          <div class="demo-card-content">
+            <p style="color: hsl(var(--foreground) / 0.8); line-height: 1.6;">
+              Add <code style="background: rgba(255,255,255,0.1); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">data-tooltip</code> attribute to any element.
+              Tooltips automatically initialize on page load.
+            </p>
+            <div class="code-block">
+&lt;button data-tooltip="Save your changes" data-tooltip-side="top"&gt;
+  Save
+&lt;/button&gt;
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===== ALERT SECTION ===== -->
+    <section class="demo-section">
+      <h2 class="demo-title">Alert</h2>
+      <p class="demo-subtitle">Inline notification banners</p>
+      
+      <div class="demo-grid">
+        <div class="demo-card">
+          <h3 class="demo-card-title">Alert Variants</h3>
+          <div class="demo-card-content">
+            
+            <!-- Info Alert -->
+            <div class="ds-alert ds-alert-info">
+              <div class="ds-alert-icon">ℹ</div>
+              <div class="ds-alert-content">
+                <div class="ds-alert-title">Information</div>
+                <div class="ds-alert-description">This is an informational message</div>
+              </div>
+              <button class="ds-alert-close">✕</button>
+            </div>
+            
+            <!-- Success Alert -->
+            <div class="ds-alert ds-alert-success">
+              <div class="ds-alert-icon">✓</div>
+              <div class="ds-alert-content">
+                <div class="ds-alert-title">Success</div>
+                <div class="ds-alert-description">Your changes have been saved successfully</div>
+              </div>
+              <button class="ds-alert-close">✕</button>
+            </div>
+            
+            <!-- Warning Alert -->
+            <div class="ds-alert ds-alert-warning">
+              <div class="ds-alert-icon">⚠</div>
+              <div class="ds-alert-content">
+                <div class="ds-alert-title">Warning</div>
+                <div class="ds-alert-description">Please review your settings before continuing</div>
+              </div>
+              <button class="ds-alert-close">✕</button>
+            </div>
+            
+            <!-- Error Alert -->
+            <div class="ds-alert ds-alert-error">
+              <div class="ds-alert-icon">✕</div>
+              <div class="ds-alert-content">
+                <div class="ds-alert-title">Error</div>
+                <div class="ds-alert-description">Unable to save your changes. Please try again</div>
+              </div>
+              <button class="ds-alert-close">✕</button>
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <h3 class="demo-card-title">Usage Example</h3>
+          <div class="demo-card-content">
+            <p style="color: hsl(var(--foreground) / 0.8); line-height: 1.6;">
+              Use alert components for inline notifications. Click the × button to dismiss.
+            </p>
+            <div class="code-block">
+&lt;div class="ds-alert ds-alert-success"&gt;
+  &lt;div class="ds-alert-icon"&gt;✓&lt;/div&gt;
+  &lt;div class="ds-alert-content"&gt;
+    &lt;div class="ds-alert-title"&gt;Success&lt;/div&gt;
+    &lt;div class="ds-alert-description"&gt;Saved&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="ds-alert-close"&gt;✕&lt;/button&gt;
+&lt;/div&gt;
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===== TOAST SECTION ===== -->
+    <section class="demo-section">
+      <h2 class="demo-title">Toast Notifications</h2>
+      <p class="demo-subtitle">Temporary notification messages</p>
+      
+      <div class="demo-grid">
+        <div class="demo-card">
+          <h3 class="demo-card-title">Toast Demo</h3>
+          <div class="demo-card-content">
+            <div class="demo-label">Click buttons to trigger toast notifications</div>
+            <div class="demo-row">
+              <button class="btn-primary btn-sm" onclick="RuknDS.toast.success('Success!', 'Your operation completed successfully')">
+                Success Toast
+              </button>
+              <button class="btn-outline btn-sm" onclick="RuknDS.toast.info('Info', 'This is an informational message')">
+                Info Toast
+              </button>
+            </div>
+            <div class="demo-row">
+              <button class="btn-secondary btn-sm" onclick="RuknDS.toast.warning('Warning', 'Please check your input')">
+                Warning Toast
+              </button>
+              <button class="btn-destructive btn-sm" onclick="RuknDS.toast.error('Error', 'Something went wrong')">
+                Error Toast
+              </button>
+            </div>
+            <div class="demo-row">
+              <button class="btn-outline btn-sm" onclick="RuknDS.showToast({title: 'Custom', description: 'Long-lived toast', duration: 10000, variant: 'success'})">
+                Long Duration (10s)
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <h3 class="demo-card-title">Usage Example</h3>
+          <div class="demo-card-content">
+            <p style="color: hsl(var(--foreground) / 0.8); line-height: 1.6;">
+              Use JavaScript to trigger toast notifications programmatically.
+            </p>
+            <div class="code-block">
+// Simple usage
+RuknDS.toast.success('Success!', 'Operation completed');
+
+// Custom configuration
+RuknDS.showToast({
+  title: 'Custom Toast',
+  description: 'With custom options',
+  variant: 'info',
+  duration: 5000
+});
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===== PROGRESS SECTION ===== -->
+    <section class="demo-section">
+      <h2 class="demo-title">Progress Indicators</h2>
+      <p class="demo-subtitle">Linear and circular progress bars</p>
+      
+      <div class="demo-grid">
+        <div class="demo-card">
+          <h3 class="demo-card-title">Linear Progress</h3>
+          <div class="demo-card-content">
+            
+            <div>
+              <div class="demo-label">Primary (60%)</div>
+              <div class="ds-progress">
+                <div class="ds-progress-bar" style="width: 60%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="demo-label">Success (80%)</div>
+              <div class="ds-progress ds-progress-success">
+                <div class="ds-progress-bar" style="width: 80%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="demo-label">Warning (45%)</div>
+              <div class="ds-progress ds-progress-warning">
+                <div class="ds-progress-bar" style="width: 45%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="demo-label">Error (30%)</div>
+              <div class="ds-progress ds-progress-error">
+                <div class="ds-progress-bar" style="width: 30%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="demo-label">Indeterminate (Loading)</div>
+              <div class="ds-progress ds-progress-indeterminate">
+                <div class="ds-progress-bar"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="demo-label">Size Variants</div>
+              <div class="ds-progress ds-progress-sm">
+                <div class="ds-progress-bar" style="width: 50%"></div>
+              </div>
+              <div class="ds-progress" style="margin-top: 0.5rem;">
+                <div class="ds-progress-bar" style="width: 50%"></div>
+              </div>
+              <div class="ds-progress ds-progress-lg" style="margin-top: 0.5rem;">
+                <div class="ds-progress-bar" style="width: 50%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <button class="btn-primary btn-sm" onclick="animateProgressDemo()">
+                Animate Progress
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <h3 class="demo-card-title">Circular Progress</h3>
+          <div class="demo-card-content" style="align-items: center;">
+            
+            <div class="ds-progress-circle">
+              <svg class="ds-progress-circle-svg" viewBox="0 0 100 100">
+                <circle class="ds-progress-circle-track" cx="50" cy="50" r="46"></circle>
+                <circle class="ds-progress-circle-fill" cx="50" cy="50" r="46" 
+                        stroke-dasharray="289.027" stroke-dashoffset="115.611"></circle>
+              </svg>
+              <span class="ds-progress-circle-text">60%</span>
+            </div>
+            
+            <div class="demo-label" style="margin-top: 1rem;">Size Variants</div>
+            <div class="demo-row" style="justify-content: center;">
+              <div class="ds-progress-circle ds-progress-circle-sm">
+                <svg class="ds-progress-circle-svg" viewBox="0 0 100 100">
+                  <circle class="ds-progress-circle-track" cx="50" cy="50" r="46"></circle>
+                  <circle class="ds-progress-circle-fill" cx="50" cy="50" r="46" 
+                          stroke-dasharray="289.027" stroke-dashoffset="144.514"></circle>
+                </svg>
+                <span class="ds-progress-circle-text">50%</span>
+              </div>
+              
+              <div class="ds-progress-circle ds-progress-circle-lg">
+                <svg class="ds-progress-circle-svg" viewBox="0 0 100 100">
+                  <circle class="ds-progress-circle-track" cx="50" cy="50" r="46"></circle>
+                  <circle class="ds-progress-circle-fill" cx="50" cy="50" r="46" 
+                          stroke-dasharray="289.027" stroke-dashoffset="86.708"></circle>
+                </svg>
+                <span class="ds-progress-circle-text">70%</span>
+              </div>
+            </div>
+            
+            <div class="code-block" style="width: 100%;">
+// Update progress dynamically
+const bar = document.querySelector('.ds-progress-bar');
+RuknDS.updateProgress(bar, 75);
+
+// Animate progress
+RuknDS.animateProgress(bar, 90, 1000);
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===== SPINNER SECTION ===== -->
+    <section class="demo-section">
+      <h2 class="demo-title">Spinners & Loading States</h2>
+      <p class="demo-subtitle">Loading indicators and spinners</p>
+      
+      <div class="demo-grid">
+        <div class="demo-card">
+          <h3 class="demo-card-title">Spinner Sizes</h3>
+          <div class="demo-card-content">
+            <div class="demo-label">Different sizes</div>
+            <div class="demo-row" style="align-items: center;">
+              <div class="ds-spinner ds-spinner-xs"></div>
+              <div class="ds-spinner ds-spinner-sm"></div>
+              <div class="ds-spinner"></div>
+              <div class="ds-spinner ds-spinner-lg"></div>
+              <div class="ds-spinner ds-spinner-xl"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <h3 class="demo-card-title">Spinner Variants</h3>
+          <div class="demo-card-content">
+            <div class="demo-label">Different colors</div>
+            <div class="demo-row">
+              <div class="ds-spinner ds-spinner-primary"></div>
+              <div class="ds-spinner ds-spinner-success"></div>
+              <div class="ds-spinner ds-spinner-warning"></div>
+              <div class="ds-spinner ds-spinner-error"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <h3 class="demo-card-title">Button Loading States</h3>
+          <div class="demo-card-content">
+            <div class="demo-row">
+              <button class="btn-primary btn-sm" id="demoLoadingBtn">
+                Click to Load
+              </button>
+              <button class="btn-secondary btn-sm btn-loading">
+                Loading...
+              </button>
+              <button class="btn-outline btn-sm btn-loading">
+                Processing
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="demo-card">
+          <h3 class="demo-card-title">Loading Overlay</h3>
+          <div class="demo-card-content">
+            <button class="btn-primary" onclick="showLoadingDemo()">
+              Show Loading Overlay (2s)
+            </button>
+            <div class="code-block">
+// Show loading overlay
+RuknDS.showLoadingOverlay();
+
+// Hide after operation
+setTimeout(() => {
+  RuknDS.hideLoadingOverlay();
+}, 2000);
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 6rem; padding: 2rem; color: hsl(var(--muted-foreground));">
+      <p>🏛️ Rukn Design System - Phase 1 Components</p>
+      <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+        Built with glass morphism &amp; iOS motion design
+      </p>
+    </footer>
+    
+  </div>
+  
+  <!-- Scripts -->
+  <script src="modal-drawer-helpers.js"></script>
+  <script src="component-helpers.js"></script>
+  
+  <script>
+    // Demo: Animate progress
+    function animateProgressDemo() {
+      const progressBar = document.querySelector('.ds-progress-bar');
+      const currentValue = parseFloat(progressBar.style.width) || 0;
+      const targetValue = currentValue >= 100 ? 0 : 100;
+      RuknDS.animateProgress(progressBar, targetValue, 1500);
+    }
+    
+    // Demo: Loading overlay
+    function showLoadingDemo() {
+      RuknDS.showLoadingOverlay();
+      setTimeout(() => {
+        RuknDS.hideLoadingOverlay();
+        RuknDS.toast.success('Complete!', 'Loading finished');
+      }, 2000);
+    }
+    
+    // Demo: Button loading state
+    document.getElementById('demoLoadingBtn')?.addEventListener('click', function() {
+      RuknDS.setButtonLoading(this);
+      setTimeout(() => {
+        RuknDS.removeButtonLoading(this);
+        RuknDS.toast.success('Done!', 'Operation completed');
+      }, 2000);
+    });
+    
+    // Initialize toast container
+    RuknDS.initToastContainer('top-right');
+  </script>
+  
+</body>
+</html>
+

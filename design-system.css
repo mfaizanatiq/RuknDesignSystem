@@ -2834,3 +2834,822 @@ h6, .ds-h6 {
   .ds-hidden-desktop { display: none; }
 }
 
+/* ========================================
+   TOOLTIP COMPONENT
+   Floating help text with glass morphism
+   ======================================== */
+
+.ds-tooltip {
+  position: absolute;
+  z-index: 10000;
+  padding: var(--r-space-2) var(--r-space-3);
+  max-width: 200px;
+  pointer-events: none;
+  
+  /* Enhanced Glass for Floating Elements */
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--r-radius-lg);
+  backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
+  -webkit-backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
+  
+  /* Deep Shadow for Elevation */
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  
+  /* Typography */
+  font-size: var(--r-font-size-xs);
+  font-weight: var(--r-font-weight-medium);
+  color: hsl(var(--foreground));
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  line-height: var(--r-line-height-snug);
+  
+  /* Hidden by default */
+  opacity: 0;
+  transform: scale(0.94);
+  transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-tooltip[data-state="open"] {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Ensure tooltip parent has relative positioning */
+[data-tooltip] {
+  position: relative;
+}
+
+/* Tooltip Arrow - Glass Effect */
+.ds-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Position Variants */
+.ds-tooltip[data-side="top"] {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px) scale(0.94);
+  margin-bottom: 8px;
+}
+
+.ds-tooltip[data-side="top"][data-state="open"] {
+  transform: translateX(-50%) translateY(-8px) scale(1);
+}
+
+.ds-tooltip[data-side="top"]::before {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  border-top: none;
+  border-left: none;
+}
+
+.ds-tooltip[data-side="bottom"] {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px) scale(0.94);
+  margin-top: 8px;
+}
+
+.ds-tooltip[data-side="bottom"][data-state="open"] {
+  transform: translateX(-50%) translateY(8px) scale(1);
+}
+
+.ds-tooltip[data-side="bottom"]::before {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  border-bottom: none;
+  border-right: none;
+}
+
+.ds-tooltip[data-side="left"] {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px) scale(0.94);
+  margin-right: 8px;
+}
+
+.ds-tooltip[data-side="left"][data-state="open"] {
+  transform: translateY(-50%) translateX(-8px) scale(1);
+}
+
+.ds-tooltip[data-side="left"]::before {
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  border-left: none;
+  border-bottom: none;
+}
+
+.ds-tooltip[data-side="right"] {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%) translateX(8px) scale(0.94);
+  margin-left: 8px;
+}
+
+.ds-tooltip[data-side="right"][data-state="open"] {
+  transform: translateY(-50%) translateX(8px) scale(1);
+}
+
+.ds-tooltip[data-side="right"]::before {
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  border-right: none;
+  border-top: none;
+}
+
+/* ========================================
+   ALERT COMPONENT
+   Inline notification banner
+   ======================================== */
+
+.ds-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--r-space-3);
+  padding: var(--r-space-4);
+  border-radius: var(--r-radius-xl);
+  
+  /* Subtle Glass Background */
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  transition: all var(--r-transition-base) var(--r-ease-ios-smooth);
+}
+
+/* Alert Icon */
+.ds-alert-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/* Alert Content */
+.ds-alert-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ds-alert-title {
+  font-weight: var(--r-font-weight-semibold);
+  font-size: var(--r-font-size-sm);
+  margin-bottom: var(--r-space-1);
+  color: hsl(var(--foreground));
+  line-height: var(--r-line-height-snug);
+}
+
+.ds-alert-description {
+  font-size: var(--r-font-size-sm);
+  color: hsl(var(--foreground) / 0.8);
+  line-height: var(--r-line-height-relaxed);
+}
+
+/* Alert Close Button */
+.ds-alert-close {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--r-radius-full);
+  color: hsl(var(--foreground) / 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-alert-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: hsl(var(--foreground));
+  transform: scale(1.1);
+}
+
+.ds-alert-close:active {
+  transform: scale(0.95);
+  transition-duration: var(--r-transition-instant);
+}
+
+/* Variant: Info */
+.ds-alert-info {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.08) 0%,
+    hsl(var(--primary) / 0.04) 100%
+  );
+  border-color: hsl(var(--primary) / 0.2);
+}
+
+.ds-alert-info .ds-alert-icon {
+  color: hsl(var(--primary));
+}
+
+/* Variant: Success */
+.ds-alert-success {
+  background: linear-gradient(135deg,
+    hsl(var(--success) / 0.08) 0%,
+    hsl(var(--success) / 0.04) 100%
+  );
+  border-color: hsl(var(--success) / 0.2);
+}
+
+.ds-alert-success .ds-alert-icon {
+  color: hsl(var(--success));
+}
+
+/* Variant: Warning */
+.ds-alert-warning {
+  background: linear-gradient(135deg,
+    hsl(var(--warning) / 0.08) 0%,
+    hsl(var(--warning) / 0.04) 100%
+  );
+  border-color: hsl(var(--warning) / 0.2);
+}
+
+.ds-alert-warning .ds-alert-icon {
+  color: hsl(var(--warning));
+}
+
+/* Variant: Error/Destructive */
+.ds-alert-error,
+.ds-alert-destructive {
+  background: linear-gradient(135deg,
+    hsl(var(--destructive) / 0.08) 0%,
+    hsl(var(--destructive) / 0.04) 100%
+  );
+  border-color: hsl(var(--destructive) / 0.2);
+}
+
+.ds-alert-error .ds-alert-icon,
+.ds-alert-destructive .ds-alert-icon {
+  color: hsl(var(--destructive));
+}
+
+/* ========================================
+   TOAST / NOTIFICATION COMPONENT
+   Temporary notification messages
+   ======================================== */
+
+.ds-toast-container {
+  position: fixed;
+  z-index: 10002;
+  display: flex;
+  flex-direction: column;
+  gap: var(--r-space-2);
+  pointer-events: none;
+}
+
+/* Toast Positions */
+.ds-toast-container-top-right {
+  top: var(--r-space-4);
+  right: var(--r-space-4);
+}
+
+.ds-toast-container-top-left {
+  top: var(--r-space-4);
+  left: var(--r-space-4);
+}
+
+.ds-toast-container-bottom-right {
+  bottom: var(--r-space-4);
+  right: var(--r-space-4);
+}
+
+.ds-toast-container-bottom-left {
+  bottom: var(--r-space-4);
+  left: var(--r-space-4);
+}
+
+.ds-toast-container-top-center {
+  top: var(--r-space-4);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ds-toast-container-bottom-center {
+  bottom: var(--r-space-4);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Toast Component */
+.ds-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--r-space-3);
+  padding: var(--r-space-4);
+  min-width: 300px;
+  max-width: 400px;
+  border-radius: var(--r-radius-xl);
+  pointer-events: auto;
+  
+  /* Enhanced Glass Effect */
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
+  -webkit-backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
+  
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  /* Animation */
+  animation: toastSlideIn var(--r-transition-base) var(--r-spring-smooth);
+}
+
+.ds-toast[data-state="closing"] {
+  animation: toastSlideOut var(--r-transition-base) var(--r-ease-ios-accelerate);
+}
+
+/* Toast Icon */
+.ds-toast-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/* Toast Content */
+.ds-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ds-toast-title {
+  font-weight: var(--r-font-weight-semibold);
+  font-size: var(--r-font-size-sm);
+  margin-bottom: var(--r-space-1);
+  color: hsl(var(--foreground));
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ds-toast-description {
+  font-size: var(--r-font-size-sm);
+  color: hsl(var(--foreground) / 0.9);
+  line-height: var(--r-line-height-relaxed);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Toast Close Button */
+.ds-toast-close {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--r-radius-full);
+  color: hsl(var(--foreground) / 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-toast-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: hsl(var(--foreground));
+  transform: scale(1.1);
+}
+
+.ds-toast-close:active {
+  transform: scale(0.95);
+}
+
+/* Toast Variants */
+.ds-toast-success {
+  background: linear-gradient(135deg,
+    hsl(var(--success) / 0.15) 0%,
+    hsl(var(--success) / 0.10) 100%
+  );
+  border-color: hsl(var(--success) / 0.3);
+}
+
+.ds-toast-success .ds-toast-icon {
+  color: hsl(var(--success));
+}
+
+.ds-toast-error,
+.ds-toast-destructive {
+  background: linear-gradient(135deg,
+    hsl(var(--destructive) / 0.15) 0%,
+    hsl(var(--destructive) / 0.10) 100%
+  );
+  border-color: hsl(var(--destructive) / 0.3);
+}
+
+.ds-toast-error .ds-toast-icon,
+.ds-toast-destructive .ds-toast-icon {
+  color: hsl(var(--destructive));
+}
+
+.ds-toast-warning {
+  background: linear-gradient(135deg,
+    hsl(var(--warning) / 0.15) 0%,
+    hsl(var(--warning) / 0.10) 100%
+  );
+  border-color: hsl(var(--warning) / 0.3);
+}
+
+.ds-toast-warning .ds-toast-icon {
+  color: hsl(var(--warning));
+}
+
+.ds-toast-info {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.15) 0%,
+    hsl(var(--primary) / 0.10) 100%
+  );
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+.ds-toast-info .ds-toast-icon {
+  color: hsl(var(--primary));
+}
+
+/* Toast Animations */
+@keyframes toastSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toastSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+}
+
+/* Mobile Toast */
+@media (max-width: 768px) {
+  .ds-toast {
+    min-width: calc(100vw - var(--r-space-8));
+    max-width: calc(100vw - var(--r-space-8));
+  }
+  
+  .ds-toast-container-top-right,
+  .ds-toast-container-top-left,
+  .ds-toast-container-top-center {
+    left: var(--r-space-4);
+    right: var(--r-space-4);
+    transform: none;
+  }
+  
+  .ds-toast-container-bottom-right,
+  .ds-toast-container-bottom-left,
+  .ds-toast-container-bottom-center {
+    left: var(--r-space-4);
+    right: var(--r-space-4);
+    transform: none;
+  }
+}
+
+/* ========================================
+   PROGRESS BAR COMPONENT
+   Linear progress indicator
+   ======================================== */
+
+.ds-progress {
+  position: relative;
+  width: 100%;
+  height: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--r-radius-full);
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.ds-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.9) 50%,
+    hsl(var(--primary)) 100%
+  );
+  border-radius: var(--r-radius-full);
+  box-shadow: 
+    0 0 8px hsl(var(--primary) / 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: width var(--r-transition-base) var(--r-ease-ios-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer Effect */
+.ds-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: progressShimmer 2s infinite;
+}
+
+@keyframes progressShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Progress Sizes */
+.ds-progress-sm {
+  height: 0.375rem;
+}
+
+.ds-progress-lg {
+  height: 0.75rem;
+}
+
+/* Progress Variants */
+.ds-progress-success .ds-progress-bar {
+  background: linear-gradient(90deg,
+    hsl(var(--success)) 0%,
+    hsl(var(--success) / 0.9) 50%,
+    hsl(var(--success)) 100%
+  );
+  box-shadow: 
+    0 0 8px hsl(var(--success) / 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.ds-progress-warning .ds-progress-bar {
+  background: linear-gradient(90deg,
+    hsl(var(--warning)) 0%,
+    hsl(var(--warning) / 0.9) 50%,
+    hsl(var(--warning)) 100%
+  );
+  box-shadow: 
+    0 0 8px hsl(var(--warning) / 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.ds-progress-error .ds-progress-bar,
+.ds-progress-destructive .ds-progress-bar {
+  background: linear-gradient(90deg,
+    hsl(var(--destructive)) 0%,
+    hsl(var(--destructive) / 0.9) 50%,
+    hsl(var(--destructive)) 100%
+  );
+  box-shadow: 
+    0 0 8px hsl(var(--destructive) / 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Indeterminate Progress */
+.ds-progress-indeterminate .ds-progress-bar {
+  width: 40% !important;
+  animation: progressIndeterminate 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes progressIndeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+/* ========================================
+   PROGRESS CIRCLE COMPONENT
+   Circular progress indicator
+   ======================================== */
+
+.ds-progress-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+}
+
+.ds-progress-circle-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ds-progress-circle-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 4;
+  cx: 50%;
+  cy: 50%;
+  r: calc(50% - 4px);
+}
+
+.ds-progress-circle-fill {
+  fill: none;
+  stroke: hsl(var(--primary));
+  stroke-width: 4;
+  stroke-linecap: round;
+  cx: 50%;
+  cy: 50%;
+  r: calc(50% - 4px);
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--r-transition-base) var(--r-ease-ios-smooth);
+  filter: drop-shadow(0 0 4px hsl(var(--primary) / 0.4));
+}
+
+.ds-progress-circle-text {
+  position: absolute;
+  font-size: var(--r-font-size-sm);
+  font-weight: var(--r-font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+/* Circle Sizes */
+.ds-progress-circle-sm {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.ds-progress-circle-sm .ds-progress-circle-text {
+  font-size: var(--r-font-size-xs);
+}
+
+.ds-progress-circle-lg {
+  width: 6rem;
+  height: 6rem;
+}
+
+.ds-progress-circle-lg .ds-progress-circle-text {
+  font-size: var(--r-font-size-lg);
+}
+
+/* ========================================
+   SPINNER / LOADING INDICATOR
+   Rotating loading spinner
+   ======================================== */
+
+.ds-spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: hsl(var(--primary));
+  border-radius: var(--r-radius-full);
+  animation: spinnerRotate 0.8s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Spinner Sizes */
+.ds-spinner-xs {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+.ds-spinner-sm {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-width: 2px;
+}
+
+.ds-spinner-lg {
+  width: 2rem;
+  height: 2rem;
+  border-width: 3px;
+}
+
+.ds-spinner-xl {
+  width: 3rem;
+  height: 3rem;
+  border-width: 4px;
+}
+
+/* Spinner Variants */
+.ds-spinner-primary {
+  border-top-color: hsl(var(--primary));
+}
+
+.ds-spinner-success {
+  border-top-color: hsl(var(--success));
+}
+
+.ds-spinner-warning {
+  border-top-color: hsl(var(--warning));
+}
+
+.ds-spinner-error,
+.ds-spinner-destructive {
+  border-top-color: hsl(var(--destructive));
+}
+
+/* Spinner with backdrop (centered overlay) */
+.ds-spinner-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.ds-spinner-overlay .ds-spinner {
+  width: 3rem;
+  height: 3rem;
+  border-width: 4px;
+}
+
+/* Button with Spinner */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn-loading * {
+  opacity: 0;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: spinnerRotate 0.6s linear infinite;
+  z-index: 1;
+}
+
