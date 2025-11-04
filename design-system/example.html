@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Example</title>
+  <link rel="stylesheet" href="design-system-variables.css">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    section {
+      margin-bottom: 3rem;
+    }
+    
+    h1, h2 {
+      margin-top: 0;
+    }
+    
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .input-group {
+      margin: 1rem 0;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Design System Example</h1>
+    
+    <!-- Buttons Section -->
+    <section>
+      <h2>Buttons</h2>
+      
+      <h3>Variants</h3>
+      <div class="button-group">
+        <button class="btn-primary">Primary</button>
+        <button class="btn-secondary">Secondary</button>
+        <button class="btn-outline">Outline</button>
+        <button class="btn-ghost">Ghost</button>
+        <button class="btn-tertiary">Tertiary</button>
+        <button class="btn-destructive">Destructive</button>
+        <button class="btn-link">Link Style</button>
+      </div>
+      
+      <h3>Sizes</h3>
+      <div class="button-group">
+        <button class="btn-primary btn-sm">Small</button>
+        <button class="btn-primary btn-md">Medium</button>
+        <button class="btn-primary btn-lg">Large</button>
+        <button class="btn-primary btn-icon">⚙️</button>
+      </div>
+      
+      <h3>Disabled State</h3>
+      <div class="button-group">
+        <button class="btn-primary" disabled>Disabled</button>
+        <button class="btn-secondary" disabled>Disabled</button>
+      </div>
+    </section>
+    
+    <!-- Inputs Section -->
+    <section>
+      <h2>Inputs</h2>
+      
+      <div class="input-group">
+        <label>Text Input</label>
+        <input type="text" class="ds-input" placeholder="Enter text">
+      </div>
+      
+      <div class="input-group">
+        <label>Email Input</label>
+        <input type="email" class="ds-input" placeholder="your@email.com">
+      </div>
+      
+      <div class="input-group">
+        <label>Textarea</label>
+        <textarea class="ds-textarea" placeholder="Enter message"></textarea>
+      </div>
+      
+      <div class="input-group">
+        <label>Select</label>
+        <select class="ds-select">
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+      </div>
+    </section>
+    
+    <!-- Checkboxes Section -->
+    <section>
+      <h2>Checkboxes</h2>
+      
+      <h3>Basic</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0;">
+        <label class="ds-checkbox-wrapper">
+          <input type="checkbox" class="ds-checkbox" checked>
+          <span class="ds-checkbox-label">Accept terms and conditions</span>
+        </label>
+        
+        <label class="ds-checkbox-wrapper">
+          <input type="checkbox" class="ds-checkbox">
+          <span class="ds-checkbox-label">Remember me</span>
+        </label>
+        
+        <label class="ds-checkbox-wrapper">
+          <input type="checkbox" class="ds-checkbox" checked>
+          <span class="ds-checkbox-label">Subscribe to newsletter</span>
+        </label>
+        
+        <label class="ds-checkbox-wrapper">
+          <input type="checkbox" class="ds-checkbox" disabled>
+          <span class="ds-checkbox-label">Disabled option</span>
+        </label>
+      </div>
+      
+      <h3>Sizes</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0;">
+        <label class="ds-checkbox-wrapper">
+          <input type="checkbox" class="ds-checkbox ds-checkbox-sm" checked>
+          <span class="ds-checkbox-label">Small checkbox</span>
+        </label>
+        
+        <label class="ds-checkbox-wrapper">
+          <input type="checkbox" class="ds-checkbox" checked>
+          <span class="ds-checkbox-label">Default checkbox</span>
+        </label>
+        
+        <label class="ds-checkbox-wrapper">
+          <input type="checkbox" class="ds-checkbox ds-checkbox-lg" checked>
+          <span class="ds-checkbox-label">Large checkbox</span>
+        </label>
+      </div>
+    </section>
+    
+    <!-- Radio Groups Section -->
+    <section>
+      <h2>Radio Groups</h2>
+      
+      <h3>Vertical Layout</h3>
+      <div class="ds-radio-group" style="margin: 1rem 0;">
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="plan" class="ds-radio" value="free" checked>
+          <span class="ds-radio-label">Free Plan - $0/month</span>
+        </label>
+        
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="plan" class="ds-radio" value="pro">
+          <span class="ds-radio-label">Pro Plan - $19/month</span>
+        </label>
+        
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="plan" class="ds-radio" value="enterprise">
+          <span class="ds-radio-label">Enterprise Plan - $99/month</span>
+        </label>
+        
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="plan" class="ds-radio" value="disabled" disabled>
+          <span class="ds-radio-label">Disabled option</span>
+        </label>
+      </div>
+      
+      <h3>Horizontal Layout</h3>
+      <div class="ds-radio-group ds-radio-group-row" style="margin: 1rem 0;">
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="size" class="ds-radio" value="s">
+          <span class="ds-radio-label">Small</span>
+        </label>
+        
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="size" class="ds-radio" value="m" checked>
+          <span class="ds-radio-label">Medium</span>
+        </label>
+        
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="size" class="ds-radio" value="l">
+          <span class="ds-radio-label">Large</span>
+        </label>
+      </div>
+      
+      <h3>Sizes</h3>
+      <div class="ds-radio-group" style="margin: 1rem 0;">
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="radio-size" class="ds-radio ds-radio-sm" checked>
+          <span class="ds-radio-label">Small radio</span>
+        </label>
+        
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="radio-size" class="ds-radio">
+          <span class="ds-radio-label">Default radio</span>
+        </label>
+        
+        <label class="ds-radio-wrapper">
+          <input type="radio" name="radio-size" class="ds-radio ds-radio-lg">
+          <span class="ds-radio-label">Large radio</span>
+        </label>
+      </div>
+    </section>
+    
+    <!-- Switches Section -->
+    <section>
+      <h2>Switches / Toggles</h2>
+      
+      <h3>Basic</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0;">
+        <label class="ds-switch-wrapper">
+          <input type="checkbox" class="ds-switch" checked id="darkModeSwitch">
+          <span class="ds-switch-label">Dark mode</span>
+        </label>
+        
+        <label class="ds-switch-wrapper">
+          <input type="checkbox" class="ds-switch" id="notificationsSwitch">
+          <span class="ds-switch-label">Enable notifications</span>
+        </label>
+        
+        <label class="ds-switch-wrapper">
+          <input type="checkbox" class="ds-switch" checked id="autoSaveSwitch">
+          <span class="ds-switch-label">Auto-save changes</span>
+        </label>
+        
+        <label class="ds-switch-wrapper">
+          <input type="checkbox" class="ds-switch" disabled>
+          <span class="ds-switch-label">Disabled feature</span>
+        </label>
+      </div>
+      
+      <h3>Sizes</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0;">
+        <label class="ds-switch-wrapper">
+          <input type="checkbox" class="ds-switch ds-switch-sm" checked>
+          <span class="ds-switch-label">Small switch</span>
+        </label>
+        
+        <label class="ds-switch-wrapper">
+          <input type="checkbox" class="ds-switch" checked>
+          <span class="ds-switch-label">Default switch</span>
+        </label>
+        
+        <label class="ds-switch-wrapper">
+          <input type="checkbox" class="ds-switch ds-switch-lg" checked>
+          <span class="ds-switch-label">Large switch</span>
+        </label>
+      </div>
+    </section>
+    
+    <!-- Labels Section -->
+    <section>
+      <h2>Labels</h2>
+      
+      <div class="input-group">
+        <label class="ds-label ds-label-required">Required Field</label>
+        <input type="text" class="ds-input" placeholder="This field is required">
+      </div>
+      
+      <div class="input-group">
+        <label class="ds-label ds-label-optional">Optional Field</label>
+        <input type="text" class="ds-input" placeholder="This field is optional">
+      </div>
+      
+      <div class="input-group">
+        <label class="ds-label">Regular Label</label>
+        <input type="text" class="ds-input" placeholder="Regular input">
+      </div>
+      
+      <h3>Label Sizes</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0;">
+        <label class="ds-label ds-label-sm">Small label</label>
+        <label class="ds-label">Default label</label>
+        <label class="ds-label ds-label-lg">Large label</label>
+      </div>
+    </section>
+    
+    <!-- Form Fields with Validation Section -->
+    <section>
+      <h2>Form Fields (with Validation)</h2>
+      
+      <h3>Basic Form Field</h3>
+      <div class="ds-form-field">
+        <label class="ds-label ds-label-required">Username</label>
+        <input type="text" class="ds-input" placeholder="johndoe">
+        <span class="ds-form-field-helper">Choose a unique username (3-20 characters)</span>
+      </div>
+      
+      <h3>Error State</h3>
+      <div class="ds-form-field has-error">
+        <label class="ds-label ds-label-required">Email</label>
+        <input type="email" class="ds-input" value="invalid-email">
+        <span class="ds-form-field-error">Please enter a valid email address</span>
+      </div>
+      
+      <h3>Success State</h3>
+      <div class="ds-form-field has-success">
+        <label class="ds-label ds-label-required">Password</label>
+        <input type="password" class="ds-input" value="••••••••">
+        <span class="ds-form-field-success">Strong password! Great choice.</span>
+      </div>
+      
+      <h3>Complete Form with Validation</h3>
+      <form class="ds-card">
+        <h3>Sign Up Form</h3>
+        
+        <div class="ds-form-field">
+          <label class="ds-label ds-label-required">Full Name</label>
+          <input type="text" class="ds-input" placeholder="John Doe">
+          <span class="ds-form-field-helper">Enter your first and last name</span>
+        </div>
+        
+        <div class="ds-form-field has-success">
+          <label class="ds-label ds-label-required">Email</label>
+          <input type="email" class="ds-input" placeholder="john@example.com" value="john@example.com">
+          <span class="ds-form-field-success">Email is available</span>
+        </div>
+        
+        <div class="ds-form-field">
+          <label class="ds-label ds-label-optional">Company</label>
+          <input type="text" class="ds-input" placeholder="Acme Inc.">
+        </div>
+        
+        <div class="ds-form-field">
+          <label class="ds-label ds-label-optional">Bio</label>
+          <textarea class="ds-textarea" placeholder="Tell us about yourself"></textarea>
+          <span class="ds-form-field-helper">Max 500 characters</span>
+        </div>
+        
+        <div style="margin: 1rem 0;">
+          <label class="ds-checkbox-wrapper">
+            <input type="checkbox" class="ds-checkbox" checked>
+            <span class="ds-checkbox-label">I agree to the terms and conditions</span>
+          </label>
+        </div>
+        
+        <div class="button-group" style="margin-top: 1.5rem;">
+          <button type="submit" class="btn-primary">Create Account</button>
+          <button type="button" class="btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </section>
+    
+    <!-- Sliders Section -->
+    <section>
+      <h2>Sliders / Range Inputs</h2>
+      
+      <h3>Basic Slider</h3>
+      <div class="ds-slider-wrapper">
+        <label class="ds-label">Volume</label>
+        <input type="range" class="ds-slider" min="0" max="100" value="50" id="volumeSlider">
+      </div>
+      
+      <h3>Slider with Value Display</h3>
+      <div class="ds-slider-wrapper">
+        <div class="ds-slider-value">
+          <label class="ds-label">Brightness</label>
+          <span class="ds-slider-value-current" id="brightnessValue">75%</span>
+        </div>
+        <input type="range" class="ds-slider" min="0" max="100" value="75" id="brightnessSlider">
+      </div>
+      
+      <h3>Slider with Min/Max Labels</h3>
+      <div class="ds-slider-wrapper">
+        <label class="ds-label">Price Range</label>
+        <input type="range" class="ds-slider" min="0" max="1000" value="500" step="50" id="priceSlider">
+        <div class="ds-slider-value">
+          <span>$0</span>
+          <span id="priceValue">$500</span>
+          <span>$1000</span>
+        </div>
+      </div>
+      
+      <h3>Disabled Slider</h3>
+      <div class="ds-slider-wrapper">
+        <label class="ds-label">Disabled</label>
+        <input type="range" class="ds-slider" min="0" max="100" value="30" disabled>
+      </div>
+      
+      <h3>Slider Sizes</h3>
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0;">
+        <div class="ds-slider-wrapper">
+          <label class="ds-label ds-label-sm">Small</label>
+          <input type="range" class="ds-slider ds-slider-sm" min="0" max="100" value="40">
+        </div>
+        
+        <div class="ds-slider-wrapper">
+          <label class="ds-label">Default</label>
+          <input type="range" class="ds-slider" min="0" max="100" value="50">
+        </div>
+        
+        <div class="ds-slider-wrapper">
+          <label class="ds-label ds-label-lg">Large</label>
+          <input type="range" class="ds-slider ds-slider-lg" min="0" max="100" value="60">
+        </div>
+      </div>
+    </section>
+    
+    <!-- Cards Section -->
+    <section>
+      <h2>Cards</h2>
+      <div class="grid">
+        <div class="ds-card">
+          <h3>Card Title</h3>
+          <p>This is a card component with some content inside.</p>
+          <button class="btn-primary btn-sm" style="margin-top: 1rem;">Action</button>
+        </div>
+        
+        <div class="ds-card">
+          <h3>Another Card</h3>
+          <p>Cards can contain any content you need.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Badges Section -->
+    <section>
+      <h2>Badges</h2>
+      <div class="button-group">
+        <span class="ds-badge ds-badge-neutral">Neutral</span>
+        <span class="ds-badge ds-badge-primary">Primary</span>
+        <span class="ds-badge ds-badge-success">Success</span>
+        <span class="ds-badge ds-badge-warning">Warning</span>
+        <span class="ds-badge ds-badge-destructive">Destructive</span>
+      </div>
+    </section>
+    
+    <!-- Glass Morphism Section -->
+    <section>
+      <h2>Glass Morphism</h2>
+      <div class="ds-glass" style="padding: 2rem; margin: 1rem 0;">
+        <h3>Glass Container</h3>
+        <p>This uses the glass morphism effect with backdrop blur.</p>
+        <button class="btn-primary btn-sm" style="margin-top: 1rem;">Inside Glass</button>
+      </div>
+    </section>
+    
+    <!-- Form Example -->
+    <section>
+      <h2>Form Example</h2>
+      <form class="ds-card">
+        <h3>Contact Form</h3>
+        
+        <div class="input-group">
+          <label>Name</label>
+          <input type="text" class="ds-input" placeholder="Your name">
+        </div>
+        
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" class="ds-input" placeholder="your@email.com">
+        </div>
+        
+        <div class="input-group">
+          <label>Message</label>
+          <textarea class="ds-textarea" placeholder="Your message"></textarea>
+        </div>
+        
+        <div class="button-group" style="margin-top: 1.5rem;">
+          <button type="submit" class="btn-primary">Submit</button>
+          <button type="button" class="btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </section>
+    
+    <!-- Scrollbar Example -->
+    <section>
+      <h2>Scrollbar Styling</h2>
+      <div class="ds-scrollbar" style="max-height: 200px; overflow-y: auto; padding: 1rem; background: hsl(var(--card)); border-radius: 12px;">
+        <p>This container has custom scrollbar styling.</p>
+        <p>Scroll down to see it in action.</p>
+        <p>Line 4</p>
+        <p>Line 5</p>
+        <p>Line 6</p>
+        <p>Line 7</p>
+        <p>Line 8</p>
+        <p>Line 9</p>
+        <p>Line 10</p>
+      </div>
+    </section>
+
+    <!-- Navbar Example -->
+    <section>
+      <h2>Navbar</h2>
+      <p>Fixed navbar with backdrop blur (see top of page). Use <code>.ds-navbar-spacer</code> for content spacing.</p>
+      <div class="ds-card">
+        <div class="ds-navbar" style="position: relative; margin: -1.5rem -1.5rem 1.5rem -1.5rem; border-radius: 0;">
+          <div class="ds-navbar-container">
+            <a href="#" class="ds-navbar-brand">
+              <span class="ds-navbar-logo">🚀</span>
+              <span>My App</span>
+            </a>
+            <nav class="ds-navbar-nav">
+              <div class="ds-navbar-menu">
+                <button class="btn-outline btn-sm">Home</button>
+                <button class="btn-outline btn-sm">About</button>
+                <button class="btn-primary btn-sm">Sign In</button>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <p>Navbar with brand and navigation items. Responsive and includes backdrop blur effect.</p>
+      </div>
+    </section>
+
+    <!-- Modal Example (Static) -->
+    <section>
+      <h2>Modal/Dialog</h2>
+      <button class="btn-primary" onclick="document.getElementById('exampleModal').style.display='flex'; document.getElementById('modalOverlay').style.display='block';">Open Modal</button>
+      
+      <div id="modalOverlay" class="ds-modal-overlay" onclick="this.style.display='none'; document.getElementById('exampleModal').style.display='none';" style="display: none;"></div>
+      <div id="exampleModal" class="ds-modal" style="display: none;">
+        <div class="ds-modal-content ds-modal-scroll">
+          <div class="ds-modal-header ds-modal-header-left">
+            <h3 class="ds-modal-title">Modal Title</h3>
+            <p class="ds-modal-description">This is a modal dialog example with glass morphism effect.</p>
+          </div>
+          
+          <div style="padding: 1rem 0;">
+            <p>Modal content goes here. This can be scrollable if content is long.</p>
+            <p>Line 2</p>
+            <p>Line 3</p>
+            <p>Line 4</p>
+            <p>Line 5</p>
+            <p>Line 6</p>
+          </div>
+          
+          <div class="ds-modal-footer ds-modal-footer-row">
+            <button class="btn-secondary btn-sm" onclick="document.getElementById('exampleModal').style.display='none'; document.getElementById('modalOverlay').style.display='none';">Cancel</button>
+            <button class="btn-primary btn-sm" onclick="document.getElementById('exampleModal').style.display='none'; document.getElementById('modalOverlay').style.display='none';">Confirm</button>
+          </div>
+        </div>
+        <button class="ds-modal-close" onclick="document.getElementById('exampleModal').style.display='none'; document.getElementById('modalOverlay').style.display='none';">✕</button>
+      </div>
+    </section>
+
+    <!-- Drawer Example (Static) -->
+    <section>
+      <h2>Drawer (Bottom Sheet)</h2>
+      <button class="btn-primary" onclick="document.getElementById('exampleDrawer').style.display='flex'; document.getElementById('drawerOverlay').style.display='block';">Open Drawer</button>
+      
+      <div id="drawerOverlay" class="ds-drawer-overlay" onclick="this.style.display='none'; document.getElementById('exampleDrawer').style.display='none';" style="display: none;"></div>
+      <div id="exampleDrawer" class="ds-drawer" style="display: none;">
+        <div class="ds-drawer-handle" onclick="document.getElementById('exampleDrawer').style.display='none'; document.getElementById('drawerOverlay').style.display='none';"></div>
+        <div class="ds-drawer-header">
+          <h3 class="ds-drawer-title">Drawer Title</h3>
+          <button class="ds-drawer-close" onclick="document.getElementById('exampleDrawer').style.display='none'; document.getElementById('drawerOverlay').style.display='none';">✕</button>
+        </div>
+        <div class="ds-drawer-content ds-scrollbar">
+          <p>Drawer content goes here. Perfect for mobile bottom sheets.</p>
+          <p>Line 2</p>
+          <p>Line 3</p>
+          <p>Line 4</p>
+          <p>Line 5</p>
+          <p>Line 6</p>
+          <p>Line 7</p>
+          <p>Line 8</p>
+        </div>
+        <div class="ds-drawer-footer">
+          <button class="btn-secondary btn-sm" onclick="document.getElementById('exampleDrawer').style.display='none'; document.getElementById('drawerOverlay').style.display='none';">Cancel</button>
+          <button class="btn-primary btn-sm" onclick="document.getElementById('exampleDrawer').style.display='none'; document.getElementById('drawerOverlay').style.display='none';">Save</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <script>
+    // Slider value display updates
+    const brightnessSlider = document.getElementById('brightnessSlider');
+    const brightnessValue = document.getElementById('brightnessValue');
+    
+    if (brightnessSlider && brightnessValue) {
+      brightnessSlider.addEventListener('input', (e) => {
+        brightnessValue.textContent = e.target.value + '%';
+      });
+    }
+    
+    const priceSlider = document.getElementById('priceSlider');
+    const priceValue = document.getElementById('priceValue');
+    
+    if (priceSlider && priceValue) {
+      priceSlider.addEventListener('input', (e) => {
+        priceValue.textContent = '$' + e.target.value;
+      });
+    }
+    
+    // Dark mode toggle functionality (optional)
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+    
+    if (darkModeSwitch) {
+      darkModeSwitch.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+

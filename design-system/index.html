@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO -->
+  <title>Rukn Design System - رُكن | Modern Glass Morphism CSS Framework</title>
+  <meta name="description" content="Rukn (رُكن) - Built on the pillars of great design. Framework-agnostic CSS design system with glass morphism, iOS motion, and 150+ tokens.">
+  <meta name="keywords" content="rukn, design system, glass morphism, iOS motion, CSS framework, design tokens">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="design-system-variables.css">
+  <link rel="stylesheet" href="design-system.css">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      overflow-x: hidden;
+      cursor: none;
+    }
+    body, body *, a, button, input, textarea, select, label { cursor: none !important; }
+    
+    /* Custom Cursor - Optimized for performance */
+    .custom-cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid hsl(var(--primary));
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transition: width 0.15s ease, height 0.15s ease, background 0.15s ease;
+      mix-blend-mode: difference;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translate(-50%, -50%);
+    }
+    .custom-cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: hsl(var(--primary));
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 100000;
+      mix-blend-mode: difference;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translate(-50%, -50%);
+    }
+    .custom-cursor.hover {
+      width: 40px;
+      height: 40px;
+      background: hsl(var(--primary) / 0.1);
+      border-color: hsl(var(--primary) / 0.8);
+    }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--r-space-8);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Interactive Floating Components */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.15;
+      pointer-events: all;
+      overflow: hidden;
+    }
+    .floating {
+      position: absolute;
+      animation: float 20s ease-in-out infinite;
+      filter: blur(0.5px);
+    }
+    .floating:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; }
+    .floating:nth-child(2) { top: 15%; right: 12%; animation-delay: 2s; }
+    .floating:nth-child(3) { bottom: 25%; left: 10%; animation-delay: 4s; }
+    .floating:nth-child(4) { bottom: 20%; right: 15%; animation-delay: 6s; }
+    .floating:nth-child(5) { top: 45%; left: 5%; animation-delay: 3s; }
+    .floating:nth-child(6) { top: 55%; right: 8%; animation-delay: 5s; }
+    .floating:nth-child(7) { top: 70%; left: 20%; animation-delay: 1s; }
+    .floating:nth-child(8) { bottom: 40%; right: 25%; animation-delay: 7s; }
+    .floating:nth-child(9) { top: 30%; left: 25%; animation-delay: 8s; }
+    .floating:nth-child(10) { bottom: 50%; right: 5%; animation-delay: 9s; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+      25% { transform: translateY(-30px) rotate(5deg) scale(1.05); }
+      50% { transform: translateY(-15px) rotate(-5deg) scale(0.95); }
+      75% { transform: translateY(-40px) rotate(3deg) scale(1.02); }
+    }
+    
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--r-space-2);
+      padding: var(--r-space-2) var(--r-space-4);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-radius-full);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--r-space-6);
+      backdrop-filter: blur(10px);
+      transition: all var(--r-transition-base) var(--r-spring-smooth);
+    }
+    .hero-badge:hover { transform: scale(1.05); }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 10vw, 5.5rem);
+      margin-bottom: var(--r-space-6);
+      background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+    .hero p {
+      font-size: var(--font-size-2xl);
+      color: hsl(var(--foreground) / 0.7);
+      margin-bottom: var(--r-space-8);
+      line-height: var(--line-height-relaxed);
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--r-space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* Section Styles */
+    .section {
+      padding: var(--r-space-24) var(--r-space-6);
+      position: relative;
+    }
+    .section-dark {
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+    }
+    .section-title {
+      font-size: var(--font-size-5xl);
+      text-align: center;
+      margin-bottom: var(--r-space-6);
+      background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-subtitle {
+      font-size: var(--font-size-xl);
+      text-align: center;
+      color: hsl(var(--foreground) / 0.6);
+      margin-bottom: var(--r-space-12);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--r-space-6);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-radius-2xl);
+      padding: var(--r-space-8);
+      backdrop-filter: blur(10px);
+      transition: all var(--r-transition-base) var(--r-ease-ios-smooth);
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: hsl(var(--primary) / 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    .feature-icon {
+      font-size: 3rem;
+      color: hsl(var(--primary));
+      margin-bottom: var(--r-space-4);
+    }
+    .feature-title {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--r-space-3);
+      color: hsl(var(--foreground));
+    }
+    .feature-desc {
+      color: hsl(var(--foreground) / 0.7);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--r-space-6);
+      max-width: 1000px;
+      margin: var(--r-space-12) auto;
+      text-align: center;
+    }
+    .stat-item {
+      padding: var(--r-space-6);
+    }
+    .stat-number {
+      font-size: var(--font-size-6xl);
+      font-weight: 700;
+      color: hsl(var(--primary));
+      margin-bottom: var(--r-space-2);
+    }
+    .stat-label {
+      font-size: var(--font-size-lg);
+      color: hsl(var(--foreground) / 0.7);
+    }
+    
+    /* Component Showcase */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--r-space-6);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .showcase-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-radius-xl);
+      padding: var(--r-space-6);
+      text-align: center;
+      transition: all var(--r-transition-base) var(--r-ease-ios-smooth);
+    }
+    .showcase-item:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    
+    /* CTA Section */
+    .cta-box {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--r-space-12);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-radius-3xl);
+      text-align: center;
+      backdrop-filter: blur(20px);
+    }
+    .cta-title {
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--r-space-4);
+    }
+    .cta-desc {
+      font-size: var(--font-size-xl);
+      color: hsl(var(--foreground) / 0.7);
+      margin-bottom: var(--r-space-8);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="ds-navbar ds-navbar-full">
+    <div class="ds-navbar-container">
+      <a href="index.html" class="ds-navbar-brand">
+        <span class="ds-navbar-logo">◆</span>
+        <span>Rukn</span>
+      </a>
+      <nav class="ds-navbar-nav">
+        <div class="ds-navbar-menu">
+          <a href="components.html"><button class="btn-primary btn-sm">Components</button></a>
+          <a href="#roadmap"><button class="btn-ghost btn-sm">Roadmap</button></a>
+          <a href="#changelog"><button class="btn-ghost btn-sm">Changelog</button></a>
+          <a href="#about"><button class="btn-ghost btn-sm">About</button></a>
+          <a href="#contact"><button class="btn-ghost btn-sm">Contact</button></a>
+          <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener">
+            <button class="btn-ghost btn-sm" title="Connect on LinkedIn">
+              <i class="ph ph-linkedin-logo"></i>
+            </button>
+          </a>
+          <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
+            <button class="btn-ghost btn-sm" title="Star on GitHub">
+              <i class="ph ph-github-logo"></i>
+            </button>
+          </a>
+        </div>
+        
+        <!-- Mobile Hamburger -->
+        <button class="ds-navbar-hamburger" id="navToggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation Dropdown -->
+  <div class="ds-navbar-mobile-dropdown" id="navDropdown">
+    <div class="ds-navbar-menu">
+      <a href="components.html"><button class="btn-primary btn-sm">Components</button></a>
+      <a href="#roadmap"><button class="btn-ghost btn-sm">Roadmap</button></a>
+      <a href="#changelog"><button class="btn-ghost btn-sm">Changelog</button></a>
+      <a href="#about"><button class="btn-ghost btn-sm">About</button></a>
+      <a href="#contact"><button class="btn-ghost btn-sm">Contact</button></a>
+      <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener">
+        <button class="btn-ghost btn-sm">
+          <i class="ph-fill ph-linkedin-logo"></i> LinkedIn
+        </button>
+      </a>
+      <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
+        <button class="btn-ghost btn-sm">
+          <i class="ph-fill ph-github-logo"></i> GitHub
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="ds-navbar-spacer"></div>
+  
+  <!-- Hero with Interactive Background -->
+  <section class="hero">
+    <div class="hero-bg" id="heroBg">
+      <!-- Interactive floating components -->
+      <div class="floating">
+        <button class="btn-primary btn-lg" onclick="this.classList.toggle('btn-secondary')">
+          <i class="ph-fill ph-sparkle"></i> Click Me
+        </button>
+      </div>
+      <div class="floating">
+        <div class="ds-card" style="padding: 2rem; min-width: 250px;">
+          <h4 style="margin-bottom: 1rem;">Interactive Card</h4>
+          <button class="btn-outline btn-sm">Hover Me</button>
+        </div>
+      </div>
+      <div class="floating">
+        <label class="ds-checkbox-wrapper" style="transform: scale(2);">
+          <input type="checkbox" class="ds-checkbox" onchange="this.parentElement.style.transform = this.checked ? 'scale(2.2)' : 'scale(2)'">
+          <span style="margin-left: 12px; font-size: 14px;">Check</span>
+        </label>
+      </div>
+      <div class="floating">
+        <div class="ds-badge ds-badge-primary" style="padding: 0.8rem 1.5rem; font-size: 1.1rem;">
+          <i class="ph-fill ph-star"></i> Badge
+        </div>
+      </div>
+      <div class="floating">
+        <label class="ds-switch-wrapper" style="transform: scale(2);">
+          <input type="checkbox" class="ds-switch" checked>
+          <span style="margin-left: 12px; font-size: 14px;">Toggle</span>
+        </label>
+      </div>
+      <div class="floating">
+        <input type="text" class="ds-input" placeholder="Type something..." style="width: 250px;" onfocus="this.style.transform='scale(1.05)'" onblur="this.style.transform='scale(1)'">
+      </div>
+      <div class="floating">
+        <div style="display: flex; gap: 8px;">
+          <div class="ds-badge ds-badge-secondary">iOS</div>
+          <div class="ds-badge ds-badge-accent">Motion</div>
+          <div class="ds-badge ds-badge-success">Glass</div>
+        </div>
+      </div>
+      <div class="floating">
+        <button class="btn-destructive">
+          <i class="ph ph-trash"></i> Delete
+        </button>
+      </div>
+      <div class="floating">
+        <label class="ds-radio-wrapper" style="transform: scale(1.8);">
+          <input type="radio" class="ds-radio" name="demo" checked>
+          <span style="margin-left: 10px; font-size: 13px;">Option A</span>
+        </label>
+      </div>
+      <div class="floating">
+        <div class="ds-card" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.05);">
+          <i class="ph-fill ph-rocket-launch" style="font-size: 2rem; color: hsl(var(--primary));"></i>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="ph-fill ph-sparkle"></i>
+        <span>v1.3.1 • Glass Refraction • iOS Motion</span>
+      </div>
+      <h1>
+        Design System<br>
+        <span style="color: hsl(var(--primary));">Built Different.</span>
+      </h1>
+      <p>
+        <span class="arabic-text" style="font-size: 1.3em; color: hsl(var(--primary)); display: block; margin-bottom: 0.5rem;">رُكن</span>
+        Open source. Community-driven. Built for everyone.<br>
+        Because great design should be free, accessible, and yours to own.
+      </p>
+      <div class="hero-actions">
+        <a href="components.html"><button class="btn-primary btn-lg">
+          <i class="ph ph-rocket-launch" style="margin-right: 8px;"></i>
+          Explore Components
+        </button></a>
+        <a href="https://github.com/your-username/rukn"><button class="btn-secondary btn-lg">
+          <i class="ph ph-github-logo" style="margin-right: 8px;"></i>
+          View on GitHub
+        </button></a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Stats -->
+  <section class="section">
+    <div class="ds-container">
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Design Tokens</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Components</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Dependencies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Customizable</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features -->
+  <section id="features" class="section section-dark">
+    <div class="ds-container">
+      <h2 class="section-title">Built on Pillars of Excellence</h2>
+      <p class="section-subtitle">Every detail crafted with precision. Every interaction feels natural. Every component ready for production.</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-drop-half-bottom"></i></div>
+          <h3 class="feature-title">Glass Morphism</h3>
+          <p class="feature-desc">Stunning frosted glass effects with perfect blur, shadows, and translucency. Natural depth that feels touchable.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-watch"></i></div>
+          <h3 class="feature-title">iOS Motion</h3>
+          <p class="feature-desc">Apple-inspired easing curves and spring animations. Every interaction feels buttery smooth and responsive.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-palette"></i></div>
+          <h3 class="feature-title">150+ Design Tokens</h3>
+          <p class="feature-desc">W3C compliant tokens for colors, spacing, typography, shadows, and more. Complete design control.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-devices"></i></div>
+          <h3 class="feature-title">Responsive Layout</h3>
+          <p class="feature-desc">Mobile-first grid, flexbox, and container systems. Breakpoints that adapt to any screen size.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-cube"></i></div>
+          <h3 class="feature-title">Framework Agnostic</h3>
+          <p class="feature-desc">Pure CSS that works everywhere. React, Vue, Angular, Svelte, or vanilla JavaScript.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-moon-stars"></i></div>
+          <h3 class="feature-title">Dark Mode First</h3>
+          <p class="feature-desc">Designed in the dark. Beautiful contrast, perfect readability, and easy theme switching.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-wheelchair"></i></div>
+          <h3 class="feature-title">Accessibility Built-in</h3>
+          <p class="feature-desc">WCAG 2.1 AA compliant. Keyboard navigation, screen readers, and reduced motion support.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-text-aa"></i></div>
+          <h3 class="feature-title">Typography Perfected</h3>
+          <p class="feature-desc">Space Grotesk for headings, system fonts for body. Plus Rubik for beautiful Arabic support.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ph-fill ph-lightning"></i></div>
+          <h3 class="feature-title">Lightweight & Fast</h3>
+          <p class="feature-desc">Minimal CSS footprint. No JavaScript required. Lightning-fast load times.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Component Showcase -->
+  <section class="section">
+    <div class="ds-container">
+      <h2 class="section-title">Components That Shine</h2>
+      <p class="section-subtitle">Production-ready components with glass morphism and smooth interactions.</p>
+      
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-primary ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-cursor-click"></i>
+          </div>
+          <h4>Buttons</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">7 variants with iOS press</p>
+          <button class="btn-primary btn-sm">Primary</button>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-accent ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-text-align-left"></i>
+          </div>
+          <h4>Inputs</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">Glass inputs & textareas</p>
+          <input type="text" class="ds-input" placeholder="Beautiful..." style="max-width: 200px;">
+        </div>
+        
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-success ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-square-half"></i>
+          </div>
+          <h4>Cards</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">Hover & glass effects</p>
+          <div class="ds-card" style="padding: 1rem; max-width: 200px; margin: 0 auto;">Content</div>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-warning ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-tag"></i>
+          </div>
+          <h4>Badges</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">6 color variants</p>
+          <div class="ds-badge ds-badge-primary">Badge</div>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-primary ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-frame-corners"></i>
+          </div>
+          <h4>Modals</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">Spring entrance animations</p>
+          <button class="btn-outline btn-sm">Open Modal</button>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-accent ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-list-checks"></i>
+          </div>
+          <h4>Form Controls</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">Checkbox, radio, switch</p>
+          <label class="ds-switch-wrapper">
+            <input type="checkbox" class="ds-switch" checked>
+          </label>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-success ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-shapes"></i>
+          </div>
+          <h4>Icon Placeholders</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">Prismatic glass refraction</p>
+          <div style="display: flex; gap: var(--r-space-2); justify-content: center;">
+            <div class="ds-icon-placeholder ds-icon-placeholder-sm ds-icon-placeholder-primary">
+              <i class="ph-fill ph-heart"></i>
+            </div>
+            <div class="ds-icon-placeholder ds-icon-placeholder-sm ds-icon-placeholder-accent">
+              <i class="ph-fill ph-star"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-error ds-icon-placeholder-circle" style="margin-bottom: 1rem;">
+            <i class="ph-fill ph-grid-four"></i>
+          </div>
+          <h4>Responsive Layouts</h4>
+          <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin: 1rem 0;">Grid, flex & containers</p>
+          <div class="ds-grid ds-grid-cols-2 ds-gap-2" style="max-width: 120px; margin: 0 auto;">
+            <div style="height: 20px; background: hsl(var(--primary)); border-radius: var(--r-radius-md);"></div>
+            <div style="height: 20px; background: hsl(var(--accent)); border-radius: var(--r-radius-md);"></div>
+            <div style="height: 20px; background: hsl(var(--success)); border-radius: var(--r-radius-md);"></div>
+            <div style="height: 20px; background: hsl(var(--warning)); border-radius: var(--r-radius-md);"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: var(--r-space-12);">
+        <a href="components.html"><button class="btn-primary btn-lg">
+          View All Components <i class="ph ph-arrow-right" style="margin-left: 8px;"></i>
+        </button></a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Why Open Source -->
+  <section class="section section-dark">
+    <div class="ds-container">
+      <h2 class="section-title">Why Open Source?</h2>
+      <p class="section-subtitle">Design systems should belong to everyone. Here's why we're free forever.</p>
+      
+      <div class="ds-grid ds-grid-cols-1 ds-md-grid-cols-2 ds-gap-8" style="max-width: 1000px; margin: 0 auto;">
+        <div style="padding: var(--r-space-8);">
+          <h3 style="font-size: var(--font-size-3xl); margin-bottom: var(--r-space-4); color: hsl(var(--primary));">
+            <i class="ph-fill ph-hand-heart" style="margin-right: 0.5rem;"></i>
+            Freedom & Ownership
+          </h3>
+          <ul style="list-style: none; padding: 0; space-y: 1rem;">
+            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--primary)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>No vendor lock-in.</strong> Modify, extend, or fork without restrictions.</span>
+            </li>
+            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--primary)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>MIT Licensed.</strong> Use commercially, privately, or anywhere you want.</span>
+            </li>
+            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--primary)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>No paywalls.</strong> Every component, token, and feature is free forever.</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--primary)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>Your code, your control.</strong> Self-host, customize, or build upon it.</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div style="padding: var(--r-space-8);">
+          <h3 style="font-size: var(--font-size-3xl); margin-bottom: var(--r-space-4); color: hsl(var(--accent));">
+            <i class="ph-fill ph-users-three" style="margin-right: 0.5rem;"></i>
+            Community & Transparency
+          </h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--accent)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>Built in public.</strong> Every decision, every line of code is visible on GitHub.</span>
+            </li>
+            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--accent)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>Community contributions.</strong> Your ideas and PRs shape the future of Rukn.</span>
+            </li>
+            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--accent)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>No tracking or analytics.</strong> Your privacy is respected, always.</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: 1rem;">
+              <i class="ph-fill ph-check-circle" style="color: hsl(var(--accent)); font-size: 1.5rem; flex-shrink: 0;"></i>
+              <span style="color: hsl(var(--foreground) / 0.8);"><strong>Learn and grow.</strong> Study the code, understand the patterns, make it yours.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Roadmap -->
+  <section id="roadmap" class="section">
+    <div class="ds-container">
+      <h2 class="section-title">Roadmap</h2>
+      <p class="section-subtitle">Community-driven features coming to Rukn</p>
+      
+      <div class="ds-grid ds-grid-cols-1 ds-md-grid-cols-2 ds-gap-6" style="max-width: 1000px; margin: 0 auto;">
+        <div class="ds-card" style="border-left: 4px solid hsl(var(--primary));">
+          <div style="display: flex; align-items: center; gap: var(--r-space-2); margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 1.5rem;"></i>
+            <h3 style="font-size: var(--font-size-xl); margin: 0;">Completed</h3>
+          </div>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--r-space-3);">
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-check" style="color: hsl(var(--success)); margin-top: 4px;"></i>
+              <span>Glass morphism components</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-check" style="color: hsl(var(--success)); margin-top: 4px;"></i>
+              <span>iOS motion system</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-check" style="color: hsl(var(--success)); margin-top: 4px;"></i>
+              <span>150+ design tokens</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-check" style="color: hsl(var(--success)); margin-top: 4px;"></i>
+              <span>Responsive layout system</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-check" style="color: hsl(var(--success)); margin-top: 4px;"></i>
+              <span>Arabic language support</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="ds-card" style="border-left: 4px solid hsl(var(--accent));">
+          <div style="display: flex; align-items: center; gap: var(--r-space-2); margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-rocket-launch" style="color: hsl(var(--primary)); font-size: 1.5rem;"></i>
+            <h3 style="font-size: var(--font-size-xl); margin: 0;">In Progress</h3>
+          </div>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--r-space-3);">
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-circle" style="color: hsl(var(--primary)); margin-top: 4px;"></i>
+              <span>NPM package publication</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-circle" style="color: hsl(var(--primary)); margin-top: 4px;"></i>
+              <span>React component library</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-circle" style="color: hsl(var(--primary)); margin-top: 4px;"></i>
+              <span>Figma design kit</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph-fill ph-circle" style="color: hsl(var(--primary)); margin-top: 4px;"></i>
+              <span>VSCode extension</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="ds-card" style="border-left: 4px solid hsl(var(--muted-foreground) / 0.3);">
+          <div style="display: flex; align-items: center; gap: var(--r-space-2); margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-lightbulb" style="color: hsl(var(--warning)); font-size: 1.5rem;"></i>
+            <h3 style="font-size: var(--font-size-xl); margin: 0;">Planned</h3>
+          </div>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--r-space-3);">
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph ph-circle" style="color: hsl(var(--muted-foreground)); margin-top: 4px;"></i>
+              <span>Vue component library</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph ph-circle" style="color: hsl(var(--muted-foreground)); margin-top: 4px;"></i>
+              <span>Tailwind CSS plugin</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph ph-circle" style="color: hsl(var(--muted-foreground)); margin-top: 4px;"></i>
+              <span>More advanced components</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: var(--r-space-2);">
+              <i class="ph ph-circle" style="color: hsl(var(--muted-foreground)); margin-top: 4px;"></i>
+              <span>CLI tool for scaffolding</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="ds-card" style="border-left: 4px solid hsl(var(--accent));">
+          <div style="display: flex; align-items: center; gap: var(--r-space-2); margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-users-three" style="color: hsl(var(--accent)); font-size: 1.5rem;"></i>
+            <h3 style="font-size: var(--font-size-xl); margin: 0;">Community Requests</h3>
+          </div>
+          <p style="color: hsl(var(--foreground) / 0.7); margin-bottom: var(--r-space-3);">
+            Have an idea? The roadmap is shaped by you!
+          </p>
+          <a href="https://github.com/ruknds/core/discussions" target="_blank" rel="noopener">
+            <button class="btn-outline" style="width: 100%;">
+              <i class="ph ph-chat-circle-dots" style="margin-right: 8px;"></i>
+              Suggest a Feature
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Changelog -->
+  <section id="changelog" class="section section-dark">
+    <div class="ds-container">
+      <h2 class="section-title">Changelog</h2>
+      <p class="section-subtitle">What's new in Rukn Design System</p>
+      
+      <div style="max-width: 800px; margin: 0 auto;">
+        <!-- Version 1.3.1 -->
+        <div class="ds-card" style="margin-bottom: var(--r-space-6); border-left: 4px solid hsl(var(--primary));">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--r-space-4); flex-wrap: wrap; gap: var(--r-space-2);">
+            <div>
+              <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-2);">v1.3.1</h3>
+              <p style="color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">November 5, 2024</p>
+            </div>
+            <span class="ds-badge ds-badge-primary">Latest</span>
+          </div>
+          
+          <h4 style="font-size: var(--font-size-lg); margin-bottom: var(--r-space-3); color: hsl(var(--primary));">
+            <i class="ph-fill ph-plus-circle"></i> New Features
+          </h4>
+          <ul style="list-style: none; padding: 0; margin-bottom: var(--r-space-4); display: flex; flex-direction: column; gap: var(--r-space-2);">
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Icon placeholders with prismatic glass refraction effect
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Animated light refraction simulating glass prisms
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Full-width navbar variant with search integration
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Version 1.3.0 -->
+        <div class="ds-card" style="margin-bottom: var(--r-space-6);">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--r-space-4); flex-wrap: wrap; gap: var(--r-space-2);">
+            <div>
+              <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-2);">v1.3.0</h3>
+              <p style="color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">November 5, 2024</p>
+            </div>
+          </div>
+          
+          <h4 style="font-size: var(--font-size-lg); margin-bottom: var(--r-space-3); color: hsl(var(--primary));">
+            <i class="ph-fill ph-plus-circle"></i> New Features
+          </h4>
+          <ul style="list-style: none; padding: 0; margin-bottom: var(--r-space-4); display: flex; flex-direction: column; gap: var(--r-space-2);">
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              iOS motion system with Apple-inspired easing curves
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Complete responsive layout system (Grid, Flexbox, Container)
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Modern floating navbar with size variants
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Smooth custom cursor with hardware acceleration
+            </li>
+          </ul>
+          
+          <h4 style="font-size: var(--font-size-lg); margin-bottom: var(--r-space-3); color: hsl(var(--accent));">
+            <i class="ph-fill ph-wrench"></i> Improvements
+          </h4>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--r-space-2);">
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-arrow-right" style="position: absolute; left: 0; top: 4px; color: hsl(var(--accent));"></i>
+              Reduced motion support for accessibility
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-arrow-right" style="position: absolute; left: 0; top: 4px; color: hsl(var(--accent));"></i>
+              Spring animations on form controls
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-arrow-right" style="position: absolute; left: 0; top: 4px; color: hsl(var(--accent));"></i>
+              Enhanced glass morphism effects
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Version 1.2.2 -->
+        <div class="ds-card" style="margin-bottom: var(--r-space-6);">
+          <div style="margin-bottom: var(--r-space-4);">
+            <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-2);">v1.2.2</h3>
+            <p style="color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">November 4, 2024</p>
+          </div>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--r-space-2);">
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Added Rubik font for Arabic language support
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Custom artistic cursor implementation
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Enhanced marketing copy and homepage design
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Version 1.2.0 -->
+        <div class="ds-card">
+          <div style="margin-bottom: var(--r-space-4);">
+            <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-2);">v1.2.0</h3>
+            <p style="color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">November 3, 2024</p>
+          </div>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--r-space-2);">
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              W3C compliant design tokens with <code style="background: hsl(var(--muted)); padding: 2px 6px; border-radius: 4px;">--r-</code> prefix
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Space Grotesk typography system
+            </li>
+            <li style="padding-left: var(--r-space-4); position: relative;">
+              <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
+              Comprehensive showcase website
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="ds-container">
+      <h2 class="section-title">About Rukn</h2>
+      <p class="section-subtitle">Built by designers and developers, for the community</p>
+      
+      <div class="ds-grid ds-grid-cols-1 ds-md-grid-cols-2 ds-gap-8" style="max-width: 1000px; margin: 0 auto;">
+        <div class="ds-card">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-primary" style="margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-hand-heart" style="font-size: 2rem;"></i>
+          </div>
+          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">The Vision</h3>
+          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
+            Rukn (رُكن) means "pillar" or "foundation" in Arabic. Our mission is to provide a solid foundation for every web project - beautiful, accessible, and completely free. We believe great design systems should belong to everyone, not locked behind paywalls or vendor restrictions.
+          </p>
+        </div>
+        
+        <div class="ds-card">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-accent" style="margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-users-three" style="font-size: 2rem;"></i>
+          </div>
+          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Community Driven</h3>
+          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
+            Every feature, every component, every design decision is shaped by real developers building real products. Your feedback, contributions, and ideas drive the roadmap. Together, we're building something that works for everyone.
+          </p>
+        </div>
+        
+        <div class="ds-card">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-success" style="margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-code" style="font-size: 2rem;"></i>
+          </div>
+          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Open Source Forever</h3>
+          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
+            MIT licensed with no strings attached. Use it commercially, modify it freely, build your business on it. We'll never introduce paywalls, premium tiers, or tracking. Open source isn't just our license - it's our commitment.
+          </p>
+        </div>
+        
+        <div class="ds-card">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-warning" style="margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-sparkle" style="font-size: 2rem;"></i>
+          </div>
+          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Quality First</h3>
+          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
+            Just because it's free doesn't mean it's second-rate. iOS-quality motion, glass morphism that actually works, accessibility baked in, and obsessive attention to detail. We build Rukn like we'd want to use it ourselves.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact -->
+  <section id="contact" class="section section-dark">
+    <div class="ds-container">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Let's build something amazing together</p>
+      
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div class="ds-card" style="text-align: center;">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-primary ds-icon-placeholder-circle" style="width: 80px; height: 80px; font-size: 2.5rem; margin: 0 auto var(--r-space-6);">
+            <i class="ph-fill ph-chats-circle"></i>
+          </div>
+          
+          <h3 style="font-size: var(--font-size-3xl); margin-bottom: var(--r-space-4);">Connect with Me</h3>
+          <p style="color: hsl(var(--foreground) / 0.7); margin-bottom: var(--r-space-8); line-height: var(--line-height-relaxed);">
+            Have questions, suggestions, or want to contribute? I'd love to hear from you. Whether you're a designer, developer, or just curious about Rukn, let's chat!
+          </p>
+          
+          <div style="display: flex; flex-direction: column; gap: var(--r-space-4);">
+            <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener">
+              <button class="btn-primary btn-lg" style="width: 100%;">
+                <i class="ph-fill ph-linkedin-logo" style="margin-right: 8px;"></i>
+                Connect on LinkedIn
+              </button>
+            </a>
+            
+            <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
+              <button class="btn-secondary btn-lg" style="width: 100%;">
+                <i class="ph-fill ph-github-logo" style="margin-right: 8px;"></i>
+                View on GitHub
+              </button>
+            </a>
+            
+            <a href="https://github.com/ruknds/core/discussions" target="_blank" rel="noopener">
+              <button class="btn-outline btn-lg" style="width: 100%;">
+                <i class="ph ph-chat-circle-dots" style="margin-right: 8px;"></i>
+                Join Discussions
+              </button>
+            </a>
+          </div>
+          
+          <div style="margin-top: var(--r-space-8); padding-top: var(--r-space-6); border-top: 1px solid hsl(var(--border));">
+            <p style="color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">
+              <i class="ph-fill ph-envelope-simple" style="margin-right: 4px;"></i>
+              For business inquiries or collaborations
+            </p>
+            <p style="color: hsl(var(--primary)); font-size: var(--font-size-lg); margin-top: var(--r-space-2); font-weight: 600;">
+              Available via LinkedIn
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+  <section class="section">
+    <div class="ds-container">
+      <div class="cta-box">
+        <h2 class="cta-title">Join the Open Source Movement</h2>
+        <p class="cta-desc">Thousands of developers are building beautiful, accessible web experiences with Rukn. Start today, contribute tomorrow.</p>
+        <div style="display: flex; gap: var(--r-space-4); justify-content: center; flex-wrap: wrap;">
+          <a href="components.html"><button class="btn-primary btn-lg">
+            <i class="ph ph-rocket-launch" style="margin-right: 8px;"></i>
+            Get Started
+          </button></a>
+          <a href="https://github.com/ruknds/core"><button class="btn-secondary btn-lg">
+            <i class="ph ph-github-logo" style="margin-right: 8px;"></i>
+            Star on GitHub
+          </button></a>
+        </div>
+        <p style="margin-top: var(--r-space-6); font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.5);">
+          <i class="ph-fill ph-heart" style="color: hsl(var(--primary)); margin-right: 4px;"></i>
+          MIT Licensed • No Attribution Required • Free Forever • Built with Love
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer style="padding: var(--r-space-12) var(--r-space-6); text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <div class="ds-container">
+      <div style="margin-bottom: var(--r-space-6);">
+        <div style="font-size: var(--font-size-2xl); font-weight: 700; margin-bottom: var(--r-space-2);">
+          <span style="color: hsl(var(--primary));">◆</span> Rukn
+        </div>
+        <p class="arabic-text" style="color: hsl(var(--foreground) / 0.6);">رُكن</p>
+      </div>
+      <div style="display: flex; gap: var(--r-space-6); justify-content: center; flex-wrap: wrap; margin-bottom: var(--r-space-6);">
+        <a href="components.html" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">Components</a>
+        <a href="#roadmap" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">Roadmap</a>
+        <a href="#changelog" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">Changelog</a>
+        <a href="#about" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">About</a>
+        <a href="#contact" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">Contact</a>
+        <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">LinkedIn</a>
+        <a href="https://github.com/ruknds/core" target="_blank" rel="noopener" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">GitHub</a>
+      </div>
+      <p style="color: hsl(var(--foreground) / 0.5); font-size: var(--font-size-sm);">
+        Built with ❤️ for designers and developers everywhere
+      </p>
+    </div>
+  </footer>
+  
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-dot"></div>
+  
+  <script>
+    // Optimized Custom Cursor - Hardware accelerated
+    const cursor = document.querySelector('.custom-cursor');
+    const cursorDot = document.querySelector('.custom-cursor-dot');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    
+    // Make cursor visible immediately
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    cursorDot.style.left = dotX + 'px';
+    cursorDot.style.top = dotY + 'px';
+    
+    // Use passive event listener for better performance
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
+    
+    // Optimized animation with left/top for better compatibility
+    function animateCursor() {
+      // Smooth following with easing
+      const ease = 0.18;
+      const dotEase = 0.3;
+      
+      cursorX += (mouseX - cursorX) * ease;
+      cursorY += (mouseY - cursorY) * ease;
+      dotX += (mouseX - dotX) * dotEase;
+      dotY += (mouseY - dotY) * dotEase;
+      
+      // Update position
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      cursorDot.style.left = dotX + 'px';
+      cursorDot.style.top = dotY + 'px';
+      
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    
+    document.querySelectorAll('a, button, input, label, .ds-card, .feature-card, .showcase-item, .ds-icon-placeholder').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+    
+    // Navbar scroll effect
+    const navbar = document.querySelector('.ds-navbar');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    });
+    
+    // Mobile Navigation Toggle
+    const navToggle = document.getElementById('navToggle');
+    const navDropdown = document.getElementById('navDropdown');
+    
+    if (navToggle && navDropdown) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navDropdown.classList.toggle('open');
+      });
+      
+      // Close menu when clicking a link
+      navDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('open');
+          navDropdown.classList.remove('open');
+        });
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target) && !navDropdown.contains(e.target)) {
+          navToggle.classList.remove('open');
+          navDropdown.classList.remove('open');
+        }
+      });
+    }
+    
+    // Make floating components more interactive on hover
+    document.querySelectorAll('.floating').forEach((el, index) => {
+      el.addEventListener('mouseenter', () => {
+        el.style.animationPlayState = 'paused';
+        el.style.transform = 'scale(1.1)';
+        el.style.filter = 'blur(0)';
+        el.style.opacity = '0.8';
+      });
+      
+      el.addEventListener('mouseleave', () => {
+        el.style.animationPlayState = 'running';
+        el.style.transform = '';
+        el.style.filter = 'blur(0.5px)';
+        el.style.opacity = '';
+      });
+    });
+  </script>
+</body>
+</html>

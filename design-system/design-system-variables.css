@@ -1,0 +1,438 @@
+/**
+ * Design System CSS Variables
+ * 
+ * Standalone CSS variable definitions for the design system.
+ * These variables can be customized to match your brand.
+ * 
+ * Usage:
+ *   <link rel="stylesheet" href="design-system-variables.css">
+ */
+
+/* ========================================
+   FONT IMPORTS
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ========================================
+     TYPOGRAPHY TOKENS (W3C Compliant - Rukn Prefixed)
+     ======================================== */
+  
+  /* Font Families */
+  --r-font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --r-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --r-font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
+  --r-font-arabic: 'Rubik', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Font Weights */
+  --r-font-weight-light: 300;
+  --r-font-weight-normal: 400;
+  --r-font-weight-medium: 500;
+  --r-font-weight-semibold: 600;
+  --r-font-weight-bold: 700;
+  
+  /* Line Heights */
+  --r-line-height-none: 1;
+  --r-line-height-tight: 1.25;
+  --r-line-height-snug: 1.375;
+  --r-line-height-normal: 1.5;
+  --r-line-height-relaxed: 1.625;
+  --r-line-height-loose: 2;
+  
+  /* Letter Spacing */
+  --r-letter-spacing-tighter: -0.05em;
+  --r-letter-spacing-tight: -0.025em;
+  --r-letter-spacing-normal: 0;
+  --r-letter-spacing-wide: 0.025em;
+  --r-letter-spacing-wider: 0.05em;
+  --r-letter-spacing-widest: 0.1em;
+  
+  /* ========================================
+     SPACING TOKENS (4px base unit - W3C Compliant)
+     ======================================== */
+  
+  --r-space-0: 0;
+  --r-space-px: 1px;
+  --r-space-0-5: 0.125rem;  /* 2px */
+  --r-space-1: 0.25rem;     /* 4px */
+  --r-space-1-5: 0.375rem;  /* 6px */
+  --r-space-2: 0.5rem;      /* 8px */
+  --r-space-2-5: 0.625rem;  /* 10px */
+  --r-space-3: 0.75rem;     /* 12px */
+  --r-space-3-5: 0.875rem;  /* 14px */
+  --r-space-4: 1rem;        /* 16px */
+  --r-space-5: 1.25rem;     /* 20px */
+  --r-space-6: 1.5rem;      /* 24px */
+  --r-space-7: 1.75rem;     /* 28px */
+  --r-space-8: 2rem;        /* 32px */
+  --r-space-9: 2.25rem;     /* 36px */
+  --r-space-10: 2.5rem;     /* 40px */
+  --r-space-11: 2.75rem;    /* 44px */
+  --r-space-12: 3rem;       /* 48px */
+  --r-space-14: 3.5rem;     /* 56px */
+  --r-space-16: 4rem;       /* 64px */
+  --r-space-20: 5rem;       /* 80px */
+  --r-space-24: 6rem;       /* 96px */
+  --r-space-28: 7rem;       /* 112px */
+  --r-space-32: 8rem;       /* 128px */
+  
+  /* ========================================
+     SIZE TOKENS (W3C Compliant)
+     ======================================== */
+  
+  /* Component Sizes */
+  --r-size-xs: 1.5rem;      /* 24px */
+  --r-size-sm: 2rem;        /* 32px */
+  --r-size-md: 2.5rem;      /* 40px */
+  --r-size-lg: 3rem;        /* 48px */
+  --r-size-xl: 3.5rem;      /* 56px */
+  --r-size-2xl: 4rem;       /* 64px */
+  
+  /* Icon Sizes */
+  --r-icon-xs: 0.75rem;     /* 12px */
+  --r-icon-sm: 1rem;        /* 16px */
+  --r-icon-md: 1.25rem;     /* 20px */
+  --r-icon-lg: 1.5rem;      /* 24px */
+  --r-icon-xl: 2rem;        /* 32px */
+  
+  /* Container Max Widths */
+  --r-container-xs: 20rem;      /* 320px */
+  --r-container-sm: 24rem;      /* 384px */
+  --r-container-md: 28rem;      /* 448px */
+  --r-container-lg: 32rem;      /* 512px */
+  --r-container-xl: 36rem;      /* 576px */
+  --r-container-2xl: 42rem;     /* 672px */
+  --r-container-3xl: 48rem;     /* 768px */
+  --r-container-4xl: 56rem;     /* 896px */
+  --r-container-5xl: 64rem;     /* 1024px */
+  --r-container-6xl: 72rem;     /* 1152px */
+  --r-container-7xl: 80rem;     /* 1280px */
+  
+  /* ========================================
+     BORDER TOKENS (W3C Compliant)
+     ======================================== */
+  
+  /* Border Widths */
+  --r-border-width-0: 0;
+  --r-border-width-1: 1px;
+  --r-border-width-2: 2px;
+  --r-border-width-4: 4px;
+  --r-border-width-8: 8px;
+  
+  /* Note: Border radius tokens are defined in the color section below for theme consistency */
+  
+  /* ========================================
+     SHADOW TOKENS (W3C Compliant)
+     ======================================== */
+  
+  --r-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --r-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --r-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.06);
+  --r-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --r-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --r-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --r-shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --r-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  
+  /* ========================================
+     Z-INDEX TOKENS (W3C Compliant)
+     ======================================== */
+  
+  --r-z-dropdown: 1000;
+  --r-z-sticky: 1020;
+  --r-z-fixed: 1030;
+  --r-z-modal-backdrop: 1040;
+  --r-z-modal: 1050;
+  --r-z-popover: 1060;
+  --r-z-tooltip: 1070;
+  
+  /* ========================================
+     TRANSITION TOKENS (W3C Compliant - iOS Motion HCI)
+     Based on Apple's Human Interface Guidelines
+     ======================================== */
+  
+  /* Duration - iOS-inspired timing */
+  --r-transition-instant: 100ms;    /* Micro-interactions */
+  --r-transition-fast: 200ms;       /* Quick feedback */
+  --r-transition-base: 300ms;       /* Standard transitions */
+  --r-transition-slow: 400ms;       /* Deliberate motion */
+  --r-transition-slower: 600ms;     /* Emphasis */
+  
+  /* iOS Easing Curves - Smooth & Natural */
+  --r-ease-ios-standard: cubic-bezier(0.4, 0, 0.2, 1);        /* Standard iOS motion */
+  --r-ease-ios-decelerate: cubic-bezier(0, 0, 0.2, 1);        /* Quick start, slow end */
+  --r-ease-ios-accelerate: cubic-bezier(0.4, 0, 1, 1);        /* Slow start, quick end */
+  --r-ease-ios-sharp: cubic-bezier(0.4, 0, 0.6, 1);           /* Pronounced motion */
+  --r-ease-ios-smooth: cubic-bezier(0.42, 0, 0.58, 1);        /* Apple default */
+  
+  /* Spring Animations (iOS-style) */
+  --r-spring-smooth: cubic-bezier(0.5, 0, 0.1, 1);            /* Gentle spring */
+  --r-spring-bouncy: cubic-bezier(0.68, -0.55, 0.265, 1.55);  /* Playful bounce */
+  --r-spring-snappy: cubic-bezier(0.34, 1.56, 0.64, 1);       /* Quick snap */
+  
+  /* Legacy Easing (backward compatibility) */
+  --r-ease-in: var(--r-ease-ios-accelerate);
+  --r-ease-out: var(--r-ease-ios-decelerate);
+  --r-ease-in-out: var(--r-ease-ios-standard);
+  
+  /* ========================================
+     BACKWARD COMPATIBILITY ALIASES
+     ======================================== */
+  
+  /* Legacy Typography (unprefixed - deprecated, use --r-* tokens) */
+  --font-heading: var(--r-font-heading);
+  --font-body: var(--r-font-body);
+  --font-mono: var(--r-font-mono);
+  --font-arabic: var(--r-font-arabic);
+  --font-weight-light: var(--r-font-weight-light);
+  --font-weight-normal: var(--r-font-weight-normal);
+  --font-weight-medium: var(--r-font-weight-medium);
+  --font-weight-semibold: var(--r-font-weight-semibold);
+  --font-weight-bold: var(--r-font-weight-bold);
+  --line-height-none: var(--r-line-height-none);
+  --line-height-tight: var(--r-line-height-tight);
+  --line-height-snug: var(--r-line-height-snug);
+  --line-height-normal: var(--r-line-height-normal);
+  --line-height-relaxed: var(--r-line-height-relaxed);
+  --line-height-loose: var(--r-line-height-loose);
+  --letter-spacing-tighter: var(--r-letter-spacing-tighter);
+  --letter-spacing-tight: var(--r-letter-spacing-tight);
+  --letter-spacing-normal: var(--r-letter-spacing-normal);
+  --letter-spacing-wide: var(--r-letter-spacing-wide);
+  --letter-spacing-wider: var(--r-letter-spacing-wider);
+  --letter-spacing-widest: var(--r-letter-spacing-widest);
+  
+  /* Legacy Spacing (unprefixed - deprecated, use --r-space-* tokens) */
+  --space-0: var(--r-space-0);
+  --space-px: var(--r-space-px);
+  --space-0-5: var(--r-space-0-5);
+  --space-1: var(--r-space-1);
+  --space-1-5: var(--r-space-1-5);
+  --space-2: var(--r-space-2);
+  --space-2-5: var(--r-space-2-5);
+  --space-3: var(--r-space-3);
+  --space-3-5: var(--r-space-3-5);
+  --space-4: var(--r-space-4);
+  --space-5: var(--r-space-5);
+  --space-6: var(--r-space-6);
+  --space-7: var(--r-space-7);
+  --space-8: var(--r-space-8);
+  --space-9: var(--r-space-9);
+  --space-10: var(--r-space-10);
+  --space-11: var(--r-space-11);
+  --space-12: var(--r-space-12);
+  --space-14: var(--r-space-14);
+  --space-16: var(--r-space-16);
+  --space-20: var(--r-space-20);
+  --space-24: var(--r-space-24);
+  --space-28: var(--r-space-28);
+  --space-32: var(--r-space-32);
+  
+  /* Legacy Sizes (unprefixed - deprecated, use --r-size-* tokens) */
+  --size-xs: var(--r-size-xs);
+  --size-sm: var(--r-size-sm);
+  --size-md: var(--r-size-md);
+  --size-lg: var(--r-size-lg);
+  --size-xl: var(--r-size-xl);
+  --size-2xl: var(--r-size-2xl);
+  --icon-xs: var(--r-icon-xs);
+  --icon-sm: var(--r-icon-sm);
+  --icon-md: var(--r-icon-md);
+  --icon-lg: var(--r-icon-lg);
+  --icon-xl: var(--r-icon-xl);
+  --container-xs: var(--r-container-xs);
+  --container-sm: var(--r-container-sm);
+  --container-md: var(--r-container-md);
+  --container-lg: var(--r-container-lg);
+  --container-xl: var(--r-container-xl);
+  --container-2xl: var(--r-container-2xl);
+  --container-3xl: var(--r-container-3xl);
+  --container-4xl: var(--r-container-4xl);
+  --container-5xl: var(--r-container-5xl);
+  --container-6xl: var(--r-container-6xl);
+  --container-7xl: var(--r-container-7xl);
+  
+  /* Legacy Borders & Radius (unprefixed - deprecated, use --r-* tokens) */
+  --border-width-0: var(--r-border-width-0);
+  --border-width-1: var(--r-border-width-1);
+  --border-width-2: var(--r-border-width-2);
+  --border-width-4: var(--r-border-width-4);
+  --border-width-8: var(--r-border-width-8);
+  --radius-none: var(--r-radius-none);
+  --radius-sm: var(--r-radius-sm);
+  --radius-base: var(--r-radius-base);
+  --radius-md: var(--r-radius-md);
+  --radius-lg: var(--r-radius-lg);
+  --radius-xl: var(--r-radius-xl);
+  --radius-2xl: var(--r-radius-2xl);
+  --radius-3xl: var(--r-radius-3xl);
+  --radius-full: var(--r-radius-full);
+  
+  /* Legacy Shadows (unprefixed - deprecated, use --r-shadow-* tokens) */
+  --shadow-xs: var(--r-shadow-xs);
+  --shadow-sm: var(--r-shadow-sm);
+  --shadow-base: var(--r-shadow-base);
+  --shadow-md: var(--r-shadow-md);
+  --shadow-lg: var(--r-shadow-lg);
+  --shadow-xl: var(--r-shadow-xl);
+  --shadow-2xl: var(--r-shadow-2xl);
+  --shadow-inner: var(--r-shadow-inner);
+  
+  /* Legacy Transitions (unprefixed - deprecated, use --r-* tokens) */
+  --transition-fast: var(--r-transition-fast);
+  --transition-base: var(--r-transition-base);
+  --transition-slow: var(--r-transition-slow);
+  --transition-slower: var(--r-transition-slower);
+  --ease-in: var(--r-ease-in);
+  --ease-out: var(--r-ease-out);
+  --ease-in-out: var(--r-ease-in-out);
+  
+  /* Legacy Z-Index (unprefixed - deprecated, use --r-z-* tokens) */
+  --z-index-dropdown: var(--r-z-dropdown);
+  --z-index-sticky: var(--r-z-sticky);
+  --z-index-fixed: var(--r-z-fixed);
+  --z-index-modal-backdrop: var(--r-z-modal-backdrop);
+  --z-index-modal: var(--r-z-modal);
+  --z-index-popover: var(--r-z-popover);
+  --z-index-tooltip: var(--r-z-tooltip);
+  
+  /* Old spacing tokens */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  
+  /* ========================================
+     COLOR SYSTEM - Light Theme
+     ======================================== */
+  
+  /* Base Colors */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  
+  /* Card & Popover */
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  
+  /* Primary Brand Color */
+  --primary: 352 95% 58%;            /* Warm Red */
+  --primary-foreground: 210 40% 98%;
+  
+  /* Secondary Colors */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  
+  /* Muted/Subdued */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  
+  /* Accent Colors */
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 84% 4.9%;
+  
+  /* State Colors */
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --warning: 38 92% 50%;
+  --success: 142.1 76.2% 36.3%;
+  
+  /* Borders & Inputs */
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  
+  /* Border Radius (W3C Compliant) */
+  --r-radius-none: 0;
+  --r-radius-sm: 0.25rem;       /* 4px */
+  --r-radius-base: 0.375rem;    /* 6px */
+  --r-radius-md: 0.5rem;        /* 8px */
+  --r-radius-lg: 0.75rem;       /* 12px */
+  --r-radius-xl: 1rem;          /* 16px */
+  --r-radius-2xl: 1.5rem;       /* 24px */
+  --r-radius-3xl: 2rem;         /* 32px */
+  --r-radius-full: 9999px;
+  
+  /* Legacy radius (for backward compatibility) */
+  --radius: var(--r-radius-lg);
+  
+  /* Typography Scale (Legacy - use --font-size-* tokens defined above) */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-md: 1.125rem;  /* 18px */
+  --font-size-lg: 1.25rem;   /* 20px */
+  --font-size-xl: 1.5rem;    /* 24px */
+  --font-size-2xl: 1.875rem; /* 30px */
+  --font-size-3xl: 2.25rem;  /* 36px */
+  --font-size-4xl: 3rem;     /* 48px */
+  --font-size-5xl: 3.75rem;  /* 60px */
+}
+
+/* Dark Theme Variables */
+.dark,
+[data-theme="dark"] {
+  /* Base surfaces */
+  --background: 220 5% 4%;           /* #0B0B0C */
+  --foreground: 210 15% 92%;         /* #EAECEE */
+  
+  /* Card & Popover */
+  --card: 220 7% 7%;                 /* #111214 */
+  --card-foreground: 210 15% 92%;
+  --popover: 222 6% 9%;              /* ~ rgba(22,23,25,0.85) */
+  --popover-foreground: 210 15% 92%;
+  
+  /* Primary Brand Color */
+  --primary: 352 100% 63%;           /* #FF4154 - Warm Red */
+  --primary-foreground: 0 0% 5%;     /* onAccent inverse */
+  
+  /* Secondary */
+  --secondary: 220 8% 9%;            /* #141518 */
+  --secondary-foreground: 210 15% 92%;
+  
+  /* Muted/Subdued */
+  --muted: 220 8% 9%;                /* surfaceAlt */
+  --muted-foreground: 215 14% 65%;   /* #9BA3AF */
+  
+  /* Accent */
+  --accent: 18 100% 63%;             /* #FF7A45 */
+  --accent-foreground: 0 0% 5%;
+  
+  /* State Colors */
+  --destructive: 2 100% 67%;         /* #FF5F57 */
+  --destructive-foreground: 210 40% 98%;
+  --warning: 42 100% 60%;            /* #FFBD2E */
+  --success: 134 69% 48%;             /* #28C840 */
+  
+  /* Borders & Inputs */
+  --border: 0 0% 100% / 0.06;        /* subtle */
+  --input: 0 0% 100% / 0.06;
+  --ring: 262 83% 57%;                /* focus */
+}
+
+/**
+ * Base Styles (Optional - Minimal Reset)
+ * Uncomment if you want basic styling without a framework
+ */
+/*
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*/
+
+

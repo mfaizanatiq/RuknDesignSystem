@@ -1,0 +1,2266 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Components & Foundation - Rukn Design System رُكن</title>
+  <meta name="description" content="Explore all Rukn components and design tokens. Searchable component library with live examples, code snippets, and comprehensive token documentation.">
+  <meta name="keywords" content="rukn components, design tokens, CSS components, button, input, modal, checkbox, glass morphism">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rukn.design/components.html">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="design-system-variables.css">
+  <link rel="stylesheet" href="design-system.css">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      overflow-x: hidden;
+      cursor: none;
+    }
+    
+    /* Hide all default cursors */
+    body, body *, a, button, input, textarea, select, label {
+      cursor: none !important;
+    }
+    
+    /* Custom Cursor - Optimized for performance */
+    .custom-cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid hsl(var(--primary));
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transition: width 0.15s ease, height 0.15s ease, background 0.15s ease;
+      mix-blend-mode: difference;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translate(-50%, -50%);
+    }
+    
+    .custom-cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: hsl(var(--primary));
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 100000;
+      mix-blend-mode: difference;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translate(-50%, -50%);
+    }
+    
+    .custom-cursor.hover {
+      width: 40px;
+      height: 40px;
+      background: hsl(var(--primary) / 0.1);
+      border-color: hsl(var(--primary) / 0.8);
+    }
+    
+    /* Arabic Text */
+    .arabic-text {
+      font-family: var(--font-arabic);
+      font-weight: var(--font-weight-medium);
+    }
+    
+    /* Layout */
+    .docs-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 3.5rem;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      position: fixed;
+      top: calc(3.5rem + var(--r-space-8) + var(--r-space-4));
+      left: var(--r-space-4);
+      bottom: var(--r-space-4);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(24px) saturate(1.5);
+      -webkit-backdrop-filter: blur(24px) saturate(1.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-radius-2xl);
+      overflow-y: auto;
+      padding: var(--r-space-6);
+      z-index: 40;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all var(--r-transition-base) var(--r-ease-ios-smooth);
+    }
+    
+    /* Sidebar scrollbar */
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--r-radius-full);
+    }
+    .sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .sidebar-section {
+      margin-bottom: var(--r-space-8);
+    }
+    
+    .sidebar-section:not(:last-child) {
+      padding-bottom: var(--r-space-6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .sidebar-title {
+      font-size: var(--r-font-size-xs);
+      font-weight: 700;
+      color: hsl(var(--foreground) / 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--r-space-4);
+      padding: var(--r-space-2) var(--r-space-3);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--r-radius-lg);
+    }
+    
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .sidebar-nav li {
+      margin-bottom: var(--space-1);
+    }
+    
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: var(--r-space-3);
+      padding: var(--r-space-3) var(--r-space-4);
+      font-size: var(--r-font-size-sm);
+      color: hsl(var(--foreground) / 0.7);
+      text-decoration: none;
+      border-radius: var(--r-radius-lg);
+      transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sidebar-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: hsl(var(--primary));
+      transform: scaleY(0);
+      transition: transform var(--r-transition-base) var(--r-spring-smooth);
+      border-radius: 0 var(--r-radius-md) var(--r-radius-md) 0;
+    }
+    
+    .sidebar-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: hsl(var(--foreground));
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar-link:active {
+      transform: translateX(2px) scale(0.98);
+    }
+    
+    .sidebar-link.active {
+      background: linear-gradient(135deg, 
+        hsl(var(--primary) / 0.2), 
+        hsl(var(--primary) / 0.1));
+      color: hsl(var(--primary));
+      font-weight: 600;
+      box-shadow: 
+        0 2px 8px hsl(var(--primary) / 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .sidebar-link.active::before {
+      transform: scaleY(1);
+    }
+    
+    .sidebar-link i {
+      font-size: 18px;
+      transition: transform var(--r-transition-fast) var(--r-spring-smooth);
+    }
+    
+    .sidebar-link:hover i {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: calc(280px + var(--r-space-8));
+      padding: var(--r-space-8) var(--r-space-6);
+      max-width: 1400px;
+    }
+    
+    /* Section */
+    .section {
+      margin-bottom: var(--space-20);
+      scroll-margin-top: 4rem;
+    }
+    
+    .section-header {
+      margin-bottom: var(--space-8);
+    }
+    
+    .section-title {
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    
+    .section-title i {
+      color: hsl(var(--primary));
+    }
+    
+    .section-description {
+      font-size: var(--font-size-lg);
+      color: hsl(var(--foreground) / 0.7);
+    }
+    
+    /* Showcase Styles */
+    .showcase-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    
+    .showcase-item {
+      background: hsl(var(--card));
+      border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all var(--transition-base) var(--ease-out);
+    }
+    
+    .showcase-item.hidden {
+      display: none;
+    }
+    
+    .showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: var(--space-6);
+      border-bottom: 1px solid hsl(var(--border));
+      gap: var(--space-4);
+    }
+    
+    .showcase-header h3 {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-1);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    
+    .showcase-header h3 i {
+      color: hsl(var(--primary));
+    }
+    
+    .showcase-header p {
+      color: hsl(var(--foreground) / 0.7);
+      font-size: var(--font-size-sm);
+    }
+    
+    .showcase-preview {
+      padding: var(--space-8);
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .showcase-code {
+      padding: var(--space-6);
+      background: hsl(var(--muted) / 0.3);
+      border-top: 1px solid hsl(var(--border));
+    }
+    
+    .code-block {
+      background: hsl(var(--muted));
+      border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    .code-block code {
+      color: hsl(var(--foreground) / 0.9);
+    }
+    
+    /* Mobile Sidebar Toggle */
+    .sidebar-toggle {
+      position: fixed;
+      bottom: var(--r-space-6);
+      left: var(--r-space-6);
+      width: 56px;
+      height: 56px;
+      border-radius: var(--r-radius-full);
+      background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      z-index: 50;
+      transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+      backdrop-filter: blur(10px);
+    }
+    
+    .sidebar-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    
+    .sidebar-toggle:active {
+      transform: scale(0.95);
+    }
+    
+    .sidebar-toggle i {
+      font-size: 24px;
+    }
+    
+    @media (max-width: 1024px) {
+      .sidebar {
+        top: calc(3.5rem + var(--r-space-4) + var(--r-space-2));
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: none;
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        transform: translateX(-100%);
+        transition: transform var(--r-transition-slow) var(--r-spring-smooth);
+        box-shadow: none;
+      }
+      
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 
+          0 -4px 24px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+      
+      .main-content {
+        margin-left: 0;
+        padding: var(--r-space-4) var(--r-space-3);
+      }
+      
+      .sidebar-toggle {
+        display: flex;
+      }
+    }
+    
+    /* Sidebar backdrop for mobile */
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 35;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--r-transition-base) var(--r-ease-ios-smooth);
+      display: none;
+    }
+    
+    @media (max-width: 1024px) {
+      .sidebar-backdrop {
+        display: block;
+        top: calc(3.5rem + var(--r-space-4) + var(--r-space-2));
+      }
+      
+      .sidebar-backdrop.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+    
+    /* Search */
+    .search-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: hsl(var(--background));
+      padding: var(--space-6) 0;
+      margin-bottom: var(--space-8);
+      border-bottom: 1px solid hsl(var(--border));
+    }
+    
+    /* Token Grid */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+    }
+    
+    .token-item {
+      padding: var(--space-6);
+      background: hsl(var(--card));
+      border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    
+    .token-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: hsl(var(--primary) / 0.3);
+    }
+    
+    /* Navbar Search - Mobile Adjustments */
+    @media (max-width: 768px) {
+      .ds-navbar-mobile-dropdown {
+        top: calc(3.5rem + var(--r-space-2) + var(--r-space-2));
+      }
+      
+      #navSearch {
+        display: none;
+      }
+      
+      .ds-navbar-container {
+        gap: var(--r-space-2) !important;
+      }
+    }
+    
+    /* Sidebar Toggle Button - Better positioning on mobile */
+    @media (max-width: 1024px) {
+      .sidebar-toggle {
+        bottom: var(--r-space-4);
+        right: var(--r-space-4);
+        left: auto;
+        width: 56px;
+        height: 56px;
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.4),
+          0 4px 16px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+      
+      .sidebar-toggle i {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav class="ds-navbar ds-navbar-full">
+    <div class="ds-navbar-container" style="gap: var(--r-space-4);">
+      <a href="index.html" class="ds-navbar-brand">
+        <span class="ds-navbar-logo">◆</span>
+        <span>Rukn</span>
+      </a>
+      
+      <!-- Search Bar in Navbar -->
+      <div style="flex: 1; max-width: 600px; position: relative;">
+        <i class="ph ph-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: hsl(var(--foreground) / 0.5); font-size: 16px; pointer-events: none;"></i>
+        <input 
+          type="text" 
+          id="navSearch" 
+          class="ds-input" 
+          placeholder="Quick search..."
+          style="
+            padding: var(--r-space-2) var(--r-space-3) var(--r-space-2) 40px; 
+            font-size: var(--font-size-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 36px;
+          "
+        >
+      </div>
+      
+      <nav class="ds-navbar-nav">
+        <div class="ds-navbar-menu">
+          <a href="index.html"><button class="btn-ghost btn-sm">Home</button></a>
+          <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
+            <button class="btn-ghost btn-sm">
+              <i class="ph ph-github-logo"></i>
+            </button>
+          </a>
+        </div>
+        
+        <!-- Mobile Hamburger -->
+        <button class="ds-navbar-hamburger" id="navToggleComponents" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation Dropdown -->
+  <div class="ds-navbar-mobile-dropdown" id="navDropdownComponents">
+    <div class="ds-navbar-menu">
+      <a href="index.html"><button class="btn-ghost btn-sm">
+        <i class="ph ph-house"></i> Home
+      </button></a>
+      <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
+        <button class="btn-ghost btn-sm">
+          <i class="ph-fill ph-github-logo"></i> GitHub
+        </button>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Layout -->
+  <div class="docs-layout">
+    
+    <!-- Sidebar Backdrop (Mobile) -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">Foundation</h4>
+        <ul class="sidebar-nav">
+          <li><a href="#colors" class="sidebar-link"><i class="ph-fill ph-palette"></i> Colors</a></li>
+          <li><a href="#typography" class="sidebar-link"><i class="ph-fill ph-text-aa"></i> Typography</a></li>
+          <li><a href="#spacing" class="sidebar-link"><i class="ph-fill ph-arrows-out-cardinal"></i> Spacing</a></li>
+          <li><a href="#sizes" class="sidebar-link"><i class="ph-fill ph-resize"></i> Sizes</a></li>
+          <li><a href="#radius" class="sidebar-link"><i class="ph-fill ph-shapes"></i> Border Radius</a></li>
+          <li><a href="#surfaces" class="sidebar-link"><i class="ph-fill ph-stack"></i> Surfaces</a></li>
+          <li><a href="#shadows" class="sidebar-link"><i class="ph-fill ph-sun-dim"></i> Shadows</a></li>
+          <li><a href="#borders" class="sidebar-link"><i class="ph-fill ph-square-half"></i> Border Widths</a></li>
+          <li><a href="#motion" class="sidebar-link"><i class="ph-fill ph-pulse"></i> iOS Motion</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">Layouts</h4>
+        <ul class="sidebar-nav">
+          <li><a href="#container" class="sidebar-link"><i class="ph-fill ph-container"></i> Container</a></li>
+          <li><a href="#grid" class="sidebar-link"><i class="ph-fill ph-grid-four"></i> Grid System</a></li>
+          <li><a href="#flexbox" class="sidebar-link"><i class="ph-fill ph-arrows-out"></i> Flexbox</a></li>
+          <li><a href="#responsive" class="sidebar-link"><i class="ph-fill ph-devices"></i> Responsive</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">Components</h4>
+        <ul class="sidebar-nav">
+          <li><a href="#buttons" class="sidebar-link"><i class="ph-fill ph-cursor-click"></i> Buttons</a></li>
+          <li><a href="#inputs" class="sidebar-link"><i class="ph-fill ph-text-box"></i> Inputs</a></li>
+          <li><a href="#checkbox" class="sidebar-link"><i class="ph-fill ph-check-square"></i> Checkbox</a></li>
+          <li><a href="#radio" class="sidebar-link"><i class="ph-fill ph-radio-button"></i> Radio Group</a></li>
+          <li><a href="#switch" class="sidebar-link"><i class="ph-fill ph-toggle-right"></i> Switch</a></li>
+          <li><a href="#slider" class="sidebar-link"><i class="ph-fill ph-sliders-horizontal"></i> Slider</a></li>
+          <li><a href="#formfield" class="sidebar-link"><i class="ph-fill ph-text-align-left"></i> Form Field</a></li>
+          <li><a href="#icon-placeholder" class="sidebar-link"><i class="ph-fill ph-shapes"></i> Icon Placeholders</a></li>
+          <li><a href="#card" class="sidebar-link"><i class="ph-fill ph-frame-corners"></i> Card</a></li>
+          <li><a href="#badge" class="sidebar-link"><i class="ph-fill ph-tag"></i> Badges</a></li>
+          <li><a href="#modal" class="sidebar-link"><i class="ph-fill ph-frame"></i> Modal</a></li>
+          <li><a href="#drawer" class="sidebar-link"><i class="ph-fill ph-sidebar"></i> Drawer</a></li>
+          <li><a href="#navbar" class="sidebar-link"><i class="ph-fill ph-navigation-arrow"></i> Navbar</a></li>
+          <li><a href="#glass" class="sidebar-link"><i class="ph-fill ph-sparkle"></i> Glass Morphism</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section" style="border-top: 1px solid hsl(var(--border)); padding-top: var(--space-6);">
+        <a href="index.html"><button class="btn-outline btn-sm" style="width: 100%;">
+          <i class="ph ph-arrow-left" style="margin-right: 8px;"></i>
+          Back to Home
+        </button></a>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Search Results (Hidden container for results count) -->
+      <div style="display: none;">
+        <input type="hidden" id="componentSearch">
+        <button id="clearSearch" style="display: none;"></button>
+        <p id="searchResults"></p>
+      </div>
+      
+      <!-- Foundation Section Header -->
+      <div style="margin-bottom: var(--space-12);">
+        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-3);">Foundation & Components</h1>
+        <p style="font-size: var(--font-size-xl); color: hsl(var(--foreground) / 0.7);">
+          Explore design tokens and live component examples with code
+        </p>
+      </div>
+      
+      <!-- FOUNDATION SECTIONS -->
+      
+      <!-- Colors -->
+      <section id="colors" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-palette"></i>
+            Colors
+          </h2>
+          <p class="section-description">Semantic color tokens for consistent theming</p>
+        </div>
+        <div class="token-grid">
+          <div style="padding: var(--space-6); background: hsl(var(--primary)); border-radius: var(--radius-lg); color: white;">
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--primary</div>
+            <div style="font-weight: var(--font-weight-semibold);">Primary</div>
+            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Brand color</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--accent)); border-radius: var(--radius-lg); color: white;">
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--accent</div>
+            <div style="font-weight: var(--font-weight-semibold);">Accent</div>
+            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Secondary brand</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--success)); border-radius: var(--radius-lg); color: white;">
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--success</div>
+            <div style="font-weight: var(--font-weight-semibold);">Success</div>
+            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Positive actions</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--warning)); border-radius: var(--radius-lg); color: white;">
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--warning</div>
+            <div style="font-weight: var(--font-weight-semibold);">Warning</div>
+            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Caution states</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--destructive)); border-radius: var(--radius-lg); color: white;">
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--destructive</div>
+            <div style="font-weight: var(--font-weight-semibold);">Destructive</div>
+            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Dangerous actions</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin-bottom: var(--space-2);">--muted</div>
+            <div style="font-weight: var(--font-weight-semibold);">Muted</div>
+            <div style="font-size: var(--font-size-xs); color: hsl(var(--foreground) / 0.6); margin-top: var(--space-1);">Subtle backgrounds</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Typography -->
+      <section id="typography" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-text-aa"></i>
+            Typography
+          </h2>
+          <p class="section-description">Space Grotesk for headings, Rubik for Arabic, system fonts for body</p>
+        </div>
+        <div class="ds-card">
+          <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+            <div>
+              <h1 class="ds-h1">The quick brown fox jumps</h1>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">h1 • --r-font-heading (Space Grotesk) • 48px</div>
+            </div>
+            <div>
+              <h2 class="ds-h2">The quick brown fox jumps</h2>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">h2 • --r-font-heading (Space Grotesk) • 36px</div>
+            </div>
+            <div>
+              <h3 class="ds-h3">The quick brown fox jumps over the lazy dog</h3>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">h3 • --r-font-heading (Space Grotesk) • 30px</div>
+            </div>
+            <div>
+              <p style="font-size: var(--font-size-base); line-height: var(--line-height-relaxed);">Body text using system fonts for optimal performance and readability across all devices and platforms. This ensures consistent appearance while maintaining excellent legibility.</p>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">p • --r-font-body (System UI) • 16px</div>
+            </div>
+            <div>
+              <p class="arabic-text inline" style="font-size: var(--font-size-2xl);">رُكن تصميم النظام</p>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">Arabic • --r-font-arabic (Rubik) • 30px</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Spacing -->
+      <section id="spacing" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-arrows-out-cardinal"></i>
+            Spacing Scale
+          </h2>
+          <p class="section-description">4px base unit system for consistent spacing rhythm</p>
+        </div>
+        <div class="ds-card">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-1</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-1); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">4px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-2</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-2); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">8px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-4</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-4); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">16px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-6</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-6); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">24px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-8</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-8); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">32px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-12</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-12); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">48px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-16</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-16); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">64px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-20</div>
+              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-20); border-radius: var(--radius-base);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">80px</div>
+            </div>
+          </div>
+          <p style="margin-top: var(--space-6); color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">
+            <i class="ph ph-info" style="margin-right: 4px;"></i>
+            W3C Compliant • 32 spacing tokens from 2px to 128px
+          </p>
+        </div>
+      </section>
+      
+      <!-- Sizes -->
+      <section id="sizes" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-resize"></i>
+            Component Sizes
+          </h2>
+          <p class="section-description">Consistent sizing tokens for buttons, inputs, and icons</p>
+        </div>
+        <div class="ds-card">
+          <div style="display: flex; gap: var(--space-6); align-items: flex-end; flex-wrap: wrap; justify-content: center;">
+            <div style="text-align: center;">
+              <div style="width: var(--size-xs); height: var(--size-xs); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-xs</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">24px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: var(--size-sm); height: var(--size-sm); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-sm</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">32px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: var(--size-md); height: var(--size-md); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-md</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">40px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: var(--size-lg); height: var(--size-lg); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-lg</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">48px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: var(--size-xl); height: var(--size-xl); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-xl</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">56px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: var(--size-2xl); height: var(--size-2xl); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-2xl</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">64px</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Border Radius -->
+      <section id="radius" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-shapes"></i>
+            Border Radius
+          </h2>
+          <p class="section-description">From sharp corners to full circles</p>
+        </div>
+        <div class="ds-card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-6);">
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-none); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-none</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">0px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-sm); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-sm</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">4px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-base); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-base</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">6px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-md); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-md</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">8px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-lg); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-lg</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">12px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-xl); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-xl</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">16px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-2xl); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-2xl</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">24px</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-full); margin: 0 auto var(--space-2);"></div>
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-full</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Circle</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Surfaces -->
+      <section id="surfaces" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-stack"></i>
+            Surfaces & Elevation
+          </h2>
+          <p class="section-description">Layered surfaces for visual hierarchy</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
+          <div style="padding: var(--space-8); background: hsl(var(--background)); border: 1px solid hsl(var(--border)); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-2);">Background</div>
+            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Base Layer</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--background</div>
+          </div>
+          <div style="padding: var(--space-8); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-sm);">
+            <div style="font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-2);">Card</div>
+            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Elevated Surface</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--card</div>
+          </div>
+          <div style="padding: var(--space-8); background: hsl(var(--muted)); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-2);">Muted</div>
+            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Subtle Surface</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--muted</div>
+          </div>
+          <div class="ds-glass" style="padding: var(--space-8); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.9); margin-bottom: var(--space-2);">Glass</div>
+            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Frosted Glass</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--foreground) / 0.7);">.ds-glass</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Shadows -->
+      <section id="shadows" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-sun-dim"></i>
+            Shadows & Depth
+          </h2>
+          <p class="section-description">Elevation system from subtle to dramatic</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-6);">
+          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-xs);">
+            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">XS</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-xs</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-sm);">
+            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">SM</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-sm</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-base);">
+            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">Base</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-base</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-md);">
+            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">MD</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-md</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-lg);">
+            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">LG</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-lg</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-xl);">
+            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">XL</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-xl</div>
+          </div>
+          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-2xl);">
+            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">2XL</div>
+            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-2xl</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Border Widths -->
+      <section id="borders" class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-square-half"></i>
+            Border Widths
+          </h2>
+          <p class="section-description">Border thickness options from 1px to 8px</p>
+        </div>
+        <div class="ds-card">
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-1</div>
+              <div style="flex: 1; height: 60px; border: var(--border-width-1) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">1px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-2</div>
+              <div style="flex: 1; height: 60px; border: var(--border-width-2) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">2px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-4</div>
+              <div style="flex: 1; height: 60px; border: var(--border-width-4) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">4px</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-8</div>
+              <div style="flex: 1; height: 60px; border: var(--border-width-8) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">8px</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- iOS Motion -->
+      <section id="motion" class="section" data-keywords="motion animation easing spring transition ios apple smooth">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-pulse"></i>
+            iOS Motion & Easing
+          </h2>
+          <p class="section-description">Apple-inspired motion design for smooth micro-interactions</p>
+        </div>
+        <div class="ds-card">
+          <h4 style="margin-bottom: var(--space-4);">Easing Functions</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-ease-ios-standard</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Standard iOS motion</div>
+            </div>
+            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-ease-ios-smooth</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Apple default curve</div>
+            </div>
+            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-spring-smooth</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Gentle spring effect</div>
+            </div>
+            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
+              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-spring-bouncy</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Playful bounce</div>
+            </div>
+          </div>
+          <p style="margin-top: var(--space-6); padding: var(--space-4); background: rgba(255, 255, 255, 0.03); border-radius: var(--radius-lg); font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.7);">
+            <i class="ph ph-info" style="color: hsl(var(--primary)); margin-right: 4px;"></i>
+            All animations respect <code style="background: hsl(var(--muted)); padding: 2px 6px; border-radius: 4px;">prefers-reduced-motion</code> for accessibility
+          </p>
+        </div>
+      </section>
+      
+      <!-- LAYOUT SECTIONS -->
+      
+      <!-- Container -->
+      <section id="container" class="section" data-keywords="container max-width responsive centered layout">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-container"></i>
+            Container
+          </h2>
+          <p class="section-description">Responsive max-width containers with auto margins</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Container Sizes</h3>
+              <p>11 size options from xs to 7xl</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-container">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview" style="display: block; padding: var(--space-4);">
+            <div class="ds-container ds-container-sm" style="background: hsl(var(--primary) / 0.1); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-3);">
+              <div style="font-size: var(--font-size-sm);">ds-container-sm (384px)</div>
+            </div>
+            <div class="ds-container ds-container-md" style="background: hsl(var(--primary) / 0.1); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-3);">
+              <div style="font-size: var(--font-size-sm);">ds-container-md (448px)</div>
+            </div>
+            <div class="ds-container ds-container-lg" style="background: hsl(var(--primary) / 0.1); padding: var(--space-4); border-radius: var(--radius-lg);">
+              <div style="font-size: var(--space-sm);">ds-container-lg (512px)</div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-container" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-container"&gt;<br>  &lt;!-- Auto-centered, max-width 1280px --&gt;<br>&lt;/div&gt;<br><br>&lt;div class="ds-container ds-container-lg"&gt;<br>  &lt;!-- Max-width 512px --&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Grid System -->
+      <section id="grid" class="section" data-keywords="grid columns layout responsive auto-fit">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-grid-four"></i>
+            Grid System
+          </h2>
+          <p class="section-description">Powerful CSS Grid with responsive columns</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Grid Columns</h3>
+              <p>1 to 12 column grids</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-grid">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview" style="display: block;">
+            <div class="ds-grid ds-grid-cols-3 ds-gap-4" style="margin-bottom: var(--space-4);">
+              <div style="padding: var(--space-4); background: hsl(var(--primary) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Col 1</div>
+              <div style="padding: var(--space-4); background: hsl(var(--primary) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Col 2</div>
+              <div style="padding: var(--space-4); background: hsl(var(--primary) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Col 3</div>
+            </div>
+            <div class="ds-grid ds-grid-auto-fit ds-gap-4">
+              <div style="padding: var(--space-4); background: hsl(var(--accent) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Auto-fit 1</div>
+              <div style="padding: var(--space-4); background: hsl(var(--accent) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Auto-fit 2</div>
+              <div style="padding: var(--space-4); background: hsl(var(--accent) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Auto-fit 3</div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-grid" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-grid ds-grid-cols-3 ds-gap-4"&gt;<br>  &lt;div&gt;Column 1&lt;/div&gt;<br>  &lt;div&gt;Column 2&lt;/div&gt;<br>  &lt;div&gt;Column 3&lt;/div&gt;<br>&lt;/div&gt;<br><br>&lt;!-- Auto-fit responsive grid --&gt;<br>&lt;div class="ds-grid ds-grid-auto-fit ds-gap-4"&gt;<br>  &lt;div&gt;Auto-fits to space&lt;/div&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Flexbox -->
+      <section id="flexbox" class="section" data-keywords="flex flexbox row column justify align gap">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-arrows-out"></i>
+            Flexbox Utilities
+          </h2>
+          <p class="section-description">Flexible layouts with alignment and gap utilities</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Flex Layouts</h3>
+              <p>Row, column, center, between, etc.</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-flex">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview" style="display: block;">
+            <div class="ds-flex ds-justify-between ds-items-center ds-flex-gap-4" style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg); margin-bottom: var(--space-4);">
+              <div style="padding: var(--space-3); background: hsl(var(--primary)); border-radius: var(--radius-md); color: white;">Item 1</div>
+              <div style="padding: var(--space-3); background: hsl(var(--primary)); border-radius: var(--radius-md); color: white;">Item 2</div>
+              <div style="padding: var(--space-3); background: hsl(var(--primary)); border-radius: var(--radius-md); color: white;">Item 3</div>
+            </div>
+            <div class="ds-flex ds-flex-col ds-items-center ds-flex-gap-3" style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
+              <div style="padding: var(--space-3); background: hsl(var(--accent)); border-radius: var(--radius-md); color: white;">Centered</div>
+              <div style="padding: var(--space-3); background: hsl(var(--accent)); border-radius: var(--radius-md); color: white;">Column</div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-flex" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-flex ds-justify-between ds-items-center ds-flex-gap-4"&gt;<br>  &lt;div&gt;Item 1&lt;/div&gt;<br>  &lt;div&gt;Item 2&lt;/div&gt;<br>&lt;/div&gt;<br><br>&lt;div class="ds-flex ds-flex-col ds-items-center"&gt;<br>  &lt;div&gt;Centered column&lt;/div&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Responsive -->
+      <section id="responsive" class="section" data-keywords="responsive breakpoint mobile tablet desktop adaptive">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-devices"></i>
+            Responsive Design
+          </h2>
+          <p class="section-description">Mobile-first responsive utilities and breakpoints</p>
+        </div>
+        <div class="ds-card">
+          <h4 style="margin-bottom: var(--space-4);">Breakpoints</h4>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--muted-foreground));">Base</div>
+              <div style="font-size: var(--font-size-sm);">0px - 767px</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Mobile</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary));">md:</div>
+              <div style="font-size: var(--font-size-sm);">768px+</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Tablet</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary));">lg:</div>
+              <div style="font-size: var(--font-size-sm);">1024px+</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Desktop</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary));">xl:</div>
+              <div style="font-size: var(--font-size-sm);">1280px+</div>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Large Desktop</div>
+            </div>
+          </div>
+          
+          <h4 style="margin: var(--space-8) 0 var(--space-4);">Examples</h4>
+          <div class="code-block">
+            <code>&lt;!-- 1 col mobile, 2 cols tablet, 3 cols desktop --&gt;<br>&lt;div class="ds-grid ds-grid-cols-1 ds-md-grid-cols-2 ds-lg-grid-cols-3"&gt;<br>  &lt;div&gt;Responsive item&lt;/div&gt;<br>&lt;/div&gt;<br><br>&lt;!-- Hide on mobile, show on desktop --&gt;<br>&lt;div class="ds-hidden-mobile"&gt;Desktop only&lt;/div&gt;<br><br>&lt;!-- Column on mobile, row on tablet+ --&gt;<br>&lt;div class="ds-flex ds-flex-col ds-md-flex-row"&gt;<br>  &lt;div&gt;Responsive flex&lt;/div&gt;<br>&lt;/div&gt;</code>
+          </div>
+        </div>
+      </section>
+      
+      <!-- COMPONENT SECTIONS -->
+      
+      <!-- Buttons -->
+      <section id="buttons" class="section" data-keywords="button primary secondary outline ghost tertiary destructive link cta action click">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-cursor-click"></i>
+            Buttons
+          </h2>
+          <p class="section-description">7 variants with multiple sizes and states</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Variants</h3>
+              <p>All button styles</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-buttons-variants">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+              <button class="btn-primary">Primary</button>
+              <button class="btn-secondary">Secondary</button>
+              <button class="btn-outline">Outline</button>
+              <button class="btn-ghost">Ghost</button>
+              <button class="btn-tertiary">Tertiary</button>
+              <button class="btn-destructive">Destructive</button>
+              <button class="btn-link">Link Style</button>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-buttons-variants" style="display: none;">
+            <div class="code-block">
+              <code>&lt;button class="btn-primary"&gt;Primary&lt;/button&gt;<br>&lt;button class="btn-secondary"&gt;Secondary&lt;/button&gt;<br>&lt;button class="btn-outline"&gt;Outline&lt;/button&gt;<br>&lt;button class="btn-ghost"&gt;Ghost&lt;/button&gt;<br>&lt;button class="btn-tertiary"&gt;Tertiary&lt;/button&gt;<br>&lt;button class="btn-destructive"&gt;Destructive&lt;/button&gt;<br>&lt;button class="btn-link"&gt;Link Style&lt;/button&gt;</code>
+            </div>
+          </div>
+        </div>
+        
+        <div class="showcase-item" style="margin-top: var(--space-4);">
+          <div class="showcase-header">
+            <div>
+              <h3>Sizes</h3>
+              <p>Small, Medium, Large, and Icon</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-buttons-sizes">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center;">
+              <button class="btn-primary btn-sm">Small</button>
+              <button class="btn-primary btn-md">Medium</button>
+              <button class="btn-primary btn-lg">Large</button>
+              <button class="btn-primary btn-icon">⚙️</button>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-buttons-sizes" style="display: none;">
+            <div class="code-block">
+              <code>&lt;button class="btn-primary btn-sm"&gt;Small&lt;/button&gt;<br>&lt;button class="btn-primary btn-md"&gt;Medium&lt;/button&gt;<br>&lt;button class="btn-primary btn-lg"&gt;Large&lt;/button&gt;<br>&lt;button class="btn-primary btn-icon"&gt;⚙️&lt;/button&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Inputs -->
+      <section id="inputs" class="section" data-keywords="input text textarea select dropdown form field">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-text-box"></i>
+            Inputs
+          </h2>
+          <p class="section-description">Text inputs, textarea, and select elements</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>All Input Types</h3>
+              <p>Text, textarea, and select</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-inputs">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 400px; width: 100%;">
+              <input type="text" class="ds-input" placeholder="Text input">
+              <textarea class="ds-textarea" placeholder="Textarea" rows="3"></textarea>
+              <select class="ds-select">
+                <option>Select option</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+              </select>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-inputs" style="display: none;">
+            <div class="code-block">
+              <code>&lt;input type="text" class="ds-input" placeholder="Text input"&gt;<br><br>&lt;textarea class="ds-textarea" placeholder="Textarea"&gt;&lt;/textarea&gt;<br><br>&lt;select class="ds-select"&gt;<br>  &lt;option&gt;Option 1&lt;/option&gt;<br>&lt;/select&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Checkbox -->
+      <section id="checkbox" class="section" data-keywords="checkbox check tick toggle selection multi-select">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-check-square"></i>
+            Checkbox
+          </h2>
+          <p class="section-description">Animated checkboxes with multiple sizes</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Checkbox Examples</h3>
+              <p>Different states and sizes</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-checkbox">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+              <label class="ds-checkbox-wrapper">
+                <input type="checkbox" class="ds-checkbox" checked>
+                <span class="ds-checkbox-label">Accept terms and conditions</span>
+              </label>
+              <label class="ds-checkbox-wrapper">
+                <input type="checkbox" class="ds-checkbox">
+                <span class="ds-checkbox-label">Remember me</span>
+              </label>
+              <label class="ds-checkbox-wrapper">
+                <input type="checkbox" class="ds-checkbox ds-checkbox-sm" checked>
+                <span class="ds-checkbox-label">Small size checkbox</span>
+              </label>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-checkbox" style="display: none;">
+            <div class="code-block">
+              <code>&lt;label class="ds-checkbox-wrapper"&gt;<br>  &lt;input type="checkbox" class="ds-checkbox" checked&gt;<br>  &lt;span class="ds-checkbox-label"&gt;Accept terms&lt;/span&gt;<br>&lt;/label&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Radio -->
+      <section id="radio" class="section" data-keywords="radio button group selection single choice option">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-radio-button"></i>
+            Radio Group
+          </h2>
+          <p class="section-description">Single selection with layouts</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Radio Group</h3>
+              <p>Mutually exclusive selection</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-radio">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div class="ds-radio-group">
+              <label class="ds-radio-wrapper">
+                <input type="radio" name="plan-comp" class="ds-radio" value="free" checked>
+                <span class="ds-radio-label">Free Plan - $0/month</span>
+              </label>
+              <label class="ds-radio-wrapper">
+                <input type="radio" name="plan-comp" class="ds-radio" value="pro">
+                <span class="ds-radio-label">Pro Plan - $19/month</span>
+              </label>
+              <label class="ds-radio-wrapper">
+                <input type="radio" name="plan-comp" class="ds-radio" value="enterprise">
+                <span class="ds-radio-label">Enterprise - $99/month</span>
+              </label>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-radio" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-radio-group"&gt;<br>  &lt;label class="ds-radio-wrapper"&gt;<br>    &lt;input type="radio" name="plan" class="ds-radio" checked&gt;<br>    &lt;span class="ds-radio-label"&gt;Free Plan&lt;/span&gt;<br>  &lt;/label&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Switch -->
+      <section id="switch" class="section" data-keywords="switch toggle on off boolean settings">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-toggle-right"></i>
+            Switch
+          </h2>
+          <p class="section-description">Toggle switches with smooth animations</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Switch Examples</h3>
+              <p>Perfect for settings</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-switch">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+              <label class="ds-switch-wrapper">
+                <input type="checkbox" class="ds-switch" checked>
+                <span class="ds-switch-label">Dark mode</span>
+              </label>
+              <label class="ds-switch-wrapper">
+                <input type="checkbox" class="ds-switch">
+                <span class="ds-switch-label">Enable notifications</span>
+              </label>
+              <label class="ds-switch-wrapper">
+                <input type="checkbox" class="ds-switch" checked>
+                <span class="ds-switch-label">Auto-save changes</span>
+              </label>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-switch" style="display: none;">
+            <div class="code-block">
+              <code>&lt;label class="ds-switch-wrapper"&gt;<br>  &lt;input type="checkbox" class="ds-switch" checked&gt;<br>  &lt;span class="ds-switch-label"&gt;Dark mode&lt;/span&gt;<br>&lt;/label&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Slider -->
+      <section id="slider" class="section" data-keywords="slider range input number value">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-sliders-horizontal"></i>
+            Slider
+          </h2>
+          <p class="section-description">Range inputs with custom styling</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Slider with Value</h3>
+              <p>Interactive range input</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-slider">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div class="ds-slider-wrapper" style="max-width: 400px; width: 100%;">
+              <div class="ds-slider-value">
+                <label class="ds-label">Volume</label>
+                <span class="ds-slider-value-current" id="sliderValue">50</span>
+              </div>
+              <input type="range" class="ds-slider" min="0" max="100" value="50" id="demoSlider">
+            </div>
+          </div>
+          <div class="showcase-code" id="code-slider" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-slider-wrapper"&gt;<br>  &lt;label class="ds-label"&gt;Volume&lt;/label&gt;<br>  &lt;input type="range" class="ds-slider" min="0" max="100" value="50"&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Form Field -->
+      <section id="formfield" class="section" data-keywords="form field validation error success helper label required">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-text-align-left"></i>
+            Form Field
+          </h2>
+          <p class="section-description">Complete form fields with validation states</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Validation States</h3>
+              <p>Error, success, and helper text</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-formfield">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 400px; width: 100%;">
+              <div class="ds-form-field">
+                <label class="ds-label ds-label-required">Username</label>
+                <input type="text" class="ds-input" placeholder="johndoe">
+                <span class="ds-form-field-helper">Choose a unique username</span>
+              </div>
+              <div class="ds-form-field has-error">
+                <label class="ds-label ds-label-required">Email</label>
+                <input type="email" class="ds-input" value="invalid">
+                <span class="ds-form-field-error">Invalid email address</span>
+              </div>
+              <div class="ds-form-field has-success">
+                <label class="ds-label">Password</label>
+                <input type="password" class="ds-input" value="••••••••">
+                <span class="ds-form-field-success">Strong password!</span>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-formfield" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-form-field has-error"&gt;<br>  &lt;label class="ds-label ds-label-required"&gt;Email&lt;/label&gt;<br>  &lt;input type="email" class="ds-input"&gt;<br>  &lt;span class="ds-form-field-error"&gt;Invalid email&lt;/span&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Icon Placeholders -->
+      <section id="icon-placeholder" class="section" data-keywords="icon placeholder avatar glass refraction prism light">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-shapes"></i>
+            Icon Placeholders
+          </h2>
+          <p class="section-description">Glass morphism icon containers with prismatic light refraction</p>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Color Variants</h3>
+              <p>Reflect and refract light like real glass</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-icon-colors">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; gap: var(--r-space-4); flex-wrap: wrap; justify-content: center;">
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-primary">
+                <i class="ph-fill ph-sparkle"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-accent">
+                <i class="ph-fill ph-star"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-success">
+                <i class="ph-fill ph-check-circle"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-warning">
+                <i class="ph-fill ph-warning"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-error">
+                <i class="ph-fill ph-x-circle"></i>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-icon-colors" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-primary"&gt;<br>  &lt;i class="ph-fill ph-sparkle"&gt;&lt;/i&gt;<br>&lt;/div&gt;<br><br>&lt;!-- Other variants: accent, success, warning, error --&gt;</code>
+            </div>
+          </div>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Size Variants</h3>
+              <p>From xs to xl with perfect proportions</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-icon-sizes">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; gap: var(--r-space-4); align-items: center; flex-wrap: wrap; justify-content: center;">
+              <div class="ds-icon-placeholder ds-icon-placeholder-xs ds-icon-placeholder-primary">
+                <i class="ph-fill ph-heart"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-sm ds-icon-placeholder-accent">
+                <i class="ph-fill ph-heart"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-md ds-icon-placeholder-success">
+                <i class="ph-fill ph-heart"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-warning">
+                <i class="ph-fill ph-heart"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-error">
+                <i class="ph-fill ph-heart"></i>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-icon-sizes" style="display: none;">
+            <div class="code-block">
+              <code>&lt;!-- Sizes: xs, sm, md, lg, xl --&gt;<br>&lt;div class="ds-icon-placeholder ds-icon-placeholder-md ds-icon-placeholder-primary"&gt;<br>  &lt;i class="ph-fill ph-heart"&gt;&lt;/i&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Circle Variant</h3>
+              <p>Perfect circles for avatars and profiles</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-icon-circle">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; gap: var(--r-space-4); flex-wrap: wrap; justify-content: center;">
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-circle ds-icon-placeholder-primary">
+                <i class="ph-fill ph-user"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-circle ds-icon-placeholder-accent">
+                <i class="ph-fill ph-globe"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-circle ds-icon-placeholder-success">
+                <i class="ph-fill ph-rocket-launch"></i>
+              </div>
+              <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-circle ds-icon-placeholder-warning">
+                <i class="ph-fill ph-lightning"></i>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-icon-circle" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-icon-placeholder ds-icon-placeholder-lg ds-icon-placeholder-circle ds-icon-placeholder-primary"&gt;<br>  &lt;i class="ph-fill ph-user"&gt;&lt;/i&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ds-card">
+          <h4 style="margin-bottom: var(--r-space-4);">✨ Glass Refraction Effect</h4>
+          <p style="color: hsl(var(--foreground) / 0.7); line-height: var(--line-height-relaxed); margin-bottom: var(--r-space-4);">
+            Icon placeholders feature an animated light refraction overlay that simulates light passing through a prism. 
+            The gradient backgrounds blend colors to create a prismatic effect, while the radial gradient adds depth and dimensionality.
+          </p>
+          <p style="color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">
+            <i class="ph ph-info" style="margin-right: 4px; color: hsl(var(--primary));"></i>
+            Hover to see enhanced refraction and elevation • Press to see spring feedback
+          </p>
+        </div>
+      </section>
+      
+      <!-- Card -->
+      <section id="card" class="section" data-keywords="card container box panel">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-frame-corners"></i>
+            Card
+          </h2>
+          <p class="section-description">Flexible containers with shadows</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Card Component</h3>
+              <p>Content containers</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-card">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div class="ds-card" style="max-width: 400px;">
+              <h4>Card Title</h4>
+              <p style="color: hsl(var(--foreground) / 0.7); margin: var(--space-2) 0;">This is a card component with content inside. Perfect for grouping related information.</p>
+              <button class="btn-primary btn-sm">Action</button>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-card" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-card"&gt;<br>  &lt;h4&gt;Card Title&lt;/h4&gt;<br>  &lt;p&gt;Card content...&lt;/p&gt;<br>  &lt;button class="btn-primary"&gt;Action&lt;/button&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Badge -->
+      <section id="badge" class="section" data-keywords="badge label status tag pill indicator">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-tag"></i>
+            Badges
+          </h2>
+          <p class="section-description">Status indicators with color variants</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>All Badge Variants</h3>
+              <p>5 color options</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-badges">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+              <span class="ds-badge ds-badge-neutral">Neutral</span>
+              <span class="ds-badge ds-badge-primary">Primary</span>
+              <span class="ds-badge ds-badge-success">Success</span>
+              <span class="ds-badge ds-badge-warning">Warning</span>
+              <span class="ds-badge ds-badge-destructive">Destructive</span>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-badges" style="display: none;">
+            <div class="code-block">
+              <code>&lt;span class="ds-badge ds-badge-neutral"&gt;Neutral&lt;/span&gt;<br>&lt;span class="ds-badge ds-badge-primary"&gt;Primary&lt;/span&gt;<br>&lt;span class="ds-badge ds-badge-success"&gt;Success&lt;/span&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Modal -->
+      <section id="modal" class="section" data-keywords="modal dialog popup overlay window">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-frame"></i>
+            Modal
+          </h2>
+          <p class="section-description">Glass morphism dialogs with animations</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Interactive Modal</h3>
+              <p>Click to see glass effect</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-modal">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <button class="btn-primary" onclick="document.getElementById('compModal').style.display='flex'; document.getElementById('compModalOverlay').style.display='block';">
+              <i class="ph ph-frame" style="margin-right: 8px;"></i>
+              Open Modal
+            </button>
+          </div>
+          <div class="showcase-code" id="code-modal" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-modal-overlay"&gt;&lt;/div&gt;<br>&lt;div class="ds-modal"&gt;<br>  &lt;div class="ds-modal-content"&gt;<br>    &lt;div class="ds-modal-header"&gt;<br>      &lt;h3 class="ds-modal-title"&gt;Title&lt;/h3&gt;<br>    &lt;/div&gt;<br>    &lt;div&gt;Content...&lt;/div&gt;<br>    &lt;div class="ds-modal-footer"&gt;<br>      &lt;button class="btn-primary"&gt;Confirm&lt;/button&gt;<br>    &lt;/div&gt;<br>  &lt;/div&gt;<br>  &lt;button class="ds-modal-close"&gt;✕&lt;/button&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+        
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Modal with Elevation System</h3>
+              <p>Cards, sections, and surfaces within modals</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-modal-elevation">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <button class="btn-secondary" onclick="document.getElementById('elevationModal').style.display='flex'; document.getElementById('elevationModalOverlay').style.display='block';">
+              Open Elevation Demo
+            </button>
+          </div>
+          <div class="showcase-code" id="code-modal-elevation" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-modal"&gt;<br>  &lt;div class="ds-modal-content"&gt;<br>    <br>    &lt;!-- Section with title --&gt;<br>    &lt;div class="ds-modal-section"&gt;<br>      &lt;h4 class="ds-modal-section-title"&gt;Section Title&lt;/h4&gt;<br>      &lt;!-- Content --&gt;<br>    &lt;/div&gt;<br>    <br>    &lt;!-- Elevated Cards in Grid --&gt;<br>    &lt;div class="ds-modal-grid ds-modal-grid-2"&gt;<br>      &lt;div class="ds-modal-card"&gt;Card 1&lt;/div&gt;<br>      &lt;div class="ds-modal-card"&gt;Card 2&lt;/div&gt;<br>    &lt;/div&gt;<br>    <br>    &lt;!-- Divider --&gt;<br>    &lt;div class="ds-modal-divider"&gt;&lt;/div&gt;<br>    <br>    &lt;!-- Inset Well (lower elevation) --&gt;<br>    &lt;div class="ds-modal-well"&gt;Lower surface&lt;/div&gt;<br>    <br>  &lt;/div&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ds-card">
+          <h4 style="margin-bottom: var(--r-space-4);">🏔️ Elevation Hierarchy</h4>
+          <div style="display: flex; flex-direction: column; gap: var(--r-space-3);">
+            <div style="display: flex; align-items: center; gap: var(--r-space-4);">
+              <div style="width: 100px; font-family: var(--r-font-mono); font-size: var(--r-font-size-sm); color: hsl(var(--muted-foreground));">Level 0</div>
+              <div style="flex: 1; padding: var(--r-space-3); background: rgba(0, 0, 0, 0.2); border-radius: var(--r-radius-md); font-size: var(--r-font-size-sm);">.ds-modal-well (inset)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--r-space-4);">
+              <div style="width: 100px; font-family: var(--r-font-mono); font-size: var(--r-font-size-sm); color: hsl(var(--primary));">Level 1</div>
+              <div style="flex: 1; padding: var(--r-space-3); background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--r-radius-md); font-size: var(--r-font-size-sm);">Modal base surface</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--r-space-4);">
+              <div style="width: 100px; font-family: var(--r-font-mono); font-size: var(--r-font-size-sm); color: hsl(var(--primary));">Level 2</div>
+              <div style="flex: 1; padding: var(--r-space-3); background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--r-radius-md); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); font-size: var(--r-font-size-sm);">.ds-modal-card (subtle)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--r-space-4);">
+              <div style="width: 100px; font-family: var(--r-font-mono); font-size: var(--r-font-size-sm); color: hsl(var(--primary));">Level 3</div>
+              <div style="flex: 1; padding: var(--r-space-3); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--r-radius-md); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); font-size: var(--r-font-size-sm);">.ds-modal-surface (subtle)</div>
+            </div>
+          </div>
+          <p style="margin-top: var(--r-space-6); padding: var(--r-space-4); background: rgba(255, 255, 255, 0.03); border-radius: var(--r-radius-lg); font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7);">
+            <i class="ph ph-info" style="color: hsl(var(--primary)); margin-right: 4px;"></i>
+            Each elevation level increases blur, shadow depth, and border brightness for clear visual hierarchy
+          </p>
+        </div>
+      </section>
+      
+      <!-- Elevation Demo Modal -->
+      <div class="ds-modal-overlay" id="elevationModalOverlay" style="display: none;" onclick="this.style.display='none'; document.getElementById('elevationModal').style.display='none';"></div>
+      <div class="ds-modal" id="elevationModal" style="display: none;">
+        <div class="ds-modal-content">
+          <div class="ds-modal-header">
+            <h3 class="ds-modal-title">
+              <i class="ph-fill ph-stack" style="margin-right: 8px;"></i>
+              Modal Elevation System
+            </h3>
+          </div>
+          
+          <div class="ds-modal-section">
+            <h4 class="ds-modal-section-title">Elevated Cards</h4>
+            <div class="ds-modal-grid ds-modal-grid-2">
+              <div class="ds-modal-card">
+                <div class="ds-icon-placeholder ds-icon-placeholder-md ds-icon-placeholder-primary" style="margin-bottom: var(--r-space-2);">
+                  <i class="ph-fill ph-rocket-launch"></i>
+                </div>
+                <h5 style="margin-bottom: var(--r-space-2);">Feature A</h5>
+                <p style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7);">Cards float above modal surface</p>
+              </div>
+              <div class="ds-modal-card">
+                <div class="ds-icon-placeholder ds-icon-placeholder-md ds-icon-placeholder-accent" style="margin-bottom: var(--r-space-2);">
+                  <i class="ph-fill ph-sparkle"></i>
+                </div>
+                <h5 style="margin-bottom: var(--r-space-2);">Feature B</h5>
+                <p style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7);">Hover for elevation increase</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="ds-modal-divider"></div>
+          
+          <div class="ds-modal-section">
+            <h4 class="ds-modal-section-title">Highest Elevation</h4>
+            <div class="ds-modal-surface">
+              <div style="display: flex; gap: var(--r-space-3); align-items: center; margin-bottom: var(--r-space-3);">
+                <div class="ds-icon-placeholder ds-icon-placeholder-sm ds-icon-placeholder-success ds-icon-placeholder-circle">
+                  <i class="ph-fill ph-check"></i>
+                </div>
+                <div>
+                  <div style="font-weight: 600; margin-bottom: 4px;">Surface Component</div>
+                  <p style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7);">Highest glass elevation with enhanced blur</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: var(--r-space-2);">
+                <span class="ds-badge ds-badge-primary">Badge 1</span>
+                <span class="ds-badge ds-badge-accent">Badge 2</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="ds-modal-divider"></div>
+          
+          <div class="ds-modal-section">
+            <h4 class="ds-modal-section-title">Inset Well (Lower)</h4>
+            <div class="ds-modal-well">
+              <p style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.8);">
+                <i class="ph ph-info" style="margin-right: 4px; color: hsl(var(--primary));"></i>
+                Wells are recessed surfaces - perfect for nested content or data displays
+              </p>
+            </div>
+          </div>
+          
+          <div class="ds-modal-footer">
+            <button class="btn-ghost" onclick="document.getElementById('elevationModal').style.display='none'; document.getElementById('elevationModalOverlay').style.display='none';">Close</button>
+            <button class="btn-primary" onclick="alert('Elevation demo!')">Understand</button>
+          </div>
+        </div>
+        <button class="ds-modal-close" onclick="document.getElementById('elevationModal').style.display='none'; document.getElementById('elevationModalOverlay').style.display='none';">✕</button>
+      </div>
+      
+      <!-- Drawer -->
+      <section id="drawer" class="section" data-keywords="drawer sidebar sheet panel slide">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-sidebar"></i>
+            Drawer
+          </h2>
+          <p class="section-description">Bottom sheets and side drawers</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Bottom Drawer</h3>
+              <p>Slide up from bottom</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-drawer">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <button class="btn-primary" onclick="document.getElementById('compDrawer').style.display='flex'; document.getElementById('compDrawerOverlay').style.display='block';">
+              <i class="ph ph-sidebar" style="margin-right: 8px;"></i>
+              Open Drawer
+            </button>
+          </div>
+          <div class="showcase-code" id="code-drawer" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-drawer-overlay"&gt;&lt;/div&gt;<br>&lt;div class="ds-drawer"&gt;<br>  &lt;div class="ds-drawer-handle"&gt;&lt;/div&gt;<br>  &lt;div class="ds-drawer-header"&gt;<br>    &lt;h3 class="ds-drawer-title"&gt;Title&lt;/h3&gt;<br>    &lt;button class="ds-drawer-close"&gt;✕&lt;/button&gt;<br>  &lt;/div&gt;<br>  &lt;div class="ds-drawer-content"&gt;...&lt;/div&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Navbar -->
+      <section id="navbar" class="section" data-keywords="navbar header navigation menu top bar">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-navigation-arrow"></i>
+            Navbar
+          </h2>
+          <p class="section-description">Fixed navigation with backdrop blur</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Navbar Preview</h3>
+              <p>Fixed top navigation</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-navbar">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div class="ds-card" style="padding: 0; overflow: hidden; width: 100%;">
+              <div class="ds-navbar" style="position: relative;">
+                <div class="ds-navbar-container">
+                  <a href="#" class="ds-navbar-brand">
+                    <span class="ds-navbar-logo">◆</span>
+                    <span>Brand</span>
+                  </a>
+                  <nav class="ds-navbar-nav">
+                    <div class="ds-navbar-menu">
+                      <button class="btn-ghost btn-sm">Home</button>
+                      <button class="btn-ghost btn-sm">About</button>
+                      <button class="btn-primary btn-sm">Sign In</button>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-navbar" style="display: none;">
+            <div class="code-block">
+              <code>&lt;nav class="ds-navbar"&gt;<br>  &lt;div class="ds-navbar-container"&gt;<br>    &lt;a href="#" class="ds-navbar-brand"&gt;Brand&lt;/a&gt;<br>    &lt;nav class="ds-navbar-nav"&gt;...&lt;/nav&gt;<br>  &lt;/div&gt;<br>&lt;/nav&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Glass Morphism -->
+      <section id="glass" class="section" data-keywords="glass morphism blur backdrop frosted">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-sparkle"></i>
+            Glass Morphism
+          </h2>
+          <p class="section-description">Frosted glass effects with backdrop blur</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-header">
+            <div>
+              <h3>Glass Container</h3>
+              <p>Natural frosted effect</p>
+            </div>
+            <button class="btn-ghost btn-sm toggle-code" data-target="code-glass">
+              <i class="ph ph-code"></i> Code
+            </button>
+          </div>
+          <div class="showcase-preview">
+            <div class="ds-glass" style="padding: var(--space-6); max-width: 400px;">
+              <h4>Glass Container</h4>
+              <p style="color: hsl(var(--foreground) / 0.9); margin: var(--space-2) 0;">Natural frosted glass effect with enhanced backdrop blur for modern UIs.</p>
+            </div>
+          </div>
+          <div class="showcase-code" id="code-glass" style="display: none;">
+            <div class="code-block">
+              <code>&lt;div class="ds-glass"&gt;<br>  &lt;h4&gt;Glass Container&lt;/h4&gt;<br>  &lt;p&gt;Content with frosted glass effect&lt;/p&gt;<br>&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Documentation CTA -->
+      <div style="text-align: center; margin: var(--space-20) 0; padding: var(--space-12); background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-2xl); backdrop-filter: blur(10px);">
+        <i class="ph-fill ph-book-open" style="font-size: 48px; color: hsl(var(--primary)); margin-bottom: var(--space-4);"></i>
+        <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-3);">Need More Details?</h3>
+        <p style="color: hsl(var(--foreground) / 0.7); margin-bottom: var(--space-6); font-size: var(--font-size-lg);">
+          Check out the complete examples page or read the full documentation
+        </p>
+        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+          <a href="example.html"><button class="btn-primary btn-lg">
+            <i class="ph ph-eye" style="margin-right: 8px;"></i>
+            Full Examples
+          </button></a>
+          <a href="README.md"><button class="btn-secondary btn-lg">
+            <i class="ph ph-book-open" style="margin-right: 8px;"></i>
+            Documentation
+          </button></a>
+          <a href="DESIGN_TOKENS.md"><button class="btn-outline btn-lg">
+            <i class="ph ph-cube" style="margin-right: 8px;"></i>
+            All Tokens
+          </button></a>
+        </div>
+      </div>
+      
+    </main>
+  </div>
+  
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+    <i class="ph-bold ph-list" style="font-size: 24px;"></i>
+  </button>
+  
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-dot"></div>
+  
+  <script>
+    // Optimized Custom Cursor - Hardware accelerated
+    const cursor = document.querySelector('.custom-cursor');
+    const cursorDot = document.querySelector('.custom-cursor-dot');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    
+    // Make cursor visible immediately
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    cursorDot.style.left = dotX + 'px';
+    cursorDot.style.top = dotY + 'px';
+    
+    // Use passive event listener for better performance
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
+    
+    // Optimized animation with left/top for better compatibility
+    function animateCursor() {
+      // Smooth following with easing
+      const ease = 0.18;
+      const dotEase = 0.3;
+      
+      cursorX += (mouseX - cursorX) * ease;
+      cursorY += (mouseY - cursorY) * ease;
+      dotX += (mouseX - dotX) * dotEase;
+      dotY += (mouseY - dotY) * dotEase;
+      
+      // Update position
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      cursorDot.style.left = dotX + 'px';
+      cursorDot.style.top = dotY + 'px';
+      
+      requestAnimationFrame(animateCursor);
+    }
+    
+    animateCursor();
+    
+    document.querySelectorAll('a, button, input, textarea, select, label, .ds-card, .sidebar-link, .showcase-item, .feature-card, .ds-icon-placeholder').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+    
+    // Sidebar Navigation Active State
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - 100)) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+    
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    
+    // Mobile Navigation Toggle
+    const navToggleComponents = document.getElementById('navToggleComponents');
+    const navDropdownComponents = document.getElementById('navDropdownComponents');
+    const navbarComponents = document.querySelector('.ds-navbar');
+    
+    if (navToggleComponents && navDropdownComponents) {
+      navToggleComponents.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navToggleComponents.classList.toggle('open');
+        navDropdownComponents.classList.toggle('open');
+      });
+      
+      // Close menu when clicking a link
+      navDropdownComponents.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggleComponents.classList.remove('open');
+          navDropdownComponents.classList.remove('open');
+        });
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navbarComponents.contains(e.target) && !navDropdownComponents.contains(e.target)) {
+          navToggleComponents.classList.remove('open');
+          navDropdownComponents.classList.remove('open');
+        }
+      });
+    }
+    
+    // Mobile Sidebar Toggle
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+    
+    if (sidebarToggle && sidebar && sidebarBackdrop) {
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        sidebarBackdrop.classList.toggle('open');
+      });
+      
+      // Close sidebar when clicking backdrop
+      sidebarBackdrop.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        sidebarBackdrop.classList.remove('open');
+      });
+      
+      // Close sidebar when clicking a link
+      sidebar.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 1024) {
+            sidebar.classList.remove('open');
+            sidebarBackdrop.classList.remove('open');
+          }
+        });
+      });
+    }
+    
+    // Search Functionality
+    const searchInput = document.getElementById('componentSearch');
+    const navSearch = document.getElementById('navSearch');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const searchResultsText = document.getElementById('searchResults');
+    const searchableSections = document.querySelectorAll('section[id]');
+    
+    // Sync nav search with main search (hidden)
+    if (navSearch) {
+      navSearch.addEventListener('input', (e) => {
+        if (searchInput) {
+          searchInput.value = e.target.value;
+        }
+        searchContent();
+      });
+    }
+    
+    function searchContent() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+      
+      searchableSections.forEach(section => {
+        const keywords = section.getAttribute('data-keywords') || '';
+        const title = section.querySelector('h2') ? section.querySelector('h2').textContent.toLowerCase() : '';
+        const content = section.textContent.toLowerCase();
+        
+        const matches = searchTerm === '' || 
+                       keywords.toLowerCase().includes(searchTerm) || 
+                       title.includes(searchTerm) ||
+                       content.includes(searchTerm);
+        
+        if (matches) {
+          section.style.display = 'block';
+          visibleCount++;
+        } else {
+          section.style.display = 'none';
+        }
+      });
+      
+      if (searchTerm !== '') {
+        searchResultsText.textContent = `${visibleCount} section${visibleCount !== 1 ? 's' : ''} found`;
+        clearSearchBtn.style.display = 'block';
+      } else {
+        searchResultsText.textContent = '';
+        clearSearchBtn.style.display = 'none';
+      }
+    }
+    
+    searchInput.addEventListener('input', searchContent);
+    
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchContent();
+      searchInput.focus();
+    });
+    
+    // Code Toggle
+    document.querySelectorAll('.toggle-code').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        const codeBlock = document.getElementById(targetId);
+        
+        if (codeBlock.style.display === 'none') {
+          codeBlock.style.display = 'block';
+          this.innerHTML = '<i class="ph ph-code"></i> Hide Code';
+        } else {
+          codeBlock.style.display = 'none';
+          this.innerHTML = '<i class="ph ph-code"></i> Code';
+        }
+      });
+    });
+    
+    // Slider value update
+    const demoSlider = document.getElementById('demoSlider');
+    const sliderValue = document.getElementById('sliderValue');
+    
+    if (demoSlider && sliderValue) {
+      demoSlider.addEventListener('input', (e) => {
+        sliderValue.textContent = e.target.value;
+      });
+    }
+  </script>
+  
+  <!-- Demo Modal -->
+  <div id="compModalOverlay" class="ds-modal-overlay" onclick="this.style.display='none'; document.getElementById('compModal').style.display='none';" style="display: none;"></div>
+  <div id="compModal" class="ds-modal" style="display: none;">
+    <div class="ds-modal-content ds-modal-scroll">
+      <div class="ds-modal-header ds-modal-header-left">
+        <h3 class="ds-modal-title">Modal Example</h3>
+        <p class="ds-modal-description">This is a glass morphism modal dialog</p>
+      </div>
+      <div style="padding: 1rem 0;">
+        <p>Modal content with beautiful backdrop blur and smooth animations. The glass effect creates depth while maintaining readability.</p>
+      </div>
+      <div class="ds-modal-footer ds-modal-footer-row">
+        <button class="btn-secondary btn-sm" onclick="document.getElementById('compModal').style.display='none'; document.getElementById('compModalOverlay').style.display='none';">Cancel</button>
+        <button class="btn-primary btn-sm" onclick="document.getElementById('compModal').style.display='none'; document.getElementById('compModalOverlay').style.display='none';">Confirm</button>
+      </div>
+    </div>
+    <button class="ds-modal-close" onclick="document.getElementById('compModal').style.display='none'; document.getElementById('compModalOverlay').style.display='none';">✕</button>
+  </div>
+  
+  <!-- Demo Drawer -->
+  <div id="compDrawerOverlay" class="ds-drawer-overlay" onclick="this.style.display='none'; document.getElementById('compDrawer').style.display='none';" style="display: none;"></div>
+  <div id="compDrawer" class="ds-drawer" style="display: none;">
+    <div class="ds-drawer-handle" onclick="document.getElementById('compDrawer').style.display='none'; document.getElementById('compDrawerOverlay').style.display='none';"></div>
+    <div class="ds-drawer-header">
+      <h3 class="ds-drawer-title">Drawer Example</h3>
+      <button class="ds-drawer-close" onclick="document.getElementById('compDrawer').style.display='none'; document.getElementById('compDrawerOverlay').style.display='none';">✕</button>
+    </div>
+    <div class="ds-drawer-content ds-scrollbar">
+      <p>Bottom sheet drawer with smooth slide-in animation. Perfect for mobile-first experiences and quick actions.</p>
+      <p style="margin-top: var(--space-4); color: hsl(var(--foreground) / 0.7);">Try swiping down on the handle (visual feedback only in this demo).</p>
+    </div>
+    <div class="ds-drawer-footer">
+      <button class="btn-secondary btn-sm" onclick="document.getElementById('compDrawer').style.display='none'; document.getElementById('compDrawerOverlay').style.display='none';">Cancel</button>
+      <button class="btn-primary btn-sm" onclick="document.getElementById('compDrawer').style.display='none'; document.getElementById('compDrawerOverlay').style.display='none';">Save</button>
+    </div>
+  </div>
+  
+</body>
+</html>
+

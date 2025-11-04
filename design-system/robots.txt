@@ -1,0 +1,11 @@
+# robots.txt for Rukn Design System
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://rukn.design/sitemap.xml
+
+# Crawl-delay (optional, adjust if needed)
+# Crawl-delay: 1
+
