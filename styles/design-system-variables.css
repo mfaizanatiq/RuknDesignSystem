@@ -31,6 +31,7 @@
   --r-font-weight-medium: 500;
   --r-font-weight-semibold: 600;
   --r-font-weight-bold: 700;
+  --r-font-weight-extrabold: 800;
   
   /* Line Heights */
   --r-line-height-none: 1;
@@ -190,6 +191,7 @@
   --font-weight-medium: var(--r-font-weight-medium);
   --font-weight-semibold: var(--r-font-weight-semibold);
   --font-weight-bold: var(--r-font-weight-bold);
+  --font-weight-extrabold: var(--r-font-weight-extrabold);
   --line-height-none: var(--r-line-height-none);
   --line-height-tight: var(--r-line-height-tight);
   --line-height-snug: var(--r-line-height-snug);

@@ -464,7 +464,7 @@ component-helpers.js (new file)
 All foundations are in place:
 - ✅ Design tokens (`design-system-variables.css`)
 - ✅ Glass morphism styles
-- ✅ iOS motion curves
+- ✅ Rukn motion curves
 - ✅ Color system (HSL format)
 - ✅ Spacing scale
 - ✅ Typography system

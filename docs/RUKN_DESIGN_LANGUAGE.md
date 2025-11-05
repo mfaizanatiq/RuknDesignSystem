@@ -1,7 +1,7 @@
 # Rukn Design Language Guide
 **رُكن - The Foundation of Modern Glass Morphism**
 
-> **Philosophy:** Every component must embody Rukn's signature glass morphism aesthetic with iOS-inspired motion design. We don't copy—we adapt patterns while maintaining our unique visual identity.
+> **Philosophy:** Every component must embody Rukn's signature glass morphism aesthetic with Rukn-inspired motion design. We don't copy—we adapt patterns while maintaining our unique visual identity.
 
 ---
 
@@ -44,7 +44,7 @@
 
 ---
 
-### 2. iOS Motion Design
+### 2. Rukn Motion Design
 **Animations should feel natural, smooth, and spring-based**
 
 ```css
@@ -847,7 +847,7 @@ hsl(var(--primary) / 0.5)        /* 50% opacity */
 
 ---
 
-**Remember:** Rukn is not a clone of any design system. We take inspiration from patterns (Untitled UI's component structure) but implement them with our unique glass morphism aesthetic and iOS motion design principles. Every component should feel unmistakably "Rukn."
+**Remember:** Rukn is not a clone of any design system. We take inspiration from patterns (Untitled UI's component structure) but implement them with our unique glass morphism aesthetic and Rukn motion design principles. Every component should feel unmistakably "Rukn."
 
 ---
 

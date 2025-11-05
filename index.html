@@ -6,15 +6,15 @@
   
   <!-- SEO -->
   <title>Rukn Design System - رُكن | Modern Glass Morphism CSS Framework</title>
-  <meta name="description" content="Rukn (رُكن) - Built on the pillars of great design. Framework-agnostic CSS design system with glass morphism, iOS motion, and 150+ tokens.">
-  <meta name="keywords" content="rukn, design system, glass morphism, iOS motion, CSS framework, design tokens">
+  <meta name="description" content="Rukn (رُكن) - Built on the pillars of great design. Framework-agnostic CSS design system with glass morphism, Rukn motion, and 150+ tokens.">
+  <meta name="keywords" content="rukn, design system, glass morphism, Rukn motion, CSS framework, design tokens">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
   
   <!-- Styles -->
-  <link rel="stylesheet" href="design-system-variables.css">
-  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
   
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
@@ -26,7 +26,77 @@
       color: hsl(var(--foreground));
       overflow-x: hidden;
       cursor: none;
+      position: relative;
     }
+    
+    /* Ethereal Background - Ambient Light Refraction */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -30%;
+      left: -30%;
+      width: 160%;
+      height: 160%;
+      background: 
+        radial-gradient(circle at 30% 20%, hsl(var(--primary) / 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 70% 40%, hsl(var(--accent) / 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 85% 75%, hsl(var(--accent) / 0.09) 0%, transparent 38%);
+      animation: ambientShift 45s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(80px);
+      opacity: 0.7;
+    }
+    
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.03) 0%, transparent 70%);
+      animation: ambientPulse 25s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(100px);
+    }
+    
+    @keyframes ambientShift {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.7;
+      }
+      25% {
+        transform: translate(3%, 4%) rotate(90deg);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translate(-2%, 6%) rotate(180deg);
+        opacity: 0.6;
+      }
+      75% {
+        transform: translate(5%, -3%) rotate(270deg);
+        opacity: 0.4;
+      }
+    }
+    
+    @keyframes ambientPulse {
+      0% {
+        opacity: 0.2;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 0.4;
+        transform: scale(1.05);
+      }
+    }
+    
+    /* Ensure all content is above background */
+    nav, section, footer, .hero, .ds-navbar {
+      position: relative;
+      z-index: 1;
+    }
+    
     body, body *, a, button, input, textarea, select, label { cursor: none !important; }
     
     /* Custom Cursor - Optimized for performance */
@@ -240,16 +310,34 @@
     }
     .stat-item {
       padding: var(--r-space-6);
+      transition: all var(--r-transition-base) var(--r-ease-ios-smooth);
+    }
+    .stat-item:hover {
+      transform: translateY(-4px) scale(1.02);
     }
     .stat-number {
-      font-size: var(--font-size-6xl);
-      font-weight: 700;
-      color: hsl(var(--primary));
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: var(--r-font-weight-bold);
+      background: linear-gradient(135deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--accent)) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: var(--r-space-2);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
+      filter: drop-shadow(0 4px 20px hsl(var(--primary) / 0.3));
     }
     .stat-label {
       font-size: var(--font-size-lg);
-      color: hsl(var(--foreground) / 0.7);
+      font-weight: 600;
+      color: hsl(var(--foreground) / 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: var(--font-size-sm);
     }
     
     /* Component Showcase */
@@ -306,21 +394,15 @@
       </a>
       <nav class="ds-navbar-nav">
         <div class="ds-navbar-menu">
-          <a href="components.html"><button class="btn-primary btn-sm">Components</button></a>
+          <a href="foundation.html"><button class="btn-ghost btn-sm">Foundation</button></a>
+          <a href="components.html"><button class="btn-ghost btn-sm">Components</button></a>
+          <a href="#pricing"><button class="btn-ghost btn-sm">Pricing</button></a>
           <a href="#roadmap"><button class="btn-ghost btn-sm">Roadmap</button></a>
-          <a href="#changelog"><button class="btn-ghost btn-sm">Changelog</button></a>
           <a href="#about"><button class="btn-ghost btn-sm">About</button></a>
-          <a href="#contact"><button class="btn-ghost btn-sm">Contact</button></a>
-          <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener">
-            <button class="btn-ghost btn-sm" title="Connect on LinkedIn">
-              <i class="ph ph-linkedin-logo"></i>
-            </button>
-          </a>
-          <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
-            <button class="btn-ghost btn-sm" title="Star on GitHub">
-              <i class="ph ph-github-logo"></i>
-            </button>
-          </a>
+          <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank"><button class="btn-primary btn-sm">
+            <i class="ph ph-github-logo" style="margin-right: 4px;"></i>
+            GitHub
+          </button></a>
         </div>
         
         <!-- Mobile Hamburger -->
@@ -336,21 +418,25 @@
   <!-- Mobile Navigation Dropdown -->
   <div class="ds-navbar-mobile-dropdown" id="navDropdown">
     <div class="ds-navbar-menu">
-      <a href="components.html"><button class="btn-primary btn-sm">Components</button></a>
-      <a href="#roadmap"><button class="btn-ghost btn-sm">Roadmap</button></a>
-      <a href="#changelog"><button class="btn-ghost btn-sm">Changelog</button></a>
-      <a href="#about"><button class="btn-ghost btn-sm">About</button></a>
-      <a href="#contact"><button class="btn-ghost btn-sm">Contact</button></a>
-      <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener">
-        <button class="btn-ghost btn-sm">
-          <i class="ph-fill ph-linkedin-logo"></i> LinkedIn
-        </button>
-      </a>
-      <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
-        <button class="btn-ghost btn-sm">
-          <i class="ph-fill ph-github-logo"></i> GitHub
-        </button>
-      </a>
+      <a href="foundation.html"><button class="btn-ghost btn-sm">
+        <i class="ph ph-cube"></i> Foundation
+      </button></a>
+      <a href="components.html"><button class="btn-ghost btn-sm">
+        <i class="ph ph-stack"></i> Components
+      </button></a>
+      <a href="#pricing"><button class="btn-ghost btn-sm">
+        <i class="ph ph-currency-dollar"></i> Pricing
+      </button></a>
+      <a href="#roadmap"><button class="btn-ghost btn-sm">
+        <i class="ph ph-map-trifold"></i> Roadmap
+      </button></a>
+      <a href="#about"><button class="btn-ghost btn-sm">
+        <i class="ph ph-info"></i> About
+      </button></a>
+      <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank"><button class="btn-primary btn-sm">
+        <i class="ph ph-github-logo" style="margin-right: 4px;"></i>
+        GitHub
+      </button></a>
     </div>
   </div>
   <div class="ds-navbar-spacer"></div>
@@ -418,7 +504,7 @@
     <div class="hero-content">
       <div class="hero-badge">
         <i class="ph-fill ph-sparkle"></i>
-        <span>v1.3.1 • Glass Refraction • iOS Motion</span>
+        <span>v1.3.1 • Glass Refraction • Rukn Motion</span>
       </div>
       <h1>
         Design System<br>
@@ -443,26 +529,208 @@
   </section>
   
   <!-- Stats -->
-  <section class="section">
+  <section class="section" style="padding: var(--r-space-20) var(--r-space-6);">
     <div class="ds-container">
       <div class="stats">
         <div class="stat-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-primary ds-icon-placeholder-circle" style="width: 60px; height: 60px; margin: 0 auto var(--r-space-4); font-size: 1.5rem;">
+            <i class="ph-fill ph-cube"></i>
+          </div>
           <div class="stat-number">150+</div>
           <div class="stat-label">Design Tokens</div>
+          <p style="margin-top: var(--r-space-2); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Colors, spacing, typography</p>
         </div>
         <div class="stat-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-accent ds-icon-placeholder-circle" style="width: 60px; height: 60px; margin: 0 auto var(--r-space-4); font-size: 1.5rem;">
+            <i class="ph-fill ph-stack"></i>
+          </div>
           <div class="stat-number">20+</div>
           <div class="stat-label">Components</div>
+          <p style="margin-top: var(--r-space-2); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Production-ready UI</p>
         </div>
         <div class="stat-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-success ds-icon-placeholder-circle" style="width: 60px; height: 60px; margin: 0 auto var(--r-space-4); font-size: 1.5rem;">
+            <i class="ph-fill ph-check-circle"></i>
+          </div>
           <div class="stat-number">0</div>
           <div class="stat-label">Dependencies</div>
+          <p style="margin-top: var(--r-space-2); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Pure CSS only</p>
         </div>
         <div class="stat-item">
+          <div class="ds-icon-placeholder ds-icon-placeholder-warning ds-icon-placeholder-circle" style="width: 60px; height: 60px; margin: 0 auto var(--r-space-4); font-size: 1.5rem;">
+            <i class="ph-fill ph-paint-brush"></i>
+          </div>
           <div class="stat-number">100%</div>
           <div class="stat-label">Customizable</div>
+          <p style="margin-top: var(--r-space-2); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Every design token</p>
         </div>
       </div>
+    </div>
+  </section>
+  
+  <!-- Pricing (The Hook!) -->
+  <section id="pricing" class="section section-dark" style="padding: var(--r-space-20) var(--r-space-6);">
+    <div class="ds-container">
+      <h2 class="section-title" style="text-align: center;">Pricing</h2>
+      <p class="section-subtitle" style="text-align: center; max-width: 700px; margin: 0 auto var(--r-space-12);">
+        Choose the plan that works for you
+      </p>
+      
+      <!-- Pricing Card -->
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div class="ds-glass" style="padding: var(--r-space-12); border-radius: var(--r-radius-3xl); text-align: center; position: relative; overflow: hidden;">
+          
+          <!-- Decorative Background -->
+          <div style="position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: radial-gradient(circle, hsl(var(--primary) / 0.3) 0%, transparent 70%); filter: blur(60px); pointer-events: none;"></div>
+          <div style="position: absolute; bottom: -30%; left: -10%; width: 150px; height: 150px; background: radial-gradient(circle, hsl(var(--accent) / 0.2) 0%, transparent 70%); filter: blur(50px); pointer-events: none;"></div>
+          
+          <!-- Content -->
+          <div style="position: relative; z-index: 1;">
+            <div class="ds-badge ds-badge-success" style="margin-bottom: var(--r-space-4); font-size: var(--r-font-size-sm); padding: var(--r-space-2) var(--r-space-4);">
+              ✨ MOST POPULAR
+            </div>
+            
+            <h3 style="font-size: var(--r-font-size-4xl); font-weight: var(--r-font-weight-bold); margin-bottom: var(--r-space-3); letter-spacing: -0.02em;">
+              The Only Plan
+            </h3>
+            
+            <!-- Price Reveal -->
+            <div style="margin: var(--r-space-8) 0;">
+              <div style="position: relative; display: inline-block;">
+                <div style="font-size: clamp(4rem, 12vw, 8rem); font-weight: var(--r-font-weight-extrabold); line-height: 1; background: linear-gradient(135deg, hsl(var(--success)) 0%, hsl(var(--primary)) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 30px hsl(var(--success) / 0.4));">
+                  $0
+                </div>
+                <div style="position: absolute; top: 0; right: -60px; background: hsl(var(--success)); color: white; padding: var(--r-space-1) var(--r-space-3); border-radius: var(--r-radius-full); font-size: var(--r-font-size-xs); font-weight: var(--r-font-weight-bold); transform: rotate(12deg); box-shadow: 0 4px 12px hsl(var(--success) / 0.4);">
+                  FREE
+                </div>
+              </div>
+              <div style="font-size: var(--r-font-size-xl); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-2);">
+                Forever. No catches.
+              </div>
+            </div>
+            
+            <!-- What's Included -->
+            <div style="text-align: left; margin: var(--r-space-8) 0; padding: var(--r-space-6); background: rgba(255, 255, 255, 0.03); border-radius: var(--r-radius-xl); border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.1);">
+              <h4 style="font-size: var(--r-font-size-lg); font-weight: var(--r-font-weight-semibold); margin-bottom: var(--r-space-4); text-align: center;">Everything Included</h4>
+              <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--r-space-3);">
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>150+ Design Tokens</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Colors, spacing, typography, shadows, motion — fully customizable</div>
+                  </div>
+                </li>
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>20+ Production Components</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Growing library — tooltips, modals, forms, navigation, and more</div>
+                  </div>
+                </li>
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>Glass Morphism Design System</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Premium frosted glass effects that actually work</div>
+                  </div>
+                </li>
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>Rukn Motion System</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Smooth spring animations and easing curves</div>
+                  </div>
+                </li>
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>Framework Agnostic</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Works with React, Vue, Angular, Svelte, or vanilla JS</div>
+                  </div>
+                </li>
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>Commercial Use Allowed</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Build products, SaaS, client work — no restrictions</div>
+                  </div>
+                </li>
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>Always Up-to-Date</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Following latest design trends and market standards</div>
+                  </div>
+                </li>
+                <li style="display: flex; align-items: start; gap: var(--r-space-3);">
+                  <i class="ph-fill ph-check-circle" style="color: hsl(var(--success)); font-size: 20px; margin-top: 2px; flex-shrink: 0;"></i>
+                  <div>
+                    <strong>Zero Dependencies</strong>
+                    <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7); margin-top: var(--r-space-1);">Pure CSS, no build step, just link and go</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- The Mission -->
+            <div style="margin-top: var(--r-space-8); padding: var(--r-space-6); background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--accent) / 0.05) 100%); border-radius: var(--r-radius-xl); border: var(--r-border-width-1) solid hsl(var(--primary) / 0.2);">
+              <div style="font-size: var(--r-font-size-xs); font-weight: var(--r-font-weight-bold); color: hsl(var(--primary)); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--r-space-3);">
+                🚀 Our Mission
+              </div>
+              <p style="font-size: var(--r-font-size-lg); line-height: var(--r-line-height-relaxed); color: hsl(var(--foreground) / 0.9); margin-bottom: var(--r-space-4);">
+                <strong style="color: hsl(var(--primary));">Building the world's first largest open source free design system</strong> — modern, trendy, and constantly evolving with the latest design standards and market trends.
+              </p>
+              <p style="font-size: var(--r-font-size-base); line-height: var(--r-line-height-relaxed); color: hsl(var(--foreground) / 0.8);">
+                We believe great design systems should be accessible to everyone. No paywalls, no premium tiers, no tracking. Just beautiful, production-ready components that anyone can use to build amazing products.
+              </p>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div style="margin-top: var(--r-space-8); display: flex; gap: var(--r-space-4); justify-content: center; flex-wrap: wrap;">
+              <a href="components.html"><button class="btn-primary btn-lg">
+                <i class="ph ph-rocket-launch" style="margin-right: 8px;"></i>
+                Start Building Free
+              </button></a>
+              <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener"><button class="btn-secondary btn-lg">
+                <i class="ph ph-github-logo" style="margin-right: 8px;"></i>
+                Star on GitHub
+              </button></a>
+            </div>
+            
+            <!-- Footer Note -->
+            <p style="margin-top: var(--r-space-6); font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.6); font-style: italic;">
+              MIT Licensed • Used by developers worldwide • Community-driven • Forever free
+            </p>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Contribution Model -->
+      <div style="max-width: 900px; margin: var(--r-space-12) auto 0; text-align: center;">
+        <h3 style="font-size: var(--r-font-size-2xl); font-weight: var(--r-font-weight-semibold); margin-bottom: var(--r-space-4);">
+          <i class="ph-fill ph-heart" style="color: hsl(var(--primary)); margin-right: 8px;"></i>
+          Built by the Community, For the Community
+        </h3>
+        <p style="font-size: var(--r-font-size-lg); color: hsl(var(--foreground) / 0.8); line-height: var(--r-line-height-relaxed); margin-bottom: var(--r-space-6);">
+          Rukn stays free and cutting-edge through community contributions. Star us on GitHub, share your feedback, contribute components, or spread the word. Together, we're building something that belongs to everyone.
+        </p>
+        <div style="display: flex; gap: var(--r-space-3); justify-content: center; flex-wrap: wrap;">
+          <span class="ds-badge ds-badge-primary" style="padding: var(--r-space-2) var(--r-space-4); font-size: var(--r-font-size-sm);">
+            <i class="ph-fill ph-star"></i> Star on GitHub
+          </span>
+          <span class="ds-badge ds-badge-success" style="padding: var(--r-space-2) var(--r-space-4); font-size: var(--r-font-size-sm);">
+            <i class="ph-fill ph-git-pull-request"></i> Contribute Code
+          </span>
+          <span class="ds-badge ds-badge-neutral" style="padding: var(--r-space-2) var(--r-space-4); font-size: var(--r-font-size-sm);">
+            <i class="ph-fill ph-chats-circle"></i> Share Feedback
+          </span>
+          <span class="ds-badge ds-badge-warning" style="padding: var(--r-space-2) var(--r-space-4); font-size: var(--r-font-size-sm);">
+            <i class="ph-fill ph-share-network"></i> Spread the Word
+          </span>
+        </div>
+      </div>
+      
     </div>
   </section>
   
@@ -481,8 +749,8 @@
         
         <div class="feature-card">
           <div class="feature-icon"><i class="ph-fill ph-watch"></i></div>
-          <h3 class="feature-title">iOS Motion</h3>
-          <p class="feature-desc">Apple-inspired easing curves and spring animations. Every interaction feels buttery smooth and responsive.</p>
+          <h3 class="feature-title">Rukn Motion</h3>
+          <p class="feature-desc">Smooth easing curves and spring animations. Every interaction feels buttery smooth and responsive.</p>
         </div>
         
         <div class="feature-card">
@@ -711,7 +979,7 @@
             </li>
             <li style="display: flex; align-items: start; gap: var(--r-space-2);">
               <i class="ph-fill ph-check" style="color: hsl(var(--success)); margin-top: 4px;"></i>
-              <span>iOS motion system</span>
+              <span>Rukn motion system</span>
             </li>
             <li style="display: flex; align-items: start; gap: var(--r-space-2);">
               <i class="ph-fill ph-check" style="color: hsl(var(--success)); margin-top: 4px;"></i>
@@ -786,7 +1054,7 @@
           <p style="color: hsl(var(--foreground) / 0.7); margin-bottom: var(--r-space-3);">
             Have an idea? The roadmap is shaped by you!
           </p>
-          <a href="https://github.com/ruknds/core/discussions" target="_blank" rel="noopener">
+          <a href="https://github.com/mfaizanatiq/RuknDesignSystem/discussions" target="_blank" rel="noopener">
             <button class="btn-outline" style="width: 100%;">
               <i class="ph ph-chat-circle-dots" style="margin-right: 8px;"></i>
               Suggest a Feature
@@ -848,7 +1116,7 @@
           <ul style="list-style: none; padding: 0; margin-bottom: var(--r-space-4); display: flex; flex-direction: column; gap: var(--r-space-2);">
             <li style="padding-left: var(--r-space-4); position: relative;">
               <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
-              iOS motion system with Apple-inspired easing curves
+              Rukn motion system with Apple-inspired easing curves
             </li>
             <li style="padding-left: var(--r-space-4); position: relative;">
               <i class="ph-fill ph-check" style="position: absolute; left: 0; top: 4px; color: hsl(var(--success));"></i>
@@ -934,102 +1202,60 @@
   <section id="about" class="section">
     <div class="ds-container">
       <h2 class="section-title">About Rukn</h2>
-      <p class="section-subtitle">Built by designers and developers, for the community</p>
+      <p class="section-subtitle">Open source forever — Built by the community, for the community</p>
       
-      <div class="ds-grid ds-grid-cols-1 ds-md-grid-cols-2 ds-gap-8" style="max-width: 1000px; margin: 0 auto;">
-        <div class="ds-card">
-          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-primary" style="margin-bottom: var(--r-space-4);">
-            <i class="ph-fill ph-hand-heart" style="font-size: 2rem;"></i>
-          </div>
-          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">The Vision</h3>
-          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
-            Rukn (رُكن) means "pillar" or "foundation" in Arabic. Our mission is to provide a solid foundation for every web project - beautiful, accessible, and completely free. We believe great design systems should belong to everyone, not locked behind paywalls or vendor restrictions.
-          </p>
-        </div>
-        
-        <div class="ds-card">
-          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-accent" style="margin-bottom: var(--r-space-4);">
-            <i class="ph-fill ph-users-three" style="font-size: 2rem;"></i>
-          </div>
-          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Community Driven</h3>
-          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
-            Every feature, every component, every design decision is shaped by real developers building real products. Your feedback, contributions, and ideas drive the roadmap. Together, we're building something that works for everyone.
-          </p>
-        </div>
-        
+      <div class="ds-grid ds-grid-cols-1 ds-md-grid-cols-3 ds-gap-8" style="max-width: 1200px; margin: 0 auto;">
+        <!-- Open Source Forever -->
         <div class="ds-card">
           <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-success" style="margin-bottom: var(--r-space-4);">
             <i class="ph-fill ph-code" style="font-size: 2rem;"></i>
           </div>
           <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Open Source Forever</h3>
           <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
-            MIT licensed with no strings attached. Use it commercially, modify it freely, build your business on it. We'll never introduce paywalls, premium tiers, or tracking. Open source isn't just our license - it's our commitment.
+            MIT licensed with no strings attached. Use commercially, modify freely, build your business on it. No paywalls, premium tiers, or tracking. Ever.
           </p>
         </div>
         
+        <!-- Join the Movement -->
         <div class="ds-card">
-          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-warning" style="margin-bottom: var(--r-space-4);">
-            <i class="ph-fill ph-sparkle" style="font-size: 2rem;"></i>
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-primary" style="margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-users-three" style="font-size: 2rem;"></i>
           </div>
-          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Quality First</h3>
-          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed);">
-            Just because it's free doesn't mean it's second-rate. iOS-quality motion, glass morphism that actually works, accessibility baked in, and obsessive attention to detail. We build Rukn like we'd want to use it ourselves.
+          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Join the Movement</h3>
+          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed); margin-bottom: var(--r-space-4);">
+            Every contribution shapes the future. Star on GitHub, share feedback, or contribute code.
           </p>
+          <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener">
+            <button class="btn-primary" style="width: 100%;">
+              <i class="ph-fill ph-github-logo" style="margin-right: 8px;"></i>
+              Star on GitHub
+            </button>
+          </a>
+        </div>
+        
+        <!-- Get in Touch -->
+        <div class="ds-card">
+          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-accent" style="margin-bottom: var(--r-space-4);">
+            <i class="ph-fill ph-chats-circle" style="font-size: 2rem;"></i>
+          </div>
+          <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--r-space-3);">Get in Touch</h3>
+          <p style="color: hsl(var(--foreground) / 0.8); line-height: var(--line-height-relaxed); margin-bottom: var(--r-space-4);">
+            Questions, ideas, or want to collaborate? Connect on LinkedIn or join discussions.
+          </p>
+          <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener">
+            <button class="btn-secondary" style="width: 100%;">
+              <i class="ph-fill ph-linkedin-logo" style="margin-right: 8px;"></i>
+              Connect on LinkedIn
+            </button>
+          </a>
         </div>
       </div>
-    </div>
-  </section>
-  
-  <!-- Contact -->
-  <section id="contact" class="section section-dark">
-    <div class="ds-container">
-      <h2 class="section-title">Get in Touch</h2>
-      <p class="section-subtitle">Let's build something amazing together</p>
       
-      <div style="max-width: 600px; margin: 0 auto;">
-        <div class="ds-card" style="text-align: center;">
-          <div class="ds-icon-placeholder ds-icon-placeholder-xl ds-icon-placeholder-primary ds-icon-placeholder-circle" style="width: 80px; height: 80px; font-size: 2.5rem; margin: 0 auto var(--r-space-6);">
-            <i class="ph-fill ph-chats-circle"></i>
-          </div>
-          
-          <h3 style="font-size: var(--font-size-3xl); margin-bottom: var(--r-space-4);">Connect with Me</h3>
-          <p style="color: hsl(var(--foreground) / 0.7); margin-bottom: var(--r-space-8); line-height: var(--line-height-relaxed);">
-            Have questions, suggestions, or want to contribute? I'd love to hear from you. Whether you're a designer, developer, or just curious about Rukn, let's chat!
-          </p>
-          
-          <div style="display: flex; flex-direction: column; gap: var(--r-space-4);">
-            <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener">
-              <button class="btn-primary btn-lg" style="width: 100%;">
-                <i class="ph-fill ph-linkedin-logo" style="margin-right: 8px;"></i>
-                Connect on LinkedIn
-              </button>
-            </a>
-            
-            <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
-              <button class="btn-secondary btn-lg" style="width: 100%;">
-                <i class="ph-fill ph-github-logo" style="margin-right: 8px;"></i>
-                View on GitHub
-              </button>
-            </a>
-            
-            <a href="https://github.com/ruknds/core/discussions" target="_blank" rel="noopener">
-              <button class="btn-outline btn-lg" style="width: 100%;">
-                <i class="ph ph-chat-circle-dots" style="margin-right: 8px;"></i>
-                Join Discussions
-              </button>
-            </a>
-          </div>
-          
-          <div style="margin-top: var(--r-space-8); padding-top: var(--r-space-6); border-top: 1px solid hsl(var(--border));">
-            <p style="color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">
-              <i class="ph-fill ph-envelope-simple" style="margin-right: 4px;"></i>
-              For business inquiries or collaborations
-            </p>
-            <p style="color: hsl(var(--primary)); font-size: var(--font-size-lg); margin-top: var(--r-space-2); font-weight: 600;">
-              Available via LinkedIn
-            </p>
-          </div>
-        </div>
+      <!-- Rukn Vision Statement -->
+      <div style="max-width: 800px; margin: var(--r-space-12) auto 0; text-align: center;">
+        <p style="font-size: var(--font-size-xl); color: hsl(var(--foreground) / 0.7); line-height: var(--line-height-relaxed);">
+          <strong>Rukn</strong> <span class="arabic-text" style="font-size: var(--font-size-2xl); color: hsl(var(--primary));">رُكن</span> means "pillar" in Arabic. We're building the foundation for beautiful, accessible web experiences — completely free, forever.
+        </p>
       </div>
     </div>
   </section>
@@ -1038,21 +1264,21 @@
   <section class="section">
     <div class="ds-container">
       <div class="cta-box">
-        <h2 class="cta-title">Join the Open Source Movement</h2>
-        <p class="cta-desc">Thousands of developers are building beautiful, accessible web experiences with Rukn. Start today, contribute tomorrow.</p>
+        <h2 class="cta-title">Start Building Today</h2>
+        <p class="cta-desc">Beautiful, accessible components with glass morphism and Rukn motion design. Zero dependencies. Open source forever.</p>
         <div style="display: flex; gap: var(--r-space-4); justify-content: center; flex-wrap: wrap;">
           <a href="components.html"><button class="btn-primary btn-lg">
             <i class="ph ph-rocket-launch" style="margin-right: 8px;"></i>
-            Get Started
+            Explore Components
           </button></a>
-          <a href="https://github.com/ruknds/core"><button class="btn-secondary btn-lg">
+          <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener"><button class="btn-secondary btn-lg">
             <i class="ph ph-github-logo" style="margin-right: 8px;"></i>
-            Star on GitHub
+            View on GitHub
           </button></a>
         </div>
         <p style="margin-top: var(--r-space-6); font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.5);">
           <i class="ph-fill ph-heart" style="color: hsl(var(--primary)); margin-right: 4px;"></i>
-          MIT Licensed • No Attribution Required • Free Forever • Built with Love
+          MIT Licensed • No Attribution Required • Open Source Forever
         </p>
       </div>
     </div>
@@ -1074,7 +1300,7 @@
         <a href="#about" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">About</a>
         <a href="#contact" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">Contact</a>
         <a href="https://www.linkedin.com/in/mfaizanatiq/" target="_blank" rel="noopener" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">LinkedIn</a>
-        <a href="https://github.com/ruknds/core" target="_blank" rel="noopener" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">GitHub</a>
+        <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener" style="color: hsl(var(--foreground) / 0.7); text-decoration: none; transition: color var(--r-transition-fast);">GitHub</a>
       </div>
       <p style="color: hsl(var(--foreground) / 0.5); font-size: var(--font-size-sm);">
         Built with ❤️ for designers and developers everywhere

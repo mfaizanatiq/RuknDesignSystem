@@ -20,9 +20,9 @@ A modern, framework-agnostic CSS design system built on the pillars of great des
 - **Accessible** - WCAG 2.1 AA compliant with proper focus states
 - **Glass Morphism** - Natural frosted glass effects throughout
 - **Custom Cursor** - Artistic custom cursor for a unique feel
-- **Modern Floating Navbar** - Rounded, centered navbar with iOS-style scroll effects
+- **Modern Floating Navbar** - Rounded, centered navbar with Rukn-style scroll effects
 - **Complete Layout System** - Grid, Flexbox, Container utilities with responsive breakpoints
-- **iOS Motion Design** - Apple-inspired easing curves and spring animations
+- **Rukn Motion Design** - Apple-inspired easing curves and spring animations
 
 ## 📦 Files
 

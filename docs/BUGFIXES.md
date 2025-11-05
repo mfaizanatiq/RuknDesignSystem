@@ -76,7 +76,7 @@ Removed redundant inline `position: relative` styles from demo pages.
 - `design-system.css` (lines 2884-2900)
 - `component-helpers.js` (lines 17-61)
 - `components.html` (tooltip demo section)
-- `phase1-components.html` (tooltip demo section)
+- `components.html` (tooltip demo section)
 
 ---
 
@@ -149,7 +149,7 @@ Both fixes tested and working on:
 - `design-system.css` - Component styles
 - `component-helpers.js` - JavaScript utilities
 - `components.html` - Main component showcase
-- `phase1-components.html` - Phase 1 demo page
+- `components.html` - Phase 1 demo page
 
 ---
 

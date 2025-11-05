@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO Meta Tags -->
-  <title>Components & Foundation - Rukn Design System رُكن</title>
-  <meta name="description" content="Explore all Rukn components and design tokens. Searchable component library with live examples, code snippets, and comprehensive token documentation.">
-  <meta name="keywords" content="rukn components, design tokens, CSS components, button, input, modal, checkbox, glass morphism">
+  <title>UI Components - Rukn Design System رُكن</title>
+  <meta name="description" content="Explore all Rukn UI components - buttons, forms, modals, tooltips, and more. Searchable component library with glass morphism and live examples.">
+  <meta name="keywords" content="rukn components, CSS components, UI library, button, input, modal, tooltip, glass morphism, design system">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
@@ -17,8 +17,8 @@
   <link rel="canonical" href="https://rukn.design/components.html">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="design-system-variables.css">
-  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
   
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
@@ -35,6 +35,40 @@
       color: hsl(var(--foreground));
       overflow-x: hidden;
       cursor: none;
+      position: relative;
+    }
+    
+    /* Ethereal Background - Subtle Light Refraction */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 15% 25%, hsl(var(--primary) / 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 15%, hsl(var(--accent) / 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, hsl(var(--primary) / 0.05) 0%, transparent 40%);
+      animation: subtleFloat 40s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(70px);
+      opacity: 0.5;
+    }
+    
+    @keyframes subtleFloat {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translate(3%, 3%) scale(1.05);
+        opacity: 0.7;
+      }
+    }
+    
+    /* Ensure content is above background */
+    .ds-navbar, .docs-layout, .sidebar, .main-content {
+      position: relative;
+      z-index: 1;
     }
     
     /* Hide all default cursors */
@@ -533,9 +567,15 @@
       <nav class="ds-navbar-nav">
         <div class="ds-navbar-menu">
           <a href="index.html"><button class="btn-ghost btn-sm">Home</button></a>
-          <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
-            <button class="btn-ghost btn-sm">
-              <i class="ph ph-github-logo"></i>
+          <a href="foundation.html"><button class="btn-ghost btn-sm">Foundation</button></a>
+          <a href="components.html"><button class="btn-ghost btn-sm">Components</button></a>
+          <a href="index.html#pricing"><button class="btn-ghost btn-sm">Pricing</button></a>
+          <a href="index.html#roadmap"><button class="btn-ghost btn-sm">Roadmap</button></a>
+          <a href="index.html#about"><button class="btn-ghost btn-sm">About</button></a>
+          <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener">
+            <button class="btn-primary btn-sm">
+              <i class="ph ph-github-logo" style="margin-right: 4px;"></i>
+              GitHub
             </button>
           </a>
         </div>
@@ -556,8 +596,23 @@
       <a href="index.html"><button class="btn-ghost btn-sm">
         <i class="ph ph-house"></i> Home
       </button></a>
-      <a href="https://github.com/ruknds/core" target="_blank" rel="noopener">
-        <button class="btn-ghost btn-sm">
+      <a href="foundation.html"><button class="btn-ghost btn-sm">
+        <i class="ph ph-cube"></i> Foundation
+      </button></a>
+      <a href="components.html"><button class="btn-ghost btn-sm">
+        <i class="ph ph-stack"></i> Components
+      </button></a>
+      <a href="index.html#pricing"><button class="btn-ghost btn-sm">
+        <i class="ph ph-currency-dollar"></i> Pricing
+      </button></a>
+      <a href="index.html#roadmap"><button class="btn-ghost btn-sm">
+        <i class="ph ph-map-trifold"></i> Roadmap
+      </button></a>
+      <a href="index.html#about"><button class="btn-ghost btn-sm">
+        <i class="ph ph-info"></i> About
+      </button></a>
+      <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener">
+        <button class="btn-primary btn-sm">
           <i class="ph-fill ph-github-logo"></i> GitHub
         </button>
       </a>
@@ -573,32 +628,7 @@
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-section">
-        <h4 class="sidebar-title">Foundation</h4>
-        <ul class="sidebar-nav">
-          <li><a href="#colors" class="sidebar-link"><i class="ph-fill ph-palette"></i> Colors</a></li>
-          <li><a href="#typography" class="sidebar-link"><i class="ph-fill ph-text-aa"></i> Typography</a></li>
-          <li><a href="#spacing" class="sidebar-link"><i class="ph-fill ph-arrows-out-cardinal"></i> Spacing</a></li>
-          <li><a href="#sizes" class="sidebar-link"><i class="ph-fill ph-resize"></i> Sizes</a></li>
-          <li><a href="#radius" class="sidebar-link"><i class="ph-fill ph-shapes"></i> Border Radius</a></li>
-          <li><a href="#surfaces" class="sidebar-link"><i class="ph-fill ph-stack"></i> Surfaces</a></li>
-          <li><a href="#shadows" class="sidebar-link"><i class="ph-fill ph-sun-dim"></i> Shadows</a></li>
-          <li><a href="#borders" class="sidebar-link"><i class="ph-fill ph-square-half"></i> Border Widths</a></li>
-          <li><a href="#motion" class="sidebar-link"><i class="ph-fill ph-pulse"></i> iOS Motion</a></li>
-        </ul>
-      </div>
-      
-      <div class="sidebar-section">
-        <h4 class="sidebar-title">Layouts</h4>
-        <ul class="sidebar-nav">
-          <li><a href="#container" class="sidebar-link"><i class="ph-fill ph-container"></i> Container</a></li>
-          <li><a href="#grid" class="sidebar-link"><i class="ph-fill ph-grid-four"></i> Grid System</a></li>
-          <li><a href="#flexbox" class="sidebar-link"><i class="ph-fill ph-arrows-out"></i> Flexbox</a></li>
-          <li><a href="#responsive" class="sidebar-link"><i class="ph-fill ph-devices"></i> Responsive</a></li>
-        </ul>
-      </div>
-      
-      <div class="sidebar-section">
-        <h4 class="sidebar-title">Components</h4>
+        <h4 class="sidebar-title">UI Components</h4>
         <ul class="sidebar-nav">
           <li><a href="#buttons" class="sidebar-link"><i class="ph-fill ph-cursor-click"></i> Buttons</a></li>
           <li><a href="#inputs" class="sidebar-link"><i class="ph-fill ph-text-box"></i> Inputs</a></li>
@@ -613,17 +643,33 @@
           <li><a href="#modal" class="sidebar-link"><i class="ph-fill ph-frame"></i> Modal</a></li>
           <li><a href="#drawer" class="sidebar-link"><i class="ph-fill ph-sidebar"></i> Drawer</a></li>
           <li><a href="#navbar" class="sidebar-link"><i class="ph-fill ph-navigation-arrow"></i> Navbar</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">Feedback</h4>
+        <ul class="sidebar-nav">
           <li><a href="#tooltip" class="sidebar-link"><i class="ph-fill ph-chat-circle-dots"></i> Tooltip</a></li>
           <li><a href="#alert" class="sidebar-link"><i class="ph-fill ph-warning-circle"></i> Alert</a></li>
           <li><a href="#toast" class="sidebar-link"><i class="ph-fill ph-bell"></i> Toast</a></li>
           <li><a href="#progress" class="sidebar-link"><i class="ph-fill ph-circle-notch"></i> Progress</a></li>
           <li><a href="#spinner" class="sidebar-link"><i class="ph ph-spinner"></i> Spinner</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">Effects</h4>
+        <ul class="sidebar-nav">
           <li><a href="#glass" class="sidebar-link"><i class="ph-fill ph-sparkle"></i> Glass Morphism</a></li>
         </ul>
       </div>
       
       <div class="sidebar-section" style="border-top: 1px solid hsl(var(--border)); padding-top: var(--space-6);">
-        <a href="index.html"><button class="btn-outline btn-sm" style="width: 100%;">
+        <a href="foundation.html"><button class="btn-outline btn-sm" style="width: 100%;">
+          <i class="ph ph-cube" style="margin-right: 8px;"></i>
+          View Foundation
+        </button></a>
+        <a href="index.html" style="margin-top: var(--r-space-2); display: block;"><button class="btn-outline btn-sm" style="width: 100%;">
           <i class="ph ph-arrow-left" style="margin-right: 8px;"></i>
           Back to Home
         </button></a>
@@ -642,555 +688,16 @@
       
       <!-- Foundation Section Header -->
       <div style="margin-bottom: var(--space-12);">
-        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-3);">Foundation & Components</h1>
+        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-3);">UI Components</h1>
         <p style="font-size: var(--font-size-xl); color: hsl(var(--foreground) / 0.7);">
-          Explore design tokens and live component examples with code
+          Production-ready components with glass morphism and Rukn Motion
         </p>
+        <div style="margin-top: var(--r-space-4); display: flex; gap: var(--r-space-2); flex-wrap: wrap;">
+          <span class="ds-badge ds-badge-primary">20+ Components</span>
+          <span class="ds-badge ds-badge-success">Glass Morphism</span>
+          <span class="ds-badge ds-badge-neutral">Copy & Paste</span>
+        </div>
       </div>
-      
-      <!-- FOUNDATION SECTIONS -->
-      
-      <!-- Colors -->
-      <section id="colors" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-palette"></i>
-            Colors
-          </h2>
-          <p class="section-description">Semantic color tokens for consistent theming</p>
-        </div>
-        <div class="token-grid">
-          <div style="padding: var(--space-6); background: hsl(var(--primary)); border-radius: var(--radius-lg); color: white;">
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--primary</div>
-            <div style="font-weight: var(--font-weight-semibold);">Primary</div>
-            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Brand color</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--accent)); border-radius: var(--radius-lg); color: white;">
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--accent</div>
-            <div style="font-weight: var(--font-weight-semibold);">Accent</div>
-            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Secondary brand</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--success)); border-radius: var(--radius-lg); color: white;">
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--success</div>
-            <div style="font-weight: var(--font-weight-semibold);">Success</div>
-            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Positive actions</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--warning)); border-radius: var(--radius-lg); color: white;">
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--warning</div>
-            <div style="font-weight: var(--font-weight-semibold);">Warning</div>
-            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Caution states</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--destructive)); border-radius: var(--radius-lg); color: white;">
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); opacity: 0.9; margin-bottom: var(--space-2);">--destructive</div>
-            <div style="font-weight: var(--font-weight-semibold);">Destructive</div>
-            <div style="font-size: var(--font-size-xs); opacity: 0.8; margin-top: var(--space-1);">Dangerous actions</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.6); margin-bottom: var(--space-2);">--muted</div>
-            <div style="font-weight: var(--font-weight-semibold);">Muted</div>
-            <div style="font-size: var(--font-size-xs); color: hsl(var(--foreground) / 0.6); margin-top: var(--space-1);">Subtle backgrounds</div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Typography -->
-      <section id="typography" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-text-aa"></i>
-            Typography
-          </h2>
-          <p class="section-description">Space Grotesk for headings, Rubik for Arabic, system fonts for body</p>
-        </div>
-        <div class="ds-card">
-          <div style="display: flex; flex-direction: column; gap: var(--space-6);">
-            <div>
-              <h1 class="ds-h1">The quick brown fox jumps</h1>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">h1 • --r-font-heading (Space Grotesk) • 48px</div>
-            </div>
-            <div>
-              <h2 class="ds-h2">The quick brown fox jumps</h2>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">h2 • --r-font-heading (Space Grotesk) • 36px</div>
-            </div>
-            <div>
-              <h3 class="ds-h3">The quick brown fox jumps over the lazy dog</h3>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">h3 • --r-font-heading (Space Grotesk) • 30px</div>
-            </div>
-            <div>
-              <p style="font-size: var(--font-size-base); line-height: var(--line-height-relaxed);">Body text using system fonts for optimal performance and readability across all devices and platforms. This ensures consistent appearance while maintaining excellent legibility.</p>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">p • --r-font-body (System UI) • 16px</div>
-            </div>
-            <div>
-              <p class="arabic-text inline" style="font-size: var(--font-size-2xl);">رُكن تصميم النظام</p>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">Arabic • --r-font-arabic (Rubik) • 30px</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Spacing -->
-      <section id="spacing" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-arrows-out-cardinal"></i>
-            Spacing Scale
-          </h2>
-          <p class="section-description">4px base unit system for consistent spacing rhythm</p>
-        </div>
-        <div class="ds-card">
-          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-1</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-1); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">4px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-2</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-2); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">8px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-4</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-4); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">16px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-6</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-6); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">24px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-8</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-8); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">32px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-12</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-12); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">48px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-16</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-16); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">64px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 130px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-space-20</div>
-              <div style="height: 24px; background: hsl(var(--primary)); width: var(--space-20); border-radius: var(--radius-base);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">80px</div>
-            </div>
-          </div>
-          <p style="margin-top: var(--space-6); color: hsl(var(--muted-foreground)); font-size: var(--font-size-sm);">
-            <i class="ph ph-info" style="margin-right: 4px;"></i>
-            W3C Compliant • 32 spacing tokens from 2px to 128px
-          </p>
-        </div>
-      </section>
-      
-      <!-- Sizes -->
-      <section id="sizes" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-resize"></i>
-            Component Sizes
-          </h2>
-          <p class="section-description">Consistent sizing tokens for buttons, inputs, and icons</p>
-        </div>
-        <div class="ds-card">
-          <div style="display: flex; gap: var(--space-6); align-items: flex-end; flex-wrap: wrap; justify-content: center;">
-            <div style="text-align: center;">
-              <div style="width: var(--size-xs); height: var(--size-xs); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-xs</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">24px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: var(--size-sm); height: var(--size-sm); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-sm</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">32px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: var(--size-md); height: var(--size-md); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-md</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">40px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: var(--size-lg); height: var(--size-lg); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-lg</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">48px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: var(--size-xl); height: var(--size-xl); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-xl</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">56px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: var(--size-2xl); height: var(--size-2xl); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8)); border-radius: var(--radius-lg); margin-bottom: var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-size-2xl</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">64px</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Border Radius -->
-      <section id="radius" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-shapes"></i>
-            Border Radius
-          </h2>
-          <p class="section-description">From sharp corners to full circles</p>
-        </div>
-        <div class="ds-card">
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-6);">
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-none); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-none</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">0px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-sm); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-sm</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">4px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-base); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-base</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">6px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-md); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-md</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">8px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-lg); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-lg</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">12px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-xl); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-xl</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">16px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-2xl); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-2xl</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">24px</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))); border-radius: var(--radius-full); margin: 0 auto var(--space-2);"></div>
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-full</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Circle</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Surfaces -->
-      <section id="surfaces" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-stack"></i>
-            Surfaces & Elevation
-          </h2>
-          <p class="section-description">Layered surfaces for visual hierarchy</p>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
-          <div style="padding: var(--space-8); background: hsl(var(--background)); border: 1px solid hsl(var(--border)); border-radius: var(--radius-lg); text-align: center;">
-            <div style="font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-2);">Background</div>
-            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Base Layer</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--background</div>
-          </div>
-          <div style="padding: var(--space-8); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-sm);">
-            <div style="font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-2);">Card</div>
-            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Elevated Surface</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--card</div>
-          </div>
-          <div style="padding: var(--space-8); background: hsl(var(--muted)); border-radius: var(--radius-lg); text-align: center;">
-            <div style="font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-2);">Muted</div>
-            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Subtle Surface</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--muted</div>
-          </div>
-          <div class="ds-glass" style="padding: var(--space-8); border-radius: var(--radius-lg); text-align: center;">
-            <div style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.9); margin-bottom: var(--space-2);">Glass</div>
-            <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg); margin-bottom: var(--space-2);">Frosted Glass</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--foreground) / 0.7);">.ds-glass</div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Shadows -->
-      <section id="shadows" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-sun-dim"></i>
-            Shadows & Depth
-          </h2>
-          <p class="section-description">Elevation system from subtle to dramatic</p>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-6);">
-          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-xs);">
-            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">XS</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-xs</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-sm);">
-            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">SM</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-sm</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-base);">
-            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">Base</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-base</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-md);">
-            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">MD</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-md</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-lg);">
-            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">LG</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-lg</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-xl);">
-            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">XL</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-xl</div>
-          </div>
-          <div style="padding: var(--space-6); background: hsl(var(--card)); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-2xl);">
-            <div style="font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-2);">2XL</div>
-            <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">--r-shadow-2xl</div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Border Widths -->
-      <section id="borders" class="section">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-square-half"></i>
-            Border Widths
-          </h2>
-          <p class="section-description">Border thickness options from 1px to 8px</p>
-        </div>
-        <div class="ds-card">
-          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-1</div>
-              <div style="flex: 1; height: 60px; border: var(--border-width-1) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">1px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-2</div>
-              <div style="flex: 1; height: 60px; border: var(--border-width-2) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">2px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-4</div>
-              <div style="flex: 1; height: 60px; border: var(--border-width-4) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">4px</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 160px; font-size: var(--font-size-sm); color: hsl(var(--muted-foreground)); font-family: var(--font-mono);">--r-border-width-8</div>
-              <div style="flex: 1; height: 60px; border: var(--border-width-8) solid hsl(var(--primary)); border-radius: var(--radius-lg);"></div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">8px</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- iOS Motion -->
-      <section id="motion" class="section" data-keywords="motion animation easing spring transition ios apple smooth">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-pulse"></i>
-            iOS Motion & Easing
-          </h2>
-          <p class="section-description">Apple-inspired motion design for smooth micro-interactions</p>
-        </div>
-        <div class="ds-card">
-          <h4 style="margin-bottom: var(--space-4);">Easing Functions</h4>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
-            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-ease-ios-standard</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Standard iOS motion</div>
-            </div>
-            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-ease-ios-smooth</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Apple default curve</div>
-            </div>
-            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-spring-smooth</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Gentle spring effect</div>
-            </div>
-            <div style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
-              <div style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary)); margin-bottom: var(--space-2);">--r-spring-bouncy</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Playful bounce</div>
-            </div>
-          </div>
-          <p style="margin-top: var(--space-6); padding: var(--space-4); background: rgba(255, 255, 255, 0.03); border-radius: var(--radius-lg); font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.7);">
-            <i class="ph ph-info" style="color: hsl(var(--primary)); margin-right: 4px;"></i>
-            All animations respect <code style="background: hsl(var(--muted)); padding: 2px 6px; border-radius: 4px;">prefers-reduced-motion</code> for accessibility
-          </p>
-        </div>
-      </section>
-      
-      <!-- LAYOUT SECTIONS -->
-      
-      <!-- Container -->
-      <section id="container" class="section" data-keywords="container max-width responsive centered layout">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-container"></i>
-            Container
-          </h2>
-          <p class="section-description">Responsive max-width containers with auto margins</p>
-        </div>
-        <div class="showcase-item">
-          <div class="showcase-header">
-            <div>
-              <h3>Container Sizes</h3>
-              <p>11 size options from xs to 7xl</p>
-            </div>
-            <button class="btn-ghost btn-sm toggle-code" data-target="code-container">
-              <i class="ph ph-code"></i> Code
-            </button>
-          </div>
-          <div class="showcase-preview" style="display: block; padding: var(--space-4);">
-            <div class="ds-container ds-container-sm" style="background: hsl(var(--primary) / 0.1); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-3);">
-              <div style="font-size: var(--font-size-sm);">ds-container-sm (384px)</div>
-            </div>
-            <div class="ds-container ds-container-md" style="background: hsl(var(--primary) / 0.1); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-3);">
-              <div style="font-size: var(--font-size-sm);">ds-container-md (448px)</div>
-            </div>
-            <div class="ds-container ds-container-lg" style="background: hsl(var(--primary) / 0.1); padding: var(--space-4); border-radius: var(--radius-lg);">
-              <div style="font-size: var(--space-sm);">ds-container-lg (512px)</div>
-            </div>
-          </div>
-          <div class="showcase-code" id="code-container" style="display: none;">
-            <div class="code-block">
-              <code>&lt;div class="ds-container"&gt;<br>  &lt;!-- Auto-centered, max-width 1280px --&gt;<br>&lt;/div&gt;<br><br>&lt;div class="ds-container ds-container-lg"&gt;<br>  &lt;!-- Max-width 512px --&gt;<br>&lt;/div&gt;</code>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Grid System -->
-      <section id="grid" class="section" data-keywords="grid columns layout responsive auto-fit">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-grid-four"></i>
-            Grid System
-          </h2>
-          <p class="section-description">Powerful CSS Grid with responsive columns</p>
-        </div>
-        <div class="showcase-item">
-          <div class="showcase-header">
-            <div>
-              <h3>Grid Columns</h3>
-              <p>1 to 12 column grids</p>
-            </div>
-            <button class="btn-ghost btn-sm toggle-code" data-target="code-grid">
-              <i class="ph ph-code"></i> Code
-            </button>
-          </div>
-          <div class="showcase-preview" style="display: block;">
-            <div class="ds-grid ds-grid-cols-3 ds-gap-4" style="margin-bottom: var(--space-4);">
-              <div style="padding: var(--space-4); background: hsl(var(--primary) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Col 1</div>
-              <div style="padding: var(--space-4); background: hsl(var(--primary) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Col 2</div>
-              <div style="padding: var(--space-4); background: hsl(var(--primary) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Col 3</div>
-            </div>
-            <div class="ds-grid ds-grid-auto-fit ds-gap-4">
-              <div style="padding: var(--space-4); background: hsl(var(--accent) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Auto-fit 1</div>
-              <div style="padding: var(--space-4); background: hsl(var(--accent) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Auto-fit 2</div>
-              <div style="padding: var(--space-4); background: hsl(var(--accent) / 0.2); border-radius: var(--radius-lg); text-align: center; font-size: var(--font-size-sm);">Auto-fit 3</div>
-            </div>
-          </div>
-          <div class="showcase-code" id="code-grid" style="display: none;">
-            <div class="code-block">
-              <code>&lt;div class="ds-grid ds-grid-cols-3 ds-gap-4"&gt;<br>  &lt;div&gt;Column 1&lt;/div&gt;<br>  &lt;div&gt;Column 2&lt;/div&gt;<br>  &lt;div&gt;Column 3&lt;/div&gt;<br>&lt;/div&gt;<br><br>&lt;!-- Auto-fit responsive grid --&gt;<br>&lt;div class="ds-grid ds-grid-auto-fit ds-gap-4"&gt;<br>  &lt;div&gt;Auto-fits to space&lt;/div&gt;<br>&lt;/div&gt;</code>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Flexbox -->
-      <section id="flexbox" class="section" data-keywords="flex flexbox row column justify align gap">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-arrows-out"></i>
-            Flexbox Utilities
-          </h2>
-          <p class="section-description">Flexible layouts with alignment and gap utilities</p>
-        </div>
-        <div class="showcase-item">
-          <div class="showcase-header">
-            <div>
-              <h3>Flex Layouts</h3>
-              <p>Row, column, center, between, etc.</p>
-            </div>
-            <button class="btn-ghost btn-sm toggle-code" data-target="code-flex">
-              <i class="ph ph-code"></i> Code
-            </button>
-          </div>
-          <div class="showcase-preview" style="display: block;">
-            <div class="ds-flex ds-justify-between ds-items-center ds-flex-gap-4" style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg); margin-bottom: var(--space-4);">
-              <div style="padding: var(--space-3); background: hsl(var(--primary)); border-radius: var(--radius-md); color: white;">Item 1</div>
-              <div style="padding: var(--space-3); background: hsl(var(--primary)); border-radius: var(--radius-md); color: white;">Item 2</div>
-              <div style="padding: var(--space-3); background: hsl(var(--primary)); border-radius: var(--radius-md); color: white;">Item 3</div>
-            </div>
-            <div class="ds-flex ds-flex-col ds-items-center ds-flex-gap-3" style="padding: var(--space-4); background: hsl(var(--muted)); border-radius: var(--radius-lg);">
-              <div style="padding: var(--space-3); background: hsl(var(--accent)); border-radius: var(--radius-md); color: white;">Centered</div>
-              <div style="padding: var(--space-3); background: hsl(var(--accent)); border-radius: var(--radius-md); color: white;">Column</div>
-            </div>
-          </div>
-          <div class="showcase-code" id="code-flex" style="display: none;">
-            <div class="code-block">
-              <code>&lt;div class="ds-flex ds-justify-between ds-items-center ds-flex-gap-4"&gt;<br>  &lt;div&gt;Item 1&lt;/div&gt;<br>  &lt;div&gt;Item 2&lt;/div&gt;<br>&lt;/div&gt;<br><br>&lt;div class="ds-flex ds-flex-col ds-items-center"&gt;<br>  &lt;div&gt;Centered column&lt;/div&gt;<br>&lt;/div&gt;</code>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Responsive -->
-      <section id="responsive" class="section" data-keywords="responsive breakpoint mobile tablet desktop adaptive">
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="ph-fill ph-devices"></i>
-            Responsive Design
-          </h2>
-          <p class="section-description">Mobile-first responsive utilities and breakpoints</p>
-        </div>
-        <div class="ds-card">
-          <h4 style="margin-bottom: var(--space-4);">Breakpoints</h4>
-          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--muted-foreground));">Base</div>
-              <div style="font-size: var(--font-size-sm);">0px - 767px</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Mobile</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary));">md:</div>
-              <div style="font-size: var(--font-size-sm);">768px+</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Tablet</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary));">lg:</div>
-              <div style="font-size: var(--font-size-sm);">1024px+</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Desktop</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 100px; font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--primary));">xl:</div>
-              <div style="font-size: var(--font-size-sm);">1280px+</div>
-              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Large Desktop</div>
-            </div>
-          </div>
-          
-          <h4 style="margin: var(--space-8) 0 var(--space-4);">Examples</h4>
-          <div class="code-block">
-            <code>&lt;!-- 1 col mobile, 2 cols tablet, 3 cols desktop --&gt;<br>&lt;div class="ds-grid ds-grid-cols-1 ds-md-grid-cols-2 ds-lg-grid-cols-3"&gt;<br>  &lt;div&gt;Responsive item&lt;/div&gt;<br>&lt;/div&gt;<br><br>&lt;!-- Hide on mobile, show on desktop --&gt;<br>&lt;div class="ds-hidden-mobile"&gt;Desktop only&lt;/div&gt;<br><br>&lt;!-- Column on mobile, row on tablet+ --&gt;<br>&lt;div class="ds-flex ds-flex-col ds-md-flex-row"&gt;<br>  &lt;div&gt;Responsive flex&lt;/div&gt;<br>&lt;/div&gt;</code>
-          </div>
-        </div>
-      </section>
-      
-      <!-- COMPONENT SECTIONS -->
       
       <!-- Buttons -->
       <section id="buttons" class="section" data-keywords="button primary secondary outline ghost tertiary destructive link cta action click">
@@ -2290,7 +1797,7 @@
   <div class="custom-cursor-dot"></div>
   
   <!-- Component Helpers -->
-  <script src="component-helpers.js"></script>
+  <script src="scripts/component-helpers.js"></script>
   
   <script>
     // Optimized Custom Cursor - Hardware accelerated

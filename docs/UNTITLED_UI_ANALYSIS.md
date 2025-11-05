@@ -15,7 +15,7 @@
 
 **Rukn DS Current State:**
 - ✅ **15 component families** implemented
-- 🎨 Strong foundation with glass morphism and iOS motion design
+- 🎨 Strong foundation with glass morphism and Rukn motion design
 - 🎯 **85+ components needed** to match Untitled UI's base component coverage
 
 ---
@@ -356,7 +356,7 @@ These have **high impact** and **low complexity**:
 ### 1. **Maintain Design Language**
 - Keep glass morphism aesthetic
 - Use existing design tokens
-- Maintain iOS motion principles
+- Maintain Rukn motion principles
 - Ensure consistent spacing
 
 ### 2. **Framework Agnostic Approach**
@@ -414,7 +414,7 @@ These have **high impact** and **low complexity**:
 
 ### Key Differentiators for Rukn DS
 1. **Glass Morphism First** - Unique visual identity
-2. **iOS Motion Design** - Premium feel
+2. **Rukn Motion Design** - Premium feel
 3. **Arabic Support** - RTL and Rubik font
 4. **Framework Agnostic** - No build step required
 5. **Open Source** - MIT licensed

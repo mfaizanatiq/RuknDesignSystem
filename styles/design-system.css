@@ -154,7 +154,7 @@ h6, .ds-h6 {
   position: relative;
   overflow: hidden;
   border-radius: 64px;
-  font-weight: 500;
+  font-weight: var(--r-font-weight-medium);
   font-size: 0.875rem; /* 14px */
   line-height: 1.25rem;
   padding: 0.5rem 1rem; /* 8px 16px */
@@ -213,11 +213,11 @@ h6, .ds-h6 {
     hsl(var(--primary)) 100%
   );
   color: #ffffff;
-  border: 1px solid hsl(var(--primary) / 0.3);
+  border: var(--r-border-width-1) solid hsl(var(--primary) / 0.3);
   box-shadow: 
     0 2px 8px hsl(var(--primary) / 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  font-weight: 600;
+  font-weight: var(--r-font-weight-semibold);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -259,7 +259,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.12) 100%
   );
   color: hsl(var(--foreground));
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.2);
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -302,7 +302,7 @@ h6, .ds-h6 {
 .btn-outline {
   background: transparent;
   color: hsl(var(--foreground));
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.25);
   box-shadow: 
     0 1px 4px rgba(0, 0, 0, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -339,8 +339,8 @@ h6, .ds-h6 {
 .btn-ghost {
   background: transparent;
   color: hsl(var(--foreground) / 0.8);
-  border: 1px solid transparent;
-  font-weight: 500;
+  border: var(--r-border-width-1) solid transparent;
+  font-weight: var(--r-font-weight-medium);
   box-shadow: none;
 }
 
@@ -376,8 +376,8 @@ h6, .ds-h6 {
 .btn-tertiary {
   background: transparent;
   color: hsl(var(--foreground) / 0.6);
-  border: 1px solid transparent;
-  font-weight: 400;
+  border: var(--r-border-width-1) solid transparent;
+  font-weight: var(--r-font-weight-normal);
   font-size: 0.875rem;
   box-shadow: none;
 }
@@ -414,11 +414,11 @@ h6, .ds-h6 {
     hsl(var(--destructive)) 100%
   );
   color: #ffffff;
-  border: 1px solid hsl(var(--destructive) / 0.3);
+  border: var(--r-border-width-1) solid hsl(var(--destructive) / 0.3);
   box-shadow: 
     0 2px 8px hsl(var(--destructive) / 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  font-weight: 600;
+  font-weight: var(--r-font-weight-semibold);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -457,7 +457,7 @@ h6, .ds-h6 {
   border: none;
   text-decoration: underline;
   text-underline-offset: 4px;
-  font-weight: 500;
+  font-weight: var(--r-font-weight-medium);
   padding: 0;
   height: auto;
   border-radius: 0;
@@ -496,7 +496,7 @@ h6, .ds-h6 {
   line-height: 1.5rem;
   color: hsl(var(--foreground));
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
   box-shadow: 
@@ -553,7 +553,7 @@ h6, .ds-h6 {
   height: 1.25rem;
   border-radius: 0.375rem; /* 6px */
   background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: var(--r-border-width-2) solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   position: relative;
   transition: all var(--r-transition-fast) var(--r-spring-smooth);
@@ -591,7 +591,7 @@ h6, .ds-h6 {
   transform: translate(-50%, -50%) scale(1);
   width: 0.5rem;
   height: 0.75rem;
-  border: 2px solid hsl(var(--primary-foreground));
+  border: var(--r-border-width-2) solid hsl(var(--primary-foreground));
   border-top: 0;
   border-left: 0;
   transform: translate(-50%, -60%) rotate(45deg) scale(1);
@@ -686,7 +686,7 @@ h6, .ds-h6 {
   height: 1.25rem;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: var(--r-border-width-2) solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   position: relative;
   transition: all var(--r-transition-fast) var(--r-spring-smooth);
@@ -708,7 +708,7 @@ h6, .ds-h6 {
 .ds-radio:checked {
   background: rgba(255, 255, 255, 0.08);
   border-color: hsl(var(--primary));
-  border-width: 2px;
+  border-width: var(--r-border-width-2);
   box-shadow: 
     0 2px 8px hsl(var(--primary) / 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -796,7 +796,7 @@ h6, .ds-h6 {
   width: 2.75rem; /* 44px */
   height: 1.5rem; /* 24px */
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   cursor: pointer;
   position: relative;
@@ -915,7 +915,7 @@ h6, .ds-h6 {
 .ds-label {
   display: block;
   font-size: 0.875rem; /* 14px */
-  font-weight: 500;
+  font-weight: var(--r-font-weight-medium);
   color: hsl(var(--foreground));
   margin-bottom: 0.5rem;
   user-select: none;
@@ -928,7 +928,7 @@ h6, .ds-h6 {
 }
 
 .ds-label-optional {
-  font-weight: 400;
+  font-weight: var(--r-font-weight-normal);
   color: hsl(var(--muted-foreground));
 }
 
@@ -1070,7 +1070,7 @@ h6, .ds-h6 {
     hsl(var(--primary)) 0%,
     hsl(var(--primary) / 0.9) 100%
   );
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: var(--r-border-width-2) solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1104,7 +1104,7 @@ h6, .ds-h6 {
     hsl(var(--primary)) 0%,
     hsl(var(--primary) / 0.9) 100%
   );
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: var(--r-border-width-2) solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1161,7 +1161,7 @@ h6, .ds-h6 {
 }
 
 .ds-slider-value-current {
-  font-weight: 600;
+  font-weight: var(--r-font-weight-semibold);
   color: hsl(var(--primary));
   font-size: 0.875rem;
 }
@@ -1203,7 +1203,7 @@ h6, .ds-h6 {
   background: hsl(var(--card));
   color: hsl(var(--card-foreground));
   border-radius: calc(var(--radius) + 0.25rem);
-  border: 1px solid hsl(var(--border));
+  border: var(--r-border-width-1) solid hsl(var(--border));
   padding: 1.5rem;
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.1),
@@ -1220,7 +1220,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.05) 50%,
     rgba(255, 255, 255, 0.08) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.15);
   box-shadow: 
     inset 0 1px 1px rgba(255, 255, 255, 0.15),
     inset 0 -1px 1px rgba(255, 255, 255, 0.08),
@@ -1241,7 +1241,7 @@ h6, .ds-h6 {
   padding: 0.375rem 0.5rem;
   border-radius: 999px;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: var(--r-font-weight-medium);
   line-height: 1;
 }
 
@@ -1407,7 +1407,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.05) 50%,
     rgba(255, 255, 255, 0.08) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.15);
   border-radius: calc(var(--radius) + 0.5rem);
   box-shadow: 
     inset 0 1px 1px rgba(255, 255, 255, 0.15),
@@ -1472,7 +1472,7 @@ h6, .ds-h6 {
 
 .ds-modal-title {
   font-size: 1.125rem; /* 18px */
-  font-weight: 600;
+  font-weight: var(--r-font-weight-semibold);
   line-height: 1.4;
   letter-spacing: -0.01em;
   color: hsl(var(--foreground));
@@ -1512,7 +1512,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.12) 0%,
     rgba(255, 255, 255, 0.08) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.15);
   color: hsl(var(--foreground) / 0.9);
   cursor: pointer;
   display: flex;
@@ -1582,7 +1582,7 @@ h6, .ds-h6 {
 
 .ds-modal-section-title {
   font-size: var(--r-font-size-lg);
-  font-weight: 600;
+  font-weight: var(--r-font-weight-semibold);
   margin-bottom: var(--r-space-4);
   color: hsl(var(--foreground));
 }
@@ -1593,7 +1593,7 @@ h6, .ds-h6 {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.1);
   border-radius: var(--r-radius-xl);
   padding: var(--r-space-4);
   box-shadow: 
@@ -1618,7 +1618,7 @@ h6, .ds-h6 {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.12);
   border-radius: var(--r-radius-lg);
   padding: var(--r-space-4);
   box-shadow: 
@@ -1661,7 +1661,7 @@ h6, .ds-h6 {
 /* Inset/Well within Modal - Lower elevation */
 .ds-modal-well {
   background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.05);
   border-radius: var(--r-radius-lg);
   padding: var(--r-space-4);
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -1719,7 +1719,7 @@ h6, .ds-h6 {
     hsl(var(--primary) / 0.85) 100%
   );
   color: #ffffff;
-  border: 1px solid hsl(var(--primary) / 0.4);
+  border: var(--r-border-width-1) solid hsl(var(--primary) / 0.4);
   backdrop-filter: blur(10px) saturate(1.2);
   -webkit-backdrop-filter: blur(10px) saturate(1.2);
   box-shadow: 
@@ -1750,7 +1750,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.08) 50%,
     rgba(255, 255, 255, 0.12) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px) saturate(1.1);
   -webkit-backdrop-filter: blur(10px) saturate(1.1);
   box-shadow: 
@@ -1785,7 +1785,7 @@ h6, .ds-h6 {
   z-index: 100;
   height: auto;
   min-height: 3.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.1);
   border-radius: var(--r-radius-2xl);
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(24px) saturate(1.5);
@@ -1866,7 +1866,7 @@ h6, .ds-h6 {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(24px) saturate(1.5);
   -webkit-backdrop-filter: blur(24px) saturate(1.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.1);
   border-radius: var(--r-radius-xl);
   padding: var(--r-space-4);
   box-shadow: 
@@ -1986,7 +1986,7 @@ h6, .ds-h6 {
   align-items: center;
   gap: var(--r-space-2);
   font-size: var(--font-size-xl);
-  font-weight: 700;
+  font-weight: var(--r-font-weight-bold);
   color: hsl(var(--foreground));
   text-decoration: none;
   padding: var(--r-space-2);
@@ -2152,7 +2152,7 @@ h6, .ds-h6 {
 
 .ds-drawer-title {
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: var(--r-font-weight-semibold);
   color: hsl(var(--foreground));
   margin: 0;
 }
@@ -2399,7 +2399,7 @@ h6, .ds-h6 {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.15);
   box-shadow: 
     0 4px 16px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
@@ -2851,7 +2851,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.12) 0%,
     rgba(255, 255, 255, 0.08) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.25);
   border-radius: var(--r-radius-lg);
   backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
   -webkit-backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
@@ -2893,7 +2893,7 @@ h6, .ds-h6 {
   width: 8px;
   height: 8px;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transform: rotate(45deg);
@@ -2994,7 +2994,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.06) 0%,
     rgba(255, 255, 255, 0.04) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   
@@ -3182,7 +3182,7 @@ h6, .ds-h6 {
     rgba(255, 255, 255, 0.12) 0%,
     rgba(255, 255, 255, 0.08) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.2);
   backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
   -webkit-backdrop-filter: saturate(1.8) blur(40px) brightness(1.1);
   
@@ -3550,7 +3550,7 @@ h6, .ds-h6 {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: var(--r-border-width-2) solid rgba(255, 255, 255, 0.2);
   border-top-color: hsl(var(--primary));
   border-radius: var(--r-radius-full);
   animation: spinnerRotate 0.8s linear infinite;
@@ -3569,13 +3569,13 @@ h6, .ds-h6 {
 .ds-spinner-xs {
   width: 1rem;
   height: 1rem;
-  border-width: 2px;
+  border-width: var(--r-border-width-2);
 }
 
 .ds-spinner-sm {
   width: 1.25rem;
   height: 1.25rem;
-  border-width: 2px;
+  border-width: var(--r-border-width-2);
 }
 
 .ds-spinner-lg {
@@ -3587,7 +3587,7 @@ h6, .ds-h6 {
 .ds-spinner-xl {
   width: 3rem;
   height: 3rem;
-  border-width: 4px;
+  border-width: var(--r-border-width-4);
 }
 
 /* Spinner Variants */
@@ -3624,7 +3624,7 @@ h6, .ds-h6 {
 .ds-spinner-overlay .ds-spinner {
   width: 3rem;
   height: 3rem;
-  border-width: 4px;
+  border-width: var(--r-border-width-4);
 }
 
 /* Button with Spinner */
@@ -3646,7 +3646,7 @@ h6, .ds-h6 {
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: var(--r-border-width-2) solid rgba(255, 255, 255, 0.3);
   border-top-color: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
   animation: spinnerRotate 0.6s linear infinite;

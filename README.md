@@ -1,6 +1,6 @@
 # 🏛️ Rukn Design System
 
-> **Rukn** (Arabic: رُكن, meaning "pillar" or "foundation") — A modern, framework-agnostic CSS design system built with glass morphism and iOS motion principles.
+> **Rukn** (Arabic: رُكن, meaning "pillar" or "foundation") — A modern, framework-agnostic CSS design system built with glass morphism and smooth motion principles.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-BADGE-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE-NAME/deploys)
 [![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/yourusername/rukn)
@@ -10,7 +10,7 @@
 
 - 🎨 **150+ Design Tokens** — Comprehensive W3C-compliant CSS variables (`--r-` prefix)
 - 🪟 **Glass Morphism** — Beautiful frosted glass effects with animated light refraction
-- 📱 **iOS Motion Design** — Apple HIG-inspired easing curves and spring animations
+- 📱 **Rukn Motion Design** — Smooth easing curves and spring animations
 - 🎯 **Framework Agnostic** — Pure CSS, works with React, Vue, Angular, or vanilla JS
 - 🌓 **Modern UI Components** — Buttons, inputs, cards, modals, drawers, and more
 - 📐 **Complete Layout System** — Responsive grids, flexbox utilities, and containers
@@ -27,11 +27,14 @@
 <html lang="en">
 <head>
   <!-- Rukn Design System -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ruknds/core/design-system-variables.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ruknds/core/design-system.css">
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
 </head>
 <body>
-  <button class="ds-btn ds-btn-primary">Hello Rukn!</button>
+  <button class="btn-primary">Hello Rukn!</button>
+  
+  <!-- Optional: For interactive components -->
+  <script src="scripts/component-helpers.js"></script>
 </body>
 </html>
 ```
@@ -50,12 +53,12 @@ import '@ruknds/core/design-system.css';
 
 ### Option 3: Download
 
-1. Download `design-system-variables.css` and `design-system.css`
+1. Download the `styles/` folder (design-system-variables.css and design-system.css)
 2. Link them in your HTML:
 
 ```html
-<link rel="stylesheet" href="path/to/design-system-variables.css">
-<link rel="stylesheet" href="path/to/design-system.css">
+<link rel="stylesheet" href="styles/design-system-variables.css">
+<link rel="stylesheet" href="styles/design-system.css">
 ```
 
 ## 📚 Documentation
@@ -113,7 +116,7 @@ Rukn uses W3C-compliant design tokens with the `--r-` prefix:
 --r-space-2: 0.5rem;   /* 8px */
 --r-space-4: 1rem;     /* 16px */
 
-/* iOS Motion */
+/* Rukn Motion */
 --r-ease-ios-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
 --r-spring-smooth: cubic-bezier(0.5, 1.25, 0.75, 1);
 ```
@@ -132,7 +135,7 @@ Rukn uses W3C-compliant design tokens with the `--r-` prefix:
 {
   "name": "@ruknds/core",
   "version": "1.3.1",
-  "description": "Modern glass morphism design system with iOS motion",
+  "description": "Modern glass morphism design system with smooth motion",
   "main": "design-system.css",
   "types": "types.d.ts"
 }
@@ -161,36 +164,42 @@ git push origin main
 
 Simply upload these files to any static hosting:
 - `index.html`
+- `foundation.html`
 - `components.html`
-- `design-system.css`
-- `design-system-variables.css`
-- `modal-drawer-helpers.js`
+- `styles/` (CSS files)
+- `scripts/` (JavaScript helpers)
+- `docs/` (Documentation)
 
 ## 🗺️ Project Structure
 
 ```
-FaizanDS/
-├── index.html                      # 🏠 Landing page
-├── components.html                 # 🧩 Components showcase
-├── design-system.css               # 🎨 Main stylesheet
-├── design-system-variables.css     # 🎯 Design tokens (150+)
-├── modal-drawer-helpers.js         # ⚙️ Helper utilities
+RuknDS/
+├── index.html                      # 🏠 Landing page with pricing
+├── foundation.html                 # 🎨 Design tokens & layouts
+├── components.html                 # 🧩 UI components showcase
+├── example.html                    # 📋 Component examples
+├── styles/                         # 🎨 Stylesheets
+│   ├── design-system-variables.css # Design tokens (150+)
+│   └── design-system.css           # Component styles
+├── scripts/                        # ⚙️ JavaScript
+│   ├── component-helpers.js        # Component utilities
+│   └── modal-drawer-helpers.js     # Modal/drawer helpers
+├── docs/                           # 📚 Documentation
+│   ├── DESIGN_TOKENS.md            # Token reference
+│   ├── INTEGRATION.md              # Integration guide
+│   ├── RUKN_DESIGN_LANGUAGE.md     # Design guidelines
+│   ├── UNTITLED_UI_ANALYSIS.md     # Component roadmap
+│   └── ...                         # More guides
 ├── package.json                    # 📦 NPM package config
 ├── types.d.ts                      # 📘 TypeScript definitions
 ├── LICENSE                         # ⚖️ MIT License
 ├── README.md                       # 📖 This file
 ├── QUICK_START.md                  # ⚡ 60-second setup
+├── WHATS_NEW.md                    # 🎉 Changelog
 ├── _redirects                      # 🔀 Netlify redirects
 ├── netlify.toml                    # ⚙️ Netlify config
 ├── robots.txt                      # 🤖 SEO
-├── sitemap.xml                     # 🗺️ SEO
-├── .gitignore                      # 🚫 Git ignore
-├── .npmignore                      # 📦 NPM ignore
-└── docs/                           # 📚 Documentation
-    ├── DESIGN_TOKENS.md            # Token reference
-    ├── INTEGRATION.md              # Integration guide
-    ├── DESIGN_SYSTEM_DOCS.md       # Design system docs
-    └── ...                         # More guides
+└── sitemap.xml                     # 🗺️ SEO
 ```
 
 ## 🎨 Why Rukn?
@@ -203,7 +212,7 @@ FaizanDS/
 
 ### Modern Design Principles
 - ✨ **Glass Morphism** — Elegant frosted glass effects
-- 🎬 **iOS Motion** — Smooth, natural animations
+- 🎬 **Rukn Motion** — Smooth, natural animations
 - 📱 **Mobile-First** — Responsive by default
 - ♿ **Accessible** — WCAG 2.1 AA compliant
 
@@ -217,7 +226,7 @@ FaizanDS/
 
 ### ✅ Completed (v1.3.1)
 - Glass morphism design system
-- iOS motion principles
+- Rukn motion principles
 - 150+ design tokens
 - Responsive layout system
 - Icon placeholders with refraction
@@ -252,7 +261,7 @@ FaizanDS/
 - 📱 Improved mobile navigation
 
 ### v1.3.0 (2024-11-04)
-- ✨ iOS motion design system
+- ✨ Rukn motion design system
 - 🎨 Modern floating navbar
 - 📐 Complete layout system
 - ♿ Reduced motion support
