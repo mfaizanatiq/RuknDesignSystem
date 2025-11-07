@@ -414,6 +414,17 @@
   --border: 0 0% 100% / 0.06;        /* subtle */
   --input: 0 0% 100% / 0.06;
   --ring: 262 83% 57%;                /* focus */
+  
+  /* ========================================
+     Z-INDEX SCALE (Layering System)
+     ======================================== */
+  --z-dropdown: 1000;                /* Dropdowns, popovers, mobile menu */
+  --z-navbar: 2000;                  /* Sticky navigation, headers */
+  --z-drawer: 3000;                  /* Drawers, side panels */
+  --z-modal: 4000;                   /* Modals, dialogs */
+  --z-tooltip: 5000;                 /* Tooltips, floating help */
+  --z-toast: 6000;                   /* Toasts, notifications */
+  --z-spinner: 7000;                 /* Loading overlays */
 }
 
 /**

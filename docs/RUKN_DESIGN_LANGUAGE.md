@@ -207,7 +207,7 @@ font-family: var(--r-font-mono);     /* JetBrains Mono (code) */
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-/* Elevated Layer - Enhanced glass */
+/* Elevated Layer - Enhanced glass */         bjgjnb ,hilgt yiuok,
 .ds-modal .ds-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);

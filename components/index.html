@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rukn Web Components - Quick Reference</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+      color: #ffffff;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .tagline {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 40px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(102, 126, 234, 0.2);
+      border: 1px solid rgba(102, 126, 234, 0.4);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin: 4px;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    .component-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .component-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .component-card h3 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+    .component-card code {
+      display: block;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      color: #a5b4fc;
+      overflow-x: auto;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .stat {
+      text-align: center;
+      padding: 20px;
+      background: rgba(102, 126, 234, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    .link {
+      color: #667eea;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(102, 126, 234, 0.3);
+      transition: border-color 0.2s;
+    }
+    .link:hover {
+      border-bottom-color: #667eea;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Rukn Web Components</h1>
+    <p class="tagline">100% Vanilla JavaScript • Zero Dependencies • Works Everywhere</p>
+    
+    <div style="margin-bottom: 30px;">
+      <span class="badge">5KB Gzipped</span>
+      <span class="badge">Native Browser APIs</span>
+      <span class="badge">React Compatible</span>
+      <span class="badge">Vue Compatible</span>
+      <span class="badge">Angular Compatible</span>
+      <span class="badge">95%+ Browser Support</span>
+    </div>
+    
+    <!-- Stats -->
+    <div class="section">
+      <h2>📊 Performance</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">~5KB</div>
+          <div class="stat-label">Gzipped Bundle</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Dependencies</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Components</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">10-25x</div>
+          <div class="stat-label">Smaller than React libs</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Installation -->
+    <div class="section">
+      <h2>📦 Installation</h2>
+      <div style="display: grid; gap: 20px; margin-top: 20px;">
+        <div>
+          <h3 style="color: rgba(255, 255, 255, 0.9); margin-bottom: 10px;">NPM</h3>
+          <code style="display: block; background: rgba(0, 0, 0, 0.5); padding: 15px; border-radius: 8px; color: #a5b4fc;">
+npm install @ruknds/core
+          </code>
+        </div>
+        <div>
+          <h3 style="color: rgba(255, 255, 255, 0.9); margin-bottom: 10px;">CDN</h3>
+          <code style="display: block; background: rgba(0, 0, 0, 0.5); padding: 15px; border-radius: 8px; color: #a5b4fc;">
+&lt;script src="https://unpkg.com/@ruknds/core@2.0.0/components/rukn-ui.js" type="module"&gt;&lt;/script&gt;
+          </code>
+        </div>
+        <div>
+          <h3 style="color: rgba(255, 255, 255, 0.9); margin-bottom: 10px;">Direct</h3>
+          <code style="display: block; background: rgba(0, 0, 0, 0.5); padding: 15px; border-radius: 8px; color: #a5b4fc;">
+&lt;script src="components/rukn-ui.js" type="module"&gt;&lt;/script&gt;
+          </code>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Layout Components -->
+    <div class="section">
+      <h2>🏗️ Layout Components</h2>
+      <div class="component-list">
+        <div class="component-card">
+          <h3>&lt;rukn-navbar&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Responsive navigation bar with search support</p>
+          <code>&lt;rukn-navbar current="home"&gt;&lt;/rukn-navbar&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-sidebar&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Collapsible sidebar navigation</p>
+          <code>&lt;rukn-sidebar type="components"&gt;&lt;/rukn-sidebar&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-footer&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Footer with links and branding</p>
+          <code>&lt;rukn-footer&gt;&lt;/rukn-footer&gt;</code>
+        </div>
+      </div>
+    </div>
+    
+    <!-- UI Components -->
+    <div class="section">
+      <h2>🎨 UI Components</h2>
+      <div class="component-list">
+        <div class="component-card">
+          <h3>&lt;rukn-button&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Smart buttons with variants and loading states</p>
+          <code>&lt;rukn-button variant="primary" loading&gt;Loading&lt;/rukn-button&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-badge&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Status badges with color variants</p>
+          <code>&lt;rukn-badge variant="success"&gt;Active&lt;/rukn-badge&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-card&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Content cards with glass effect</p>
+          <code>&lt;rukn-card glass&gt;Content&lt;/rukn-card&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-input&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Form input fields</p>
+          <code>&lt;rukn-input type="text" placeholder="Enter text"&gt;&lt;/rukn-input&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-icon&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Icon placeholders with variants</p>
+          <code>&lt;rukn-icon variant="primary" size="lg"&gt;⭐&lt;/rukn-icon&gt;</code>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Feedback Components -->
+    <div class="section">
+      <h2>💬 Feedback Components</h2>
+      <div class="component-list">
+        <div class="component-card">
+          <h3>&lt;rukn-alert&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Dismissible alerts</p>
+          <code>&lt;rukn-alert variant="success" title="Success"&gt;Saved!&lt;/rukn-alert&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-spinner&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Loading spinners in multiple sizes</p>
+          <code>&lt;rukn-spinner size="lg"&gt;&lt;/rukn-spinner&gt;</code>
+        </div>
+        <div class="component-card">
+          <h3>&lt;rukn-progress&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Progress bars (determinate & indeterminate)</p>
+          <code>&lt;rukn-progress value="60"&gt;&lt;/rukn-progress&gt;</code>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Overlay Components -->
+    <div class="section">
+      <h2>📋 Overlay Components</h2>
+      <div class="component-list">
+        <div class="component-card">
+          <h3>&lt;rukn-modal&gt;</h3>
+          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Modal dialogs with programmatic API</p>
+          <code>&lt;rukn-modal modal-id="example" title="Title"&gt;Content&lt;/rukn-modal&gt;</code>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Links -->
+    <div class="section">
+      <h2>📚 Resources</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 12px;">📖 <a href="../web-components-demo.html" class="link">Interactive Demo</a></li>
+        <li style="margin-bottom: 12px;">📘 <a href="../docs/WEB_COMPONENTS.md" class="link">Complete Documentation</a></li>
+        <li style="margin-bottom: 12px;">📊 <a href="../docs/WEB_COMPONENTS_SUMMARY.md" class="link">Technical Summary</a></li>
+        <li style="margin-bottom: 12px;">🔧 <a href="README.md" class="link">Component Architecture</a></li>
+        <li style="margin-bottom: 12px;">🐙 <a href="https://github.com/mfaizanatiq/RuknDesignSystem" class="link">GitHub Repository</a></li>
+      </ul>
+    </div>
+    
+    <!-- Files -->
+    <div class="section">
+      <h2>📁 Component Files</h2>
+      <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+        <div style="margin-bottom: 8px;">components/</div>
+        <div style="margin-left: 20px; color: rgba(255, 255, 255, 0.7);">
+          <div style="margin-bottom: 4px;">├── rukn-navbar.js     <span style="color: #667eea;">(4.5 KB)</span></div>
+          <div style="margin-bottom: 4px;">├── rukn-sidebar.js    <span style="color: #667eea;">(7.9 KB)</span></div>
+          <div style="margin-bottom: 4px;">├── rukn-footer.js     <span style="color: #667eea;">(2.8 KB)</span></div>
+          <div style="margin-bottom: 4px;">├── rukn-ui.js         <span style="color: #667eea;">(9.5 KB)</span> ← All UI components</div>
+          <div style="margin-bottom: 4px;">├── README.md</div>
+          <div style="margin-bottom: 4px;">└── index.html         <span style="color: rgba(255, 255, 255, 0.5);">(This file)</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+      <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem;">
+        Built with ❤️ by the Rukn DS community • MIT License
+      </p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-top: 10px; font-weight: bold;">
+        The fastest, lightest, most framework-agnostic component library ever created.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Navbar Test - Rukn Design System</title>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  
+  <!-- Rukn Navbar Component -->
+  <script src="components/rukn-navbar.js" defer></script>
+  
+  <style>
+    body {
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .test-container {
+      padding: var(--r-space-6);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .test-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-radius-xl);
+      padding: var(--r-space-6);
+      margin-bottom: var(--r-space-4);
+    }
+    
+    .test-section h2 {
+      margin-top: 0;
+      color: hsl(var(--primary));
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .feature-list li {
+      padding: var(--r-space-2) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .feature-list li::before {
+      content: "✓";
+      color: hsl(var(--primary));
+      font-weight: bold;
+      margin-right: var(--r-space-2);
+    }
+    
+    .device-simulator {
+      display: flex;
+      gap: var(--r-space-4);
+      flex-wrap: wrap;
+      margin-top: var(--r-space-4);
+    }
+    
+    .device-frame {
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--r-radius-xl);
+      padding: var(--r-space-2);
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+      .test-section {
+        padding: var(--r-space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Minimal Navbar with Hamburger Menu -->
+  <rukn-navbar current="home"></rukn-navbar>
+  
+  <div class="test-container">
+    <div class="test-section">
+      <h2>📱 Mobile Navbar - Testing Guide</h2>
+      <p>Resize your browser window to mobile size (< 768px) or open this page on a mobile device to see the minimal navbar with hamburger menu.</p>
+    </div>
+    
+    <div class="test-section">
+      <h2>✨ Features Implemented</h2>
+      <ul class="feature-list">
+        <li><strong>Minimal Design:</strong> Compact navbar that takes minimal vertical space on mobile</li>
+        <li><strong>Hamburger Menu:</strong> Clean 3-line menu icon that animates to an X when opened</li>
+        <li><strong>Responsive Breakpoints:</strong> Optimized for tablets (768px) and phones (480px)</li>
+        <li><strong>Auto-hide Elements:</strong> Search bar and menu items automatically hide on mobile</li>
+        <li><strong>Smooth Animations:</strong> Slide and scale animations for the mobile dropdown</li>
+        <li><strong>Touch-Optimized:</strong> 40px minimum touch targets for better accessibility</li>
+        <li><strong>Glass Morphism:</strong> Maintains the Rukn design language with backdrop blur</li>
+        <li><strong>Sticky Position:</strong> Always visible at the top with enhanced scroll behavior</li>
+      </ul>
+    </div>
+    
+    <div class="test-section">
+      <h2>🎯 Responsive Behavior</h2>
+      <h3>Desktop (> 768px)</h3>
+      <ul class="feature-list">
+        <li>Full horizontal menu with all navigation items visible</li>
+        <li>Search bar displayed (if enabled)</li>
+        <li>Hamburger menu hidden</li>
+      </ul>
+      
+      <h3 style="margin-top: var(--r-space-4);">Tablet (≤ 768px)</h3>
+      <ul class="feature-list">
+        <li>Minimal navbar with logo and hamburger menu</li>
+        <li>Search bar hidden</li>
+        <li>Menu items moved to dropdown</li>
+        <li>Navbar height: 3rem (48px)</li>
+      </ul>
+      
+      <h3 style="margin-top: var(--r-space-4);">Mobile (≤ 480px)</h3>
+      <ul class="feature-list">
+        <li>Ultra-minimal design with reduced padding</li>
+        <li>Smaller logo (1.25rem)</li>
+        <li>Compact hamburger menu</li>
+        <li>Navbar height: 2.75rem (44px)</li>
+      </ul>
+    </div>
+    
+    <div class="test-section">
+      <h2>🧪 How to Test</h2>
+      <ol style="padding-left: var(--r-space-4);">
+        <li><strong>Resize Browser:</strong> Drag the browser window to different widths</li>
+        <li><strong>Click Hamburger:</strong> Tap/click the menu icon to open the dropdown</li>
+        <li><strong>Test Navigation:</strong> Click menu items to navigate</li>
+        <li><strong>Test Scroll:</strong> Scroll down to see the enhanced navbar behavior</li>
+        <li><strong>Mobile Device:</strong> Open on actual mobile device for real-world testing</li>
+        <li><strong>Developer Tools:</strong> Use browser DevTools to simulate different devices</li>
+      </ol>
+    </div>
+    
+    <div class="test-section">
+      <h2>💅 Design Details</h2>
+      <ul class="feature-list">
+        <li><strong>Background:</strong> Semi-transparent black with glass morphism (blur + saturate)</li>
+        <li><strong>Border:</strong> Subtle white border (15% opacity) for depth</li>
+        <li><strong>Spacing:</strong> Reduced padding on mobile for minimal footprint</li>
+        <li><strong>Typography:</strong> Responsive font sizes (lg → base → sm)</li>
+        <li><strong>Icons:</strong> Phosphor Icons with proper ARIA labels</li>
+        <li><strong>Animation:</strong> iOS-smooth easing with scale + translate transforms</li>
+        <li><strong>Shadow:</strong> Layered box-shadows for depth and premium feel</li>
+      </ul>
+    </div>
+    
+    <div class="test-section">
+      <h2>📊 Browser Compatibility</h2>
+      <ul class="feature-list">
+        <li>Modern browsers: Chrome, Firefox, Safari, Edge (latest versions)</li>
+        <li>iOS Safari: Full support with -webkit- prefixes</li>
+        <li>Android Chrome: Full support</li>
+        <li>Fallback styles for older browsers without backdrop-filter</li>
+      </ul>
+    </div>
+    
+    <!-- Spacer content for scroll testing -->
+    <div class="test-section" style="margin-top: 100vh;">
+      <h2>🎨 Scroll Test Section</h2>
+      <p>Scroll back up to see the navbar remain sticky and visible. The navbar should stay fixed at the top with enhanced glass effects when scrolled.</p>
+    </div>
+  </div>
+</body>
+</html>
+

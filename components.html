@@ -23,6 +23,32 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
   
+  <!-- Rukn Web Components (Vanilla JS) -->
+  <script src="components/rukn-navbar.js" defer></script>
+  <script src="components/rukn-sidebar.js" defer></script>
+  <script src="components/rukn-ui.js" type="module"></script>
+  
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Rukn Design System - UI Components",
+    "description": "Complete library of Web Components for building modern interfaces. Buttons, cards, alerts, modals, and more. 100% Vanilla JavaScript.",
+    "author": {
+      "@type": "Person",
+      "name": "M Faizan Atiq"
+    },
+    "datePublished": "2025-11-05",
+    "dateModified": "2025-11-05",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Rukn Design System",
+      "url": "https://rukn.design"
+    }
+  }
+  </script>
+  
   <style>
     * {
       margin: 0;
@@ -538,144 +564,16 @@
 </head>
 <body>
   
-  <!-- Navigation -->
-  <nav class="ds-navbar ds-navbar-full">
-    <div class="ds-navbar-container" style="gap: var(--r-space-4);">
-      <a href="index.html" class="ds-navbar-brand">
-        <span class="ds-navbar-logo">◆</span>
-        <span>Rukn</span>
-      </a>
-      
-      <!-- Search Bar in Navbar -->
-      <div style="flex: 1; max-width: 600px; position: relative;">
-        <i class="ph ph-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: hsl(var(--foreground) / 0.5); font-size: 16px; pointer-events: none;"></i>
-        <input 
-          type="text" 
-          id="navSearch" 
-          class="ds-input" 
-          placeholder="Quick search..."
-          style="
-            padding: var(--r-space-2) var(--r-space-3) var(--r-space-2) 40px; 
-            font-size: var(--font-size-sm);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            height: 36px;
-          "
-        >
-      </div>
-      
-      <nav class="ds-navbar-nav">
-        <div class="ds-navbar-menu">
-          <a href="index.html"><button class="btn-ghost btn-sm">Home</button></a>
-          <a href="foundation.html"><button class="btn-ghost btn-sm">Foundation</button></a>
-          <a href="components.html"><button class="btn-ghost btn-sm">Components</button></a>
-          <a href="index.html#pricing"><button class="btn-ghost btn-sm">Pricing</button></a>
-          <a href="index.html#roadmap"><button class="btn-ghost btn-sm">Roadmap</button></a>
-          <a href="index.html#about"><button class="btn-ghost btn-sm">About</button></a>
-          <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener">
-            <button class="btn-primary btn-sm">
-              <i class="ph ph-github-logo" style="margin-right: 4px;"></i>
-              GitHub
-            </button>
-          </a>
-        </div>
-        
-        <!-- Mobile Hamburger -->
-        <button class="ds-navbar-hamburger" id="navToggleComponents" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </nav>
-    </div>
-  </nav>
   
-  <!-- Mobile Navigation Dropdown -->
-  <div class="ds-navbar-mobile-dropdown" id="navDropdownComponents">
-    <div class="ds-navbar-menu">
-      <a href="index.html"><button class="btn-ghost btn-sm">
-        <i class="ph ph-house"></i> Home
-      </button></a>
-      <a href="foundation.html"><button class="btn-ghost btn-sm">
-        <i class="ph ph-cube"></i> Foundation
-      </button></a>
-      <a href="components.html"><button class="btn-ghost btn-sm">
-        <i class="ph ph-stack"></i> Components
-      </button></a>
-      <a href="index.html#pricing"><button class="btn-ghost btn-sm">
-        <i class="ph ph-currency-dollar"></i> Pricing
-      </button></a>
-      <a href="index.html#roadmap"><button class="btn-ghost btn-sm">
-        <i class="ph ph-map-trifold"></i> Roadmap
-      </button></a>
-      <a href="index.html#about"><button class="btn-ghost btn-sm">
-        <i class="ph ph-info"></i> About
-      </button></a>
-      <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener">
-        <button class="btn-primary btn-sm">
-          <i class="ph-fill ph-github-logo"></i> GitHub
-        </button>
-      </a>
-    </div>
-  </div>
+  <!-- Navbar (Web Component) -->
+  <rukn-navbar current="components" search></rukn-navbar>
   
   <!-- Layout -->
   <div class="docs-layout">
-    
-    <!-- Sidebar Backdrop (Mobile) -->
-    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
-    
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-section">
-        <h4 class="sidebar-title">UI Components</h4>
-        <ul class="sidebar-nav">
-          <li><a href="#buttons" class="sidebar-link"><i class="ph-fill ph-cursor-click"></i> Buttons</a></li>
-          <li><a href="#inputs" class="sidebar-link"><i class="ph-fill ph-text-box"></i> Inputs</a></li>
-          <li><a href="#checkbox" class="sidebar-link"><i class="ph-fill ph-check-square"></i> Checkbox</a></li>
-          <li><a href="#radio" class="sidebar-link"><i class="ph-fill ph-radio-button"></i> Radio Group</a></li>
-          <li><a href="#switch" class="sidebar-link"><i class="ph-fill ph-toggle-right"></i> Switch</a></li>
-          <li><a href="#slider" class="sidebar-link"><i class="ph-fill ph-sliders-horizontal"></i> Slider</a></li>
-          <li><a href="#formfield" class="sidebar-link"><i class="ph-fill ph-text-align-left"></i> Form Field</a></li>
-          <li><a href="#icon-placeholder" class="sidebar-link"><i class="ph-fill ph-shapes"></i> Icon Placeholders</a></li>
-          <li><a href="#card" class="sidebar-link"><i class="ph-fill ph-frame-corners"></i> Card</a></li>
-          <li><a href="#badge" class="sidebar-link"><i class="ph-fill ph-tag"></i> Badges</a></li>
-          <li><a href="#modal" class="sidebar-link"><i class="ph-fill ph-frame"></i> Modal</a></li>
-          <li><a href="#drawer" class="sidebar-link"><i class="ph-fill ph-sidebar"></i> Drawer</a></li>
-          <li><a href="#navbar" class="sidebar-link"><i class="ph-fill ph-navigation-arrow"></i> Navbar</a></li>
-        </ul>
-      </div>
-      
-      <div class="sidebar-section">
-        <h4 class="sidebar-title">Feedback</h4>
-        <ul class="sidebar-nav">
-          <li><a href="#tooltip" class="sidebar-link"><i class="ph-fill ph-chat-circle-dots"></i> Tooltip</a></li>
-          <li><a href="#alert" class="sidebar-link"><i class="ph-fill ph-warning-circle"></i> Alert</a></li>
-          <li><a href="#toast" class="sidebar-link"><i class="ph-fill ph-bell"></i> Toast</a></li>
-          <li><a href="#progress" class="sidebar-link"><i class="ph-fill ph-circle-notch"></i> Progress</a></li>
-          <li><a href="#spinner" class="sidebar-link"><i class="ph ph-spinner"></i> Spinner</a></li>
-        </ul>
-      </div>
-      
-      <div class="sidebar-section">
-        <h4 class="sidebar-title">Effects</h4>
-        <ul class="sidebar-nav">
-          <li><a href="#glass" class="sidebar-link"><i class="ph-fill ph-sparkle"></i> Glass Morphism</a></li>
-        </ul>
-      </div>
-      
-      <div class="sidebar-section" style="border-top: 1px solid hsl(var(--border)); padding-top: var(--space-6);">
-        <a href="foundation.html"><button class="btn-outline btn-sm" style="width: 100%;">
-          <i class="ph ph-cube" style="margin-right: 8px;"></i>
-          View Foundation
-        </button></a>
-        <a href="index.html" style="margin-top: var(--r-space-2); display: block;"><button class="btn-outline btn-sm" style="width: 100%;">
-          <i class="ph ph-arrow-left" style="margin-right: 8px;"></i>
-          Back to Home
-        </button></a>
-      </div>
-    </aside>
-    
+  
+  <!-- Sidebar (Web Component) -->
+  <rukn-sidebar type="components"></rukn-sidebar>
+  
     <!-- Main Content -->
     <main class="main-content">
       
@@ -1886,33 +1784,48 @@
     });
     
     // Mobile Navigation Toggle
-    const navToggleComponents = document.getElementById('navToggleComponents');
-    const navDropdownComponents = document.getElementById('navDropdownComponents');
-    const navbarComponents = document.querySelector('.ds-navbar');
-    
-    if (navToggleComponents && navDropdownComponents) {
-      navToggleComponents.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navToggleComponents.classList.toggle('open');
-        navDropdownComponents.classList.toggle('open');
-      });
+    customElements.whenDefined('rukn-navbar').then(() => {
+      const navbarHost = document.querySelector('rukn-navbar[current="components"]');
+      if (!navbarHost) return;
       
-      // Close menu when clicking a link
-      navDropdownComponents.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navToggleComponents.classList.remove('open');
-          navDropdownComponents.classList.remove('open');
-        });
-      });
-      
-      // Close menu when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!navbarComponents.contains(e.target) && !navDropdownComponents.contains(e.target)) {
-          navToggleComponents.classList.remove('open');
-          navDropdownComponents.classList.remove('open');
+      const initNavbarControls = () => {
+        const navbarComponents = navbarHost.querySelector('.ds-navbar');
+        const navToggleComponents = navbarHost.querySelector('.ds-navbar-hamburger');
+        const navDropdownComponents = navbarHost.querySelector('.ds-navbar-mobile-dropdown');
+        
+        if (!(navbarComponents && navToggleComponents && navDropdownComponents)) {
+          requestAnimationFrame(initNavbarControls);
+          return;
         }
-      });
-    }
+        
+        if (!navToggleComponents.dataset.initialized) {
+          navToggleComponents.dataset.initialized = 'true';
+          
+          navToggleComponents.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navToggleComponents.classList.toggle('open');
+            navDropdownComponents.classList.toggle('open');
+          });
+          
+          navDropdownComponents.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              navToggleComponents.classList.remove('open');
+              navDropdownComponents.classList.remove('open');
+            });
+          });
+          
+          document.addEventListener('click', (e) => {
+            if (!navbarComponents.contains(e.target) &&
+                !navDropdownComponents.contains(e.target)) {
+              navToggleComponents.classList.remove('open');
+              navDropdownComponents.classList.remove('open');
+            }
+          });
+        }
+      };
+      
+      initNavbarControls();
+    });
     
     // Mobile Sidebar Toggle
     const sidebarToggle = document.getElementById('sidebarToggle');

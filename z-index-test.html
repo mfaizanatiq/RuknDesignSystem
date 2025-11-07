@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Z-Index Hierarchy Test - Rukn Design System</title>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  
+  <!-- Rukn Components -->
+  <script src="components/rukn-navbar.js" defer></script>
+  
+  <style>
+    body {
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .test-container {
+      padding: var(--r-space-6);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .test-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-radius-xl);
+      padding: var(--r-space-6);
+      margin-bottom: var(--r-space-4);
+    }
+    
+    .test-section h2 {
+      margin-top: 0;
+      color: hsl(var(--primary));
+    }
+    
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--r-space-4);
+      margin-top: var(--r-space-4);
+    }
+    
+    .z-index-demo {
+      padding: var(--r-space-4);
+      border-radius: var(--r-radius-lg);
+      border: 2px solid;
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .z-dropdown { 
+      background: rgba(138, 43, 226, 0.2);
+      border-color: rgb(138, 43, 226);
+      position: relative;
+      z-index: var(--z-dropdown);
+    }
+    
+    .z-navbar { 
+      background: rgba(0, 122, 255, 0.2);
+      border-color: rgb(0, 122, 255);
+      position: relative;
+      z-index: var(--z-navbar);
+    }
+    
+    .z-drawer { 
+      background: rgba(255, 149, 0, 0.2);
+      border-color: rgb(255, 149, 0);
+      position: relative;
+      z-index: var(--z-drawer);
+    }
+    
+    .z-modal { 
+      background: rgba(255, 59, 48, 0.2);
+      border-color: rgb(255, 59, 48);
+      position: relative;
+      z-index: var(--z-modal);
+    }
+    
+    .z-tooltip { 
+      background: rgba(52, 199, 89, 0.2);
+      border-color: rgb(52, 199, 89);
+      position: relative;
+      z-index: var(--z-tooltip);
+    }
+    
+    .z-toast { 
+      background: rgba(255, 204, 0, 0.2);
+      border-color: rgb(255, 204, 0);
+      position: relative;
+      z-index: var(--z-toast);
+    }
+    
+    .z-spinner { 
+      background: rgba(175, 82, 222, 0.2);
+      border-color: rgb(175, 82, 222);
+      position: relative;
+      z-index: var(--z-spinner);
+    }
+    
+    .layer-value {
+      display: block;
+      font-size: var(--r-font-size-sm);
+      opacity: 0.7;
+      margin-top: var(--r-space-1);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--r-space-4);
+    }
+    
+    th, td {
+      padding: var(--r-space-3);
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+      color: hsl(var(--primary));
+    }
+    
+    .checkmark {
+      color: hsl(var(--success));
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar (z-index: 2000) -->
+  <rukn-navbar current="home"></rukn-navbar>
+  
+  <div class="test-container">
+    <div class="test-section">
+      <h2>🎯 Z-Index Hierarchy Test</h2>
+      <p>This page tests that the z-index layering system works correctly. Modals and overlays should appear above the navbar.</p>
+      <p><strong>Current Test:</strong> Click the buttons below to open different components and verify the layering order.</p>
+    </div>
+    
+    <div class="test-section">
+      <h2>📊 Layer Hierarchy (Visual Representation)</h2>
+      <div class="button-grid">
+        <div class="z-index-demo z-dropdown">
+          Dropdown
+          <span class="layer-value">z-index: 1000</span>
+        </div>
+        <div class="z-index-demo z-navbar">
+          Navbar
+          <span class="layer-value">z-index: 2000</span>
+        </div>
+        <div class="z-index-demo z-drawer">
+          Drawer
+          <span class="layer-value">z-index: 3000</span>
+        </div>
+        <div class="z-index-demo z-modal">
+          Modal
+          <span class="layer-value">z-index: 4000</span>
+        </div>
+        <div class="z-index-demo z-tooltip">
+          Tooltip
+          <span class="layer-value">z-index: 5000</span>
+        </div>
+        <div class="z-index-demo z-toast">
+          Toast
+          <span class="layer-value">z-index: 6000</span>
+        </div>
+        <div class="z-index-demo z-spinner">
+          Spinner
+          <span class="layer-value">z-index: 7000</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h2>🧪 Interactive Tests</h2>
+      <div class="button-grid">
+        <button class="btn-primary" onclick="openTestModal()">
+          <i class="ph ph-frame-corners"></i> Open Modal
+          <br><small>Should be above navbar</small>
+        </button>
+        
+        <button class="btn-primary" onclick="openTestDrawer()">
+          <i class="ph ph-sidebar"></i> Open Drawer
+          <br><small>Should be above navbar</small>
+        </button>
+        
+        <button class="btn-primary" onclick="showTestToast()">
+          <i class="ph ph-bell"></i> Show Toast
+          <br><small>Should be above everything</small>
+        </button>
+        
+        <button class="btn-primary" onclick="showTestSpinner()">
+          <i class="ph ph-circle-notch"></i> Show Spinner
+          <br><small>Highest layer</small>
+        </button>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h2>📋 Z-Index Reference Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Component Type</th>
+            <th>Z-Index Value</th>
+            <th>CSS Variable</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Dropdowns</td>
+            <td>1000-1999</td>
+            <td>--z-dropdown</td>
+            <td>Dropdown menus, popovers, mobile menu</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Navigation</td>
+            <td>2000-2999</td>
+            <td>--z-navbar</td>
+            <td>Sticky headers, navigation bars</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Drawers</td>
+            <td>3000-3999</td>
+            <td>--z-drawer</td>
+            <td>Side panels, bottom sheets</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Modals</td>
+            <td>4000-4999</td>
+            <td>--z-modal</td>
+            <td>Dialog boxes, modals, alerts</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Tooltips</td>
+            <td>5000-5999</td>
+            <td>--z-tooltip</td>
+            <td>Floating help text, tooltips</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Toasts</td>
+            <td>6000-6999</td>
+            <td>--z-toast</td>
+            <td>Notifications, toast messages</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Spinners</td>
+            <td>7000-7999</td>
+            <td>--z-spinner</td>
+            <td>Loading overlays, full-screen loaders</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="test-section">
+      <h2>✅ Expected Behavior</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li><span class="checkmark">✓</span> Modal overlays appear above navbar</li>
+        <li><span class="checkmark">✓</span> Drawer overlays appear above navbar</li>
+        <li><span class="checkmark">✓</span> Tooltips appear above modals</li>
+        <li><span class="checkmark">✓</span> Toasts appear above tooltips</li>
+        <li><span class="checkmark">✓</span> Loading spinners appear above everything</li>
+        <li><span class="checkmark">✓</span> Navbar stays visible when scrolling</li>
+        <li><span class="checkmark">✓</span> Mobile menu appears below navbar level</li>
+      </ul>
+    </div>
+    
+    <!-- Spacer for scroll testing -->
+    <div style="height: 100vh;"></div>
+  </div>
+  
+  <!-- Test Modal -->
+  <div id="testModal" class="ds-modal-overlay" style="display: none;" onclick="closeTestModal()">
+    <div class="ds-modal" onclick="event.stopPropagation()">
+      <div class="ds-modal-header">
+        <h3>Test Modal</h3>
+        <button class="btn-ghost btn-sm" onclick="closeTestModal()">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="ds-modal-content">
+        <p>This modal should appear <strong>above the navbar</strong>.</p>
+        <p>Modal z-index: <code>4000</code></p>
+        <p>Navbar z-index: <code>2000</code></p>
+        <p style="margin-top: var(--r-space-4); padding: var(--r-space-3); background: rgba(52, 199, 89, 0.2); border-radius: var(--r-radius-md); border: 1px solid rgb(52, 199, 89);">
+          <span class="checkmark">✓</span> If you can see this modal clearly above the navbar, the z-index hierarchy is working correctly!
+        </p>
+      </div>
+      <div class="ds-modal-footer">
+        <button class="btn-secondary" onclick="closeTestModal()">Close</button>
+        <button class="btn-primary" onclick="closeTestModal()">Got it!</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Test Drawer -->
+  <div id="testDrawer" style="display: none;">
+    <div class="ds-drawer-overlay" onclick="closeTestDrawer()"></div>
+    <div class="ds-drawer">
+      <div class="ds-drawer-handle"></div>
+      <div class="ds-drawer-header">
+        <h3>Test Drawer</h3>
+        <button class="btn-ghost btn-sm" onclick="closeTestDrawer()">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="ds-drawer-content">
+        <p>This drawer should appear <strong>above the navbar</strong>.</p>
+        <p>Drawer z-index: <code>3000</code></p>
+        <p>Navbar z-index: <code>2000</code></p>
+        <p style="margin-top: var(--r-space-4); padding: var(--r-space-3); background: rgba(255, 149, 0, 0.2); border-radius: var(--r-radius-md); border: 1px solid rgb(255, 149, 0);">
+          <span class="checkmark">✓</span> If you can see this drawer above the navbar, the hierarchy works!
+        </p>
+      </div>
+      <div class="ds-drawer-footer">
+        <button class="btn-primary" onclick="closeTestDrawer()" style="width: 100%;">Close Drawer</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast Container -->
+  <div class="ds-toast-container" id="toastContainer" style="top: var(--r-space-4); right: var(--r-space-4);"></div>
+  
+  <!-- Spinner Overlay -->
+  <div id="spinnerOverlay" class="ds-spinner-overlay" style="display: none;">
+    <div class="ds-spinner ds-spinner-lg"></div>
+  </div>
+  
+  <script>
+    // Modal Functions
+    function openTestModal() {
+      document.getElementById('testModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeTestModal() {
+      document.getElementById('testModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    
+    // Drawer Functions
+    function openTestDrawer() {
+      const drawer = document.getElementById('testDrawer');
+      drawer.style.display = 'block';
+      setTimeout(() => {
+        drawer.querySelector('.ds-drawer').style.transform = 'translateY(0)';
+      }, 10);
+    }
+    
+    function closeTestDrawer() {
+      const drawer = document.getElementById('testDrawer');
+      drawer.querySelector('.ds-drawer').style.transform = 'translateY(100%)';
+      setTimeout(() => {
+        drawer.style.display = 'none';
+      }, 300);
+    }
+    
+    // Toast Function
+    function showTestToast() {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'ds-toast ds-toast-success';
+      toast.innerHTML = `
+        <i class="ph-fill ph-check-circle"></i>
+        <div class="ds-toast-content">
+          <strong>Z-Index Test</strong>
+          <p>Toast appears above everything! (z-index: 6000)</p>
+        </div>
+        <button class="ds-toast-close">
+          <i class="ph ph-x"></i>
+        </button>
+      `;
+      container.appendChild(toast);
+      
+      toast.querySelector('.ds-toast-close').addEventListener('click', () => {
+        toast.remove();
+      });
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 4000);
+    }
+    
+    // Spinner Function
+    function showTestSpinner() {
+      const spinner = document.getElementById('spinnerOverlay');
+      spinner.style.display = 'flex';
+      setTimeout(() => {
+        spinner.style.display = 'none';
+      }, 2000);
+    }
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeTestModal();
+        closeTestDrawer();
+      }
+    });
+  </script>
+</body>
+</html>
+

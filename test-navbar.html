@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Navbar Sticky</title>
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  <script src="components/rukn-navbar.js" defer></script>
+</head>
+<body style="min-height: 300vh; background: #0f0f1e;">
+  <rukn-navbar current="home"></rukn-navbar>
+  
+  <div style="padding: 200px 20px; text-align: center;">
+    <h1 style="color: white; font-size: 3rem;">Scroll Down</h1>
+    <p style="color: rgba(255,255,255,0.7); font-size: 1.5rem; margin-top: 20px;">
+      The navbar should stay fixed at the top
+    </p>
+    
+    <div style="margin-top: 100px; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 20px; max-width: 600px; margin: 100px auto;">
+      <h2 style="color: white; margin-bottom: 20px;">Checkbox Test</h2>
+      <label class="ds-checkbox-wrapper" style="font-size: 1.2rem;">
+        <input type="checkbox" class="ds-checkbox" checked>
+        <span>Sleek checkbox with smaller tick</span>
+      </label>
+      
+      <h2 style="color: white; margin: 40px 0 20px;">Dropdown Test</h2>
+      <select class="ds-select">
+        <option>Select an option...</option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
+    </div>
+  </div>
+</body>
+</html>

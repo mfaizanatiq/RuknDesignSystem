@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Sticky Test - Rukn DS</title>
+  
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
+  
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  <script src="components/rukn-navbar.js" defer></script>
+  
+  <style>
+    body {
+      min-height: 300vh;
+      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%);
+      padding: 0;
+      margin: 0;
+    }
+    
+    .content {
+      padding: var(--r-space-20) var(--r-space-6);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .scroll-indicator {
+      position: fixed;
+      bottom: var(--r-space-6);
+      right: var(--r-space-6);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      padding: var(--r-space-4);
+      border-radius: var(--r-radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: monospace;
+      font-size: var(--r-font-size-sm);
+      z-index: 101;
+    }
+    
+    .test-section {
+      margin: var(--r-space-12) 0;
+      padding: var(--r-space-8);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--r-radius-2xl);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Test Navbar -->
+  <rukn-navbar current="home"></rukn-navbar>
+  
+  <div class="content">
+    <h1 style="margin-bottom: var(--r-space-6); text-align: center;">
+      🧪 Navbar Sticky Behavior Test
+    </h1>
+    
+    <div class="test-section">
+      <h2 style="color: hsl(var(--primary)); margin-bottom: var(--r-space-4);">
+        ✅ Test Instructions
+      </h2>
+      <ol style="line-height: 2; color: hsl(var(--foreground) / 0.8);">
+        <li><strong>Open browser console</strong> (F12) - Check for "✅ Rukn Navbar: Sticky scroll behavior initialized"</li>
+        <li><strong>Navbar should be visible</strong> at top of page</li>
+        <li><strong>Scroll down slowly</strong> - Watch navbar stay fixed at top</li>
+        <li><strong>At 50px scroll</strong> - Navbar should get darker and move closer to edge</li>
+        <li><strong>Keep scrolling</strong> - Navbar stays visible (STICKY!)</li>
+        <li><strong>Scroll back to top</strong> - Navbar returns to normal state</li>
+      </ol>
+    </div>
+    
+    <div class="test-section">
+      <h2 style="color: hsl(var(--success)); margin-bottom: var(--r-space-4);">
+        ✅ Expected Behavior
+      </h2>
+      <ul style="line-height: 2; color: hsl(var(--foreground) / 0.8); list-style: none; padding: 0;">
+        <li>✓ Navbar always visible at top</li>
+        <li>✓ Never scrolls away with content</li>
+        <li>✓ Gets darker blur when scrolled >50px</li>
+        <li>✓ Smooth 0.3s transitions</li>
+        <li>✓ Console shows initialization message</li>
+      </ul>
+    </div>
+    
+    <div class="test-section">
+      <h2 style="color: hsl(var(--warning)); margin-bottom: var(--r-space-4);">
+        ⚠️ Common Issues
+      </h2>
+      <ul style="line-height: 2; color: hsl(var(--foreground) / 0.8);">
+        <li><strong>Navbar not visible:</strong> Check console for errors</li>
+        <li><strong>Not sticky:</strong> Verify position: fixed in DevTools</li>
+        <li><strong>No scroll effect:</strong> Check if JavaScript loaded</li>
+        <li><strong>Jerky movement:</strong> Hard refresh (Cmd+Shift+R)</li>
+      </ul>
+    </div>
+    
+    <!-- Spacer content to enable scrolling -->
+    <div style="margin-top: var(--r-space-32);">
+      <h2 style="text-align: center; margin-bottom: var(--r-space-8);">
+        Scroll Down to Test
+      </h2>
+      <div style="height: 200vh; display: flex; flex-direction: column; justify-content: space-around; gap: var(--r-space-12);">
+        <div class="ds-card" style="padding: var(--r-space-8);">
+          <h3 style="color: hsl(var(--primary));">Section 1</h3>
+          <p>Scroll position: <span id="scroll1">0px</span></p>
+        </div>
+        <div class="ds-card" style="padding: var(--r-space-8);">
+          <h3 style="color: hsl(var(--accent));">Section 2</h3>
+          <p>Navbar should be darker and closer to edge</p>
+        </div>
+        <div class="ds-card" style="padding: var(--r-space-8);">
+          <h3 style="color: hsl(var(--success));">Section 3</h3>
+          <p>Navbar still sticky and visible!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator" id="scrollIndicator">
+    Scroll: <span id="scrollPos">0</span>px
+    <br>
+    Navbar: <span id="navbarState">Normal</span>
+  </div>
+  
+  <script>
+    // Scroll indicator
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset;
+      document.getElementById('scrollPos').textContent = Math.round(scrollTop);
+      document.getElementById('navbarState').textContent = scrollTop > 50 ? 'Scrolled (Compact)' : 'Normal';
+    });
+    
+    // Verify navbar exists
+    setTimeout(() => {
+      const navbar = document.querySelector('.ds-navbar');
+      if (navbar) {
+        console.log('✅ Navbar found:', navbar);
+        console.log('✅ Navbar position:', window.getComputedStyle(navbar).position);
+        console.log('✅ Navbar top:', window.getComputedStyle(navbar).top);
+        console.log('✅ Navbar z-index:', window.getComputedStyle(navbar).zIndex);
+      } else {
+        console.error('❌ Navbar NOT found - Web Component may not have loaded!');
+      }
+    }, 500);
+  </script>
+  
+</body>
+</html>
+

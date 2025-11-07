@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Components Demo - Rukn DS</title>
+  
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  
+  <!-- Load Rukn Web Components (Vanilla JS - No frameworks!) -->
+  <script src="components/rukn-navbar.js" defer></script>
+  <script src="components/rukn-footer.js" defer></script>
+  <script src="components/rukn-ui.js" type="module"></script>
+  
+  <style>
+    body {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navbar Web Component -->
+  <rukn-navbar current="components" search></rukn-navbar>
+  
+  <div class="ds-container ds-container-4xl" style="padding: var(--r-space-12) var(--r-space-6);">
+    
+    <h1 style="font-size: var(--r-font-size-4xl); margin-bottom: var(--r-space-4); text-align: center;">
+      ✨ Web Components Demo
+    </h1>
+    <p style="text-align: center; color: hsl(var(--foreground) / 0.7); margin-bottom: var(--r-space-12); font-size: var(--r-font-size-lg);">
+      100% Vanilla JavaScript - Zero Dependencies - Works Everywhere
+    </p>
+    
+    <!-- Buttons -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <h2 style="margin-bottom: var(--r-space-4);">Buttons (Web Components)</h2>
+      <div style="display: flex; gap: var(--r-space-3); flex-wrap: wrap;">
+        <rukn-button variant="primary">Primary Button</rukn-button>
+        <rukn-button variant="secondary">Secondary</rukn-button>
+        <rukn-button variant="outline">Outline</rukn-button>
+        <rukn-button variant="ghost">Ghost</rukn-button>
+        <rukn-button variant="destructive">Destructive</rukn-button>
+        <rukn-button variant="primary" icon="ph-fill ph-rocket-launch">With Icon</rukn-button>
+        <rukn-button variant="primary" loading>Loading...</rukn-button>
+        <rukn-button variant="primary" disabled>Disabled</rukn-button>
+      </div>
+      
+      <div style="margin-top: var(--r-space-4);">
+        <h3 style="margin-bottom: var(--r-space-3); font-size: var(--r-font-size-lg);">Button Sizes</h3>
+        <div style="display: flex; gap: var(--r-space-3); align-items: center; flex-wrap: wrap;">
+          <rukn-button variant="primary" size="sm">Small</rukn-button>
+          <rukn-button variant="primary" size="md">Medium</rukn-button>
+          <rukn-button variant="primary" size="lg">Large</rukn-button>
+        </div>
+      </div>
+      
+      <div class="ds-card" style="margin-top: var(--r-space-6); background: rgba(0,0,0,0.3);">
+        <h4 style="margin-bottom: var(--r-space-2);">Usage:</h4>
+        <code style="font-family: var(--r-font-mono); font-size: var(--r-font-size-sm);">
+          &lt;rukn-button variant="primary"&gt;Click Me&lt;/rukn-button&gt;<br>
+          &lt;rukn-button variant="primary" icon="ph-fill ph-star"&gt;Star&lt;/rukn-button&gt;<br>
+          &lt;rukn-button variant="primary" loading&gt;Loading...&lt;/rukn-button&gt;
+        </code>
+      </div>
+    </section>
+    
+    <!-- Badges -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <h2 style="margin-bottom: var(--r-space-4);">Badges (Web Components)</h2>
+      <div style="display: flex; gap: var(--r-space-3); flex-wrap: wrap;">
+        <rukn-badge variant="neutral">Neutral</rukn-badge>
+        <rukn-badge variant="primary">Primary</rukn-badge>
+        <rukn-badge variant="success">Success</rukn-badge>
+        <rukn-badge variant="warning">Warning</rukn-badge>
+        <rukn-badge variant="destructive">Error</rukn-badge>
+      </div>
+      
+      <div class="ds-card" style="margin-top: var(--r-space-6); background: rgba(0,0,0,0.3);">
+        <h4 style="margin-bottom: var(--r-space-2);">Usage:</h4>
+        <code style="font-family: var(--r-font-mono); font-size: var(--r-font-size-sm);">
+          &lt;rukn-badge variant="success"&gt;Success&lt;/rukn-badge&gt;
+        </code>
+      </div>
+    </section>
+    
+    <!-- Cards -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <h2 style="margin-bottom: var(--r-space-4);">Cards (Web Components)</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--r-space-4);">
+        <rukn-card>
+          <h3 style="margin-bottom: var(--r-space-2);">Regular Card</h3>
+          <p style="color: hsl(var(--foreground) / 0.8);">This is a regular card component</p>
+        </rukn-card>
+        
+        <rukn-card glass>
+          <h3 style="margin-bottom: var(--r-space-2);">Glass Card</h3>
+          <p style="color: hsl(var(--foreground) / 0.8);">This uses glass morphism effect</p>
+        </rukn-card>
+      </div>
+      
+      <div class="ds-card" style="margin-top: var(--r-space-6); background: rgba(0,0,0,0.3);">
+        <h4 style="margin-bottom: var(--r-space-2);">Usage:</h4>
+        <code style="font-family: var(--r-font-mono); font-size: var(--r-font-size-sm);">
+          &lt;rukn-card&gt;Content&lt;/rukn-card&gt;<br>
+          &lt;rukn-card glass&gt;Glass effect&lt;/rukn-card&gt;
+        </code>
+      </div>
+    </section>
+    
+    <!-- Alerts -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <h2 style="margin-bottom: var(--r-space-4);">Alerts (Web Components)</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--r-space-3);">
+        <rukn-alert variant="info" title="Information" dismissible>
+          This is an informational message
+        </rukn-alert>
+        
+        <rukn-alert variant="success" title="Success" dismissible>
+          Your changes have been saved successfully
+        </rukn-alert>
+        
+        <rukn-alert variant="warning" title="Warning" dismissible>
+          Please review before continuing
+        </rukn-alert>
+        
+        <rukn-alert variant="error" title="Error" dismissible>
+          Unable to save changes
+        </rukn-alert>
+      </div>
+      
+      <div class="ds-card" style="margin-top: var(--r-space-6); background: rgba(0,0,0,0.3);">
+        <h4 style="margin-bottom: var(--r-space-2);">Usage:</h4>
+        <code style="font-family: var(--r-font-mono); font-size: var(--r-font-size-sm);">
+          &lt;rukn-alert variant="success" title="Success" dismissible&gt;<br>
+          &nbsp;&nbsp;Your message here<br>
+          &lt;/rukn-alert&gt;
+        </code>
+      </div>
+    </section>
+    
+    <!-- Progress & Spinners -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <h2 style="margin-bottom: var(--r-space-4);">Progress & Spinners (Web Components)</h2>
+      
+      <div style="margin-bottom: var(--r-space-6);">
+        <h3 style="margin-bottom: var(--r-space-3); font-size: var(--r-font-size-lg);">Progress Bars</h3>
+        <div style="display: flex; flex-direction: column; gap: var(--r-space-4);">
+          <div>
+            <p style="font-size: var(--r-font-size-sm); margin-bottom: var(--r-space-2); color: hsl(var(--foreground) / 0.7);">Primary (60%)</p>
+            <rukn-progress value="60"></rukn-progress>
+          </div>
+          <div>
+            <p style="font-size: var(--r-font-size-sm); margin-bottom: var(--r-space-2); color: hsl(var(--foreground) / 0.7);">Success (80%)</p>
+            <rukn-progress value="80" variant="success"></rukn-progress>
+          </div>
+          <div>
+            <p style="font-size: var(--r-font-size-sm); margin-bottom: var(--r-space-2); color: hsl(var(--foreground) / 0.7);">Indeterminate</p>
+            <rukn-progress indeterminate></rukn-progress>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <h3 style="margin-bottom: var(--r-space-3); font-size: var(--r-font-size-lg);">Spinners</h3>
+        <div style="display: flex; gap: var(--r-space-4); align-items: center; flex-wrap: wrap;">
+          <rukn-spinner size="xs"></rukn-spinner>
+          <rukn-spinner size="sm"></rukn-spinner>
+          <rukn-spinner></rukn-spinner>
+          <rukn-spinner size="lg"></rukn-spinner>
+          <rukn-spinner size="xl"></rukn-spinner>
+        </div>
+      </div>
+      
+      <div class="ds-card" style="margin-top: var(--r-space-6); background: rgba(0,0,0,0.3);">
+        <h4 style="margin-bottom: var(--r-space-2);">Usage:</h4>
+        <code style="font-family: var(--r-font-mono); font-size: var(--r-font-size-sm);">
+          &lt;rukn-progress value="60"&gt;&lt;/rukn-progress&gt;<br>
+          &lt;rukn-progress indeterminate&gt;&lt;/rukn-progress&gt;<br>
+          &lt;rukn-spinner size="lg"&gt;&lt;/rukn-spinner&gt;
+        </code>
+      </div>
+    </section>
+    
+    <!-- Icon Placeholders -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <h2 style="margin-bottom: var(--r-space-4);">Icon Placeholders (Web Components)</h2>
+      <div style="display: flex; gap: var(--r-space-4); flex-wrap: wrap; align-items: center;">
+        <rukn-icon size="sm" variant="primary" circle>
+          <i class="ph-fill ph-star"></i>
+        </rukn-icon>
+        <rukn-icon size="md" variant="accent">
+          <i class="ph-fill ph-heart"></i>
+        </rukn-icon>
+        <rukn-icon size="lg" variant="success" circle>
+          <i class="ph-fill ph-check"></i>
+        </rukn-icon>
+        <rukn-icon size="xl" variant="warning">
+          <i class="ph-fill ph-lightning"></i>
+        </rukn-icon>
+      </div>
+      
+      <div class="ds-card" style="margin-top: var(--r-space-6); background: rgba(0,0,0,0.3);">
+        <h4 style="margin-bottom: var(--r-space-2);">Usage:</h4>
+        <code style="font-family: var(--r-font-mono); font-size: var(--r-font-size-sm);">
+          &lt;rukn-icon variant="primary" size="lg" circle&gt;<br>
+          &nbsp;&nbsp;&lt;i class="ph-fill ph-star"&gt;&lt;/i&gt;<br>
+          &lt;/rukn-icon&gt;
+        </code>
+      </div>
+    </section>
+    
+    <!-- Framework Compatibility -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <div class="ds-glass" style="padding: var(--r-space-8); border-radius: var(--r-radius-2xl); text-align: center);">
+        <h2 style="margin-bottom: var(--r-space-4);">🌐 Works in ANY Framework</h2>
+        <p style="font-size: var(--r-font-size-lg); color: hsl(var(--foreground) / 0.8); margin-bottom: var(--r-space-6);">
+          These are Web Components - native browser technology. No framework required, but works WITH any framework!
+        </p>
+        <div style="display: flex; gap: var(--r-space-3); justify-content: center; flex-wrap: wrap;">
+          <rukn-badge variant="primary">Vanilla HTML ✅</rukn-badge>
+          <rukn-badge variant="success">React ✅</rukn-badge>
+          <rukn-badge variant="success">Vue ✅</rukn-badge>
+          <rukn-badge variant="success">Angular ✅</rukn-badge>
+          <rukn-badge variant="success">Svelte ✅</rukn-badge>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Performance Stats -->
+    <section style="margin-bottom: var(--r-space-12);">
+      <h2 style="margin-bottom: var(--r-space-4); text-align: center;">⚡ Ultra Lightweight</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--r-space-4);">
+        <div class="ds-card" style="text-align: center;">
+          <div style="font-size: var(--r-font-size-4xl); font-weight: var(--r-font-weight-bold); color: hsl(var(--success)); margin-bottom: var(--r-space-2);">~5KB</div>
+          <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7);">Gzipped Bundle</div>
+        </div>
+        <div class="ds-card" style="text-align: center;">
+          <div style="font-size: var(--r-font-size-4xl); font-weight: var(--r-font-weight-bold); color: hsl(var(--primary)); margin-bottom: var(--r-space-2);">0</div>
+          <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7);">Dependencies</div>
+        </div>
+        <div class="ds-card" style="text-align: center;">
+          <div style="font-size: var(--r-font-size-4xl); font-weight: var(--r-font-weight-bold); color: hsl(var(--accent)); margin-bottom: var(--r-space-2);">95%+</div>
+          <div style="font-size: var(--r-font-size-sm); color: hsl(var(--foreground) / 0.7);">Browser Support</div>
+        </div>
+      </div>
+    </section>
+    
+  </div>
+  
+  <!-- Footer Web Component -->
+  <rukn-footer></rukn-footer>
+  
+</body>
+</html>
+
+
+
+
