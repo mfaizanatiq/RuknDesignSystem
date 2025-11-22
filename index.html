@@ -13,6 +13,9 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
   
   <!-- Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/design-system-variables.css">
   <link rel="stylesheet" href="styles/design-system.css">
   
@@ -92,6 +95,17 @@
       opacity: 0.7;
     }
     
+    /* Light Mode - Softer, lighter gradients */
+    html:not(.dark) body::before {
+      background: 
+        radial-gradient(circle at 30% 20%, hsl(var(--primary) / 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 70% 40%, hsl(var(--accent) / 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.05) 0%, transparent 35%),
+        radial-gradient(circle at 85% 75%, hsl(var(--accent) / 0.06) 0%, transparent 38%);
+      opacity: 0.5;
+      filter: blur(100px);
+    }
+    
     body::after {
       content: '';
       position: fixed;
@@ -102,6 +116,13 @@
       pointer-events: none;
       z-index: 0;
       filter: blur(100px);
+    }
+    
+    /* Light Mode - Softer pulse */
+    html:not(.dark) body::after {
+      background: 
+        radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.02) 0%, transparent 70%);
+      filter: blur(120px);
     }
     
     @keyframes ambientShift {
@@ -268,6 +289,39 @@
       display: inline-block;
       padding-bottom: var(--r-space-2);
     }
+    
+    /* Light mode - dark text on light gradients - Accessible contrast */
+    html:not(.dark) .hero h1 {
+      background: linear-gradient(135deg, hsl(220 15% 8%), hsl(220 15% 12%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Ensure spans inside h1 also get the gradient in light mode */
+    html:not(.dark) .hero h1 span {
+      background: inherit;
+      -webkit-background-clip: inherit;
+      -webkit-text-fill-color: inherit;
+      background-clip: inherit;
+    }
+    
+    /* Override inline color styles in light mode for gradient to work */
+    html:not(.dark) .hero h1 span[style*="color"] {
+      color: transparent !important;
+      background: linear-gradient(135deg, hsl(220 15% 8%), hsl(220 15% 12%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Special handling for "Built Different" with primary color in light mode - Accessible */
+    html:not(.dark) .hero h1 span[style*="color: hsl(var(--primary))"] {
+      background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.9));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .hero h1::after {
       content: '';
       position: absolute;
@@ -296,8 +350,14 @@
       padding: var(--r-space-24) var(--r-space-6);
       position: relative;
     }
+    /* Section Dark - Token-driven gradient using primary/accent colors */
     .section-dark {
-      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+      background: var(--r-section-gradient-dark);
+    }
+    
+    /* Light Mode - Lighter, accessible gradient */
+    html:not(.dark) .section-dark {
+      background: var(--r-section-gradient-light);
     }
     .section-title {
       font-size: var(--font-size-5xl);
@@ -309,6 +369,14 @@
       background-clip: text;
       position: relative;
       padding-bottom: var(--r-space-4);
+    }
+    
+    /* Light mode - dark text on light gradients - Accessible contrast */
+    html:not(.dark) .section-title {
+      background: linear-gradient(135deg, hsl(220 15% 8%), hsl(220 15% 12%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .section-title::after {
       content: '';
@@ -445,7 +513,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page="index">
   
   <!-- Navbar (Web Component) -->
   <rukn-navbar current="home"></rukn-navbar>
@@ -470,27 +538,31 @@
     </div>
     
     <div class="hero-content">
-      <div class="hero-badge">
-        <i class="ph ph-sparkle" style="background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
-        <span>v2.0.0 • Glass Refraction • Rukn Motion</span>
+      <div data-i18n-html="index.hero.name" class="ds-font-heading" style="font-size: clamp(1.25rem, 2.2vw, 1.75rem); color: hsl(var(--primary)); margin-bottom: var(--r-space-3);">
+        <span style="display: inline-flex; align-items: center; gap: var(--r-space-2);">
+          <strong>Rukn</strong>
+          <span aria-hidden="true">•</span>
+          <span class="arabic-text">رُكن</span>
+          <span aria-hidden="true">•</span>
+          <span class="urdu-text">رکن</span>
+        </span>
       </div>
-      <h1>
-        Design System<br>
-        <span style="color: hsl(var(--primary));">Built Different.</span>
+      <h1 class="ds-font-heading">
+        <span data-i18n="index.hero.heading.primary">Design System</span><br>
+        <span data-i18n="index.hero.heading.secondary" style="color: hsl(var(--primary));">Built Different.</span>
       </h1>
       <p>
-        <span class="arabic-text" style="font-size: 1.3em; color: hsl(var(--primary)); display: block; margin-bottom: 0.5rem;">رُكن</span>
-        Open source. Community-driven. Built for everyone.<br>
-        Because great design should be free, accessible, and yours to own.
+        <span data-i18n="index.hero.message" style="display: block;" class="ds-font-body">A community-built, open-source design system for everyone</span>
+        <span data-i18n="index.hero.subtext" style="display: block; margin-bottom: var(--r-space-2);" class="ds-font-body">Because great design should be free, accessible, and yours to own.</span>
       </p>
       <div class="hero-actions">
         <a href="components.html"><button class="btn-primary btn-lg">
           <i class="ph ph-rocket-launch" style="margin-right: 8px;"></i>
-          Explore Components
+          <span data-i18n="index.hero.cta.primary">Explore Components</span>
         </button></a>
         <a href="https://github.com/your-username/rukn"><button class="btn-secondary btn-lg">
           <i class="ph ph-github-logo" style="margin-right: 8px;"></i>
-          View on GitHub
+          <span data-i18n="index.hero.cta.secondary">View on GitHub</span>
         </button></a>
       </div>
     </div>
@@ -502,19 +574,19 @@
       <div class="stats">
         <div class="stat-item">
           <div class="stat-number" style="font-size: clamp(3rem, 8vw, 5rem);">150+</div>
-          <div class="stat-label" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Design Tokens</div>
+          <div class="stat-label" data-i18n="index.stats.tokens" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Design Tokens</div>
         </div>
         <div class="stat-item">
           <div class="stat-number" style="font-size: clamp(3rem, 8vw, 5rem);">20+</div>
-          <div class="stat-label" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Components</div>
+          <div class="stat-label" data-i18n="index.stats.components" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Components</div>
         </div>
         <div class="stat-item">
           <div class="stat-number" style="font-size: clamp(3rem, 8vw, 5rem);">0</div>
-          <div class="stat-label" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Dependencies</div>
+          <div class="stat-label" data-i18n="index.stats.dependencies" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Dependencies</div>
         </div>
         <div class="stat-item">
           <div class="stat-number" style="font-size: clamp(3rem, 8vw, 5rem);">100%</div>
-          <div class="stat-label" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Customizable</div>
+          <div class="stat-label" data-i18n="index.stats.customizable" style="font-size: var(--r-font-size-lg); margin-top: var(--r-space-2);">Customizable</div>
         </div>
       </div>
     </div>
@@ -523,30 +595,30 @@
   <!-- Pricing - Simplified -->
   <section id="pricing" class="section" style="padding: var(--r-space-32) var(--r-space-6);">
     <div class="ds-container" style="max-width: 700px;">
-      <h2 class="section-title">Pricing</h2>
+      <h2 class="section-title" data-i18n="index.section.pricing.title">Pricing</h2>
       
       <div class="card-surface" style="padding: var(--r-space-12); text-align: center; border-radius: var(--r-radius-3xl);">
         
         <div style="margin-bottom: var(--r-space-6);">
           <div style="font-size: clamp(4rem, 15vw, 7rem); font-weight: var(--r-font-weight-extrabold); line-height: 1; background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.7) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
-            Free
+            <span data-i18n="index.section.pricing.plan">Free</span>
           </div>
-          <div style="font-size: var(--r-font-size-xl); color: hsl(var(--foreground) / 0.6); margin-top: var(--r-space-3);">
+          <div style="font-size: var(--r-font-size-xl); color: hsl(var(--foreground) / 0.6); margin-top: var(--r-space-3);" data-i18n="index.section.pricing.subtitle">
             Open source forever
           </div>
         </div>
         
-        <p style="font-size: var(--r-font-size-lg); color: hsl(var(--foreground) / 0.7); margin-bottom: var(--r-space-8); max-width: 500px; margin-left: auto; margin-right: auto;">
+        <p style="font-size: var(--r-font-size-lg); color: hsl(var(--foreground) / 0.7); margin-bottom: var(--r-space-8); max-width: 500px; margin-left: auto; margin-right: auto;" data-i18n="index.section.pricing.body">
           Building the world's most modern, open-source design system. MIT licensed, free forever.
         </p>
         
         <div style="display: flex; gap: var(--r-space-4); justify-content: center; flex-wrap: wrap;">
-          <a href="components.html"><button class="btn-primary btn-lg">
+          <a href="components.html"><button class="btn-primary btn-lg" data-i18n="index.section.pricing.cta.primary">
             Start Building
           </button></a>
           <a href="https://github.com/mfaizanatiq/RuknDesignSystem" target="_blank" rel="noopener"><button class="btn-outline btn-lg">
             <i class="ph ph-github-logo" style="margin-right: 8px;"></i>
-            View on GitHub
+            <span data-i18n="index.hero.cta.secondary">View on GitHub</span>
           </button></a>
         </div>
           

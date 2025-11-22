@@ -149,10 +149,10 @@ h6, .ds-h6 {
 .ds-font-body { font-family: var(--font-body); }
 .ds-font-mono { font-family: var(--font-mono); }
 .ds-font-arabic { font-family: var(--font-arabic); }
+.ds-font-urdu { font-family: var(--font-urdu); }
 
-/* Arabic Language Support */
+/* Arabic & Urdu Language Support */
 [lang="ar"],
-[dir="rtl"],
 .arabic-text {
   font-family: var(--font-arabic);
   direction: rtl;
@@ -161,6 +161,423 @@ h6, .ds-h6 {
 .arabic-text.inline {
   direction: ltr;
   display: inline-block;
+}
+
+:where([dir="rtl"]):not(:lang(ur)) {
+  font-family: var(--font-arabic);
+}
+
+/* Comprehensive Arabic font support for entire page */
+body[lang="ar"],
+html[lang="ar"] body,
+html[lang="ar"] {
+  font-family: var(--font-arabic);
+}
+
+/* Apply Arabic font to all text elements when page is in Arabic */
+/* Note: Using inherit ensures child elements use the Arabic font from parent */
+body[lang="ar"] *:not(code):not(pre):not(.ds-font-mono),
+html[lang="ar"] body *:not(code):not(pre):not(.ds-font-mono),
+html[lang="ar"] *:not(code):not(pre):not(.ds-font-mono) {
+  font-family: inherit;
+}
+
+/* Explicitly set Arabic font for common elements to ensure coverage */
+body[lang="ar"] li,
+body[lang="ar"] ul,
+body[lang="ar"] ol,
+body[lang="ar"] td,
+body[lang="ar"] th,
+body[lang="ar"] table,
+html[lang="ar"] body li,
+html[lang="ar"] body ul,
+html[lang="ar"] body ol,
+html[lang="ar"] body td,
+html[lang="ar"] body th,
+html[lang="ar"] body table,
+:lang(ar) li,
+:lang(ar) ul,
+:lang(ar) ol,
+:lang(ar) td,
+:lang(ar) th,
+:lang(ar) table {
+  font-family: var(--font-arabic);
+}
+
+/* Ensure headings use Arabic font */
+body[lang="ar"] h1,
+body[lang="ar"] h2,
+body[lang="ar"] h3,
+body[lang="ar"] h4,
+body[lang="ar"] h5,
+body[lang="ar"] h6,
+html[lang="ar"] body h1,
+html[lang="ar"] body h2,
+html[lang="ar"] body h3,
+html[lang="ar"] body h4,
+html[lang="ar"] body h5,
+html[lang="ar"] body h6,
+:lang(ar) h1,
+:lang(ar) h2,
+:lang(ar) h3,
+:lang(ar) h4,
+:lang(ar) h5,
+:lang(ar) h6 {
+  font-family: var(--font-arabic);
+}
+
+/* Ensure paragraphs and body text use Arabic font */
+body[lang="ar"] p,
+body[lang="ar"] span,
+body[lang="ar"] div,
+body[lang="ar"] a,
+body[lang="ar"] button,
+body[lang="ar"] label,
+html[lang="ar"] body p,
+html[lang="ar"] body span,
+html[lang="ar"] body div,
+html[lang="ar"] body a,
+html[lang="ar"] body button,
+html[lang="ar"] body label,
+:lang(ar) p,
+:lang(ar) span,
+:lang(ar) div,
+:lang(ar) a,
+:lang(ar) button,
+:lang(ar) label {
+  font-family: var(--font-arabic);
+}
+
+/* Override font utility classes when in Arabic context */
+body[lang="ar"] .ds-font-heading,
+body[lang="ar"] .ds-font-body,
+html[lang="ar"] .ds-font-heading,
+html[lang="ar"] .ds-font-body,
+:lang(ar) .ds-font-heading,
+:lang(ar) .ds-font-body {
+  font-family: var(--font-arabic) !important;
+}
+
+/* Ensure UI components use Arabic font */
+body[lang="ar"] .btn-primary,
+body[lang="ar"] .btn-secondary,
+body[lang="ar"] .btn-outline,
+body[lang="ar"] .btn-ghost,
+body[lang="ar"] .btn-tertiary,
+body[lang="ar"] .btn-destructive,
+body[lang="ar"] .btn-link,
+html[lang="ar"] .btn-primary,
+html[lang="ar"] .btn-secondary,
+html[lang="ar"] .btn-outline,
+html[lang="ar"] .btn-ghost,
+html[lang="ar"] .btn-tertiary,
+html[lang="ar"] .btn-destructive,
+html[lang="ar"] .btn-link,
+:lang(ar) .btn-primary,
+:lang(ar) .btn-secondary,
+:lang(ar) .btn-outline,
+:lang(ar) .btn-ghost,
+:lang(ar) .btn-tertiary,
+:lang(ar) .btn-destructive,
+:lang(ar) .btn-link {
+  font-family: var(--font-arabic);
+}
+
+/* Ensure form inputs use Arabic font */
+body[lang="ar"] .ds-input,
+body[lang="ar"] .ds-textarea,
+body[lang="ar"] .ds-select,
+body[lang="ar"] input,
+body[lang="ar"] textarea,
+body[lang="ar"] select,
+html[lang="ar"] .ds-input,
+html[lang="ar"] .ds-textarea,
+html[lang="ar"] .ds-select,
+html[lang="ar"] input,
+html[lang="ar"] textarea,
+html[lang="ar"] select,
+:lang(ar) .ds-input,
+:lang(ar) .ds-textarea,
+:lang(ar) .ds-select,
+:lang(ar) input,
+:lang(ar) textarea,
+:lang(ar) select {
+  font-family: var(--font-arabic);
+}
+
+/* Ensure cards and other components use Arabic font */
+body[lang="ar"] .ds-card,
+body[lang="ar"] .ds-card-title,
+body[lang="ar"] .ds-card-content,
+body[lang="ar"] .ds-badge,
+body[lang="ar"] .ds-alert,
+html[lang="ar"] .ds-card,
+html[lang="ar"] .ds-card-title,
+html[lang="ar"] .ds-card-content,
+html[lang="ar"] .ds-badge,
+html[lang="ar"] .ds-alert,
+:lang(ar) .ds-card,
+:lang(ar) .ds-card-title,
+:lang(ar) .ds-card-content,
+:lang(ar) .ds-badge,
+:lang(ar) .ds-alert {
+  font-family: var(--font-arabic);
+}
+
+/* Ensure navbar and navigation use Arabic font */
+body[lang="ar"] .ds-navbar,
+body[lang="ar"] .ds-navbar-brand,
+body[lang="ar"] .ds-navbar-menu a,
+body[lang="ar"] .ds-navbar-menu button,
+html[lang="ar"] .ds-navbar,
+html[lang="ar"] .ds-navbar-brand,
+html[lang="ar"] .ds-navbar-menu a,
+html[lang="ar"] .ds-navbar-menu button,
+:lang(ar) .ds-navbar,
+:lang(ar) .ds-navbar-brand,
+:lang(ar) .ds-navbar-menu a,
+:lang(ar) .ds-navbar-menu button {
+  font-family: var(--font-arabic);
+}
+
+:lang(ur),
+.urdu-text {
+  font-family: var(--font-urdu);
+  direction: rtl;
+  /* Noto Nastaliq Urdu requires more generous line-height due to calligraphic nature */
+  line-height: var(--r-line-height-urdu-base, 1.75);
+  /* Better vertical alignment for Nastaliq script */
+  vertical-align: baseline;
+  /* Slight letter spacing for better readability in Nastaliq */
+  letter-spacing: 0.01em;
+  /* Ensure proper word spacing */
+  word-spacing: 0.05em;
+}
+
+.urdu-text.inline {
+  direction: ltr;
+  display: inline-block;
+  /* Maintain line-height for inline context */
+  line-height: var(--r-line-height-urdu-base, 1.75);
+  vertical-align: baseline;
+  /* Reset word-spacing for inline to avoid breaking layout */
+  word-spacing: normal;
+}
+
+/* Ensure proper spacing in paragraphs and headings with Urdu */
+:lang(ur) p,
+p .urdu-text {
+  line-height: var(--r-line-height-urdu-body, 1.8);
+  margin-bottom: var(--r-space-4);
+}
+
+/* Adjust line-height for headings with Urdu */
+:lang(ur) h1,
+h1 .urdu-text {
+  line-height: var(--r-line-height-urdu-heading, 1.6);
+}
+
+:lang(ur) h2,
+h2 .urdu-text {
+  line-height: var(--r-line-height-urdu-heading, 1.65);
+}
+
+:lang(ur) h3,
+h3 .urdu-text {
+  line-height: var(--r-line-height-urdu-heading, 1.7);
+}
+
+:lang(ur) h4,
+:lang(ur) h5,
+:lang(ur) h6,
+h4 .urdu-text,
+h5 .urdu-text,
+h6 .urdu-text {
+  line-height: var(--r-line-height-urdu-base, 1.75);
+}
+
+body[dir="rtl"] {
+  direction: rtl;
+}
+
+body[dir="rtl"] .ds-navbar-container {
+  flex-direction: row-reverse;
+}
+
+/* Enhanced spacing for Urdu language pages */
+body[lang="ur"],
+html[lang="ur"] body {
+  /* Ensure proper line-height for all text in Urdu */
+  line-height: var(--r-line-height-urdu-body, 1.8);
+}
+
+body[lang="ur"] p,
+html[lang="ur"] body p {
+  line-height: var(--r-line-height-urdu-body, 1.8);
+  margin-bottom: var(--r-space-4);
+}
+
+body[lang="ur"] h1,
+html[lang="ur"] body h1 {
+  line-height: var(--r-line-height-urdu-heading, 1.6);
+}
+
+body[lang="ur"] h2,
+html[lang="ur"] body h2 {
+  line-height: var(--r-line-height-urdu-heading, 1.65);
+}
+
+body[lang="ur"] h3,
+html[lang="ur"] body h3 {
+  line-height: var(--r-line-height-urdu-heading, 1.7);
+}
+
+.ds-language-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--r-space-2);
+  margin-left: var(--r-space-4);
+}
+
+.ds-language-switch label {
+  font-size: var(--font-size-sm);
+  color: hsl(var(--foreground) / 0.6);
+  margin-right: var(--r-space-1);
+}
+
+.ds-language-select {
+  min-width: 130px;
+}
+
+.ds-language-switch-mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .ds-language-switch {
+    margin-left: var(--r-space-2);
+  }
+
+  body[dir="rtl"] .ds-language-switch {
+    margin-right: var(--r-space-2);
+  }
+}
+
+@media (max-width: 768px) {
+  .ds-language-switch-desktop {
+    display: none;
+  }
+
+  .ds-language-switch-mobile {
+    display: flex;
+    width: 100%;
+    margin-top: var(--r-space-4);
+  }
+
+  .ds-language-switch-mobile .ds-language-select {
+    width: 100%;
+  }
+}
+
+.ds-dropdown {
+  position: relative;
+  display: inline-flex;
+  width: max-content;
+}
+
+.ds-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--r-space-2);
+  padding: var(--r-space-2) var(--r-space-3);
+  border-radius: var(--r-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.45);
+  color: hsl(var(--foreground));
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-dropdown-trigger i {
+  font-size: 1rem;
+  opacity: 0.8;
+  transition: transform var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-dropdown.open .ds-dropdown-trigger {
+  border-color: hsl(var(--primary) / 0.45);
+  box-shadow: 0 12px 30px hsl(var(--primary) / 0.12);
+}
+
+.ds-dropdown.open .ds-dropdown-trigger i {
+  transform: rotate(180deg);
+}
+
+.ds-dropdown-menu {
+  position: absolute;
+  top: calc(100% + var(--r-space-2));
+  left: 0;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--r-space-1);
+  padding: var(--r-space-2);
+  border-radius: var(--r-radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(10, 12, 15, 0.78);
+  backdrop-filter: blur(22px) saturate(1.3);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.98);
+  transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+  z-index: 2200;
+}
+
+.ds-dropdown.open .ds-dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.ds-dropdown-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--r-space-2) var(--r-space-3);
+  border-radius: var(--r-radius-md);
+  color: hsl(var(--foreground));
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-dropdown-option:hover,
+.ds-dropdown-option:focus {
+  background: hsl(var(--primary) / 0.12);
+}
+
+.ds-dropdown-option.active {
+  background: hsl(var(--primary) / 0.18);
+  color: hsl(var(--primary-foreground));
+  box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.4);
+}
+
+body[dir="rtl"] .ds-dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.ds-language-switch-mobile .ds-dropdown,
+.ds-language-switch-mobile .ds-dropdown-trigger,
+.ds-language-switch-mobile .ds-dropdown-menu {
+  width: 100%;
 }
 
 /* ========================================
@@ -401,6 +818,35 @@ h6, .ds-h6 {
   border-radius: 64px;
 }
 
+/* Active state for navbar links */
+.btn-ghost.active,
+.btn-ghost[aria-current="page"] {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary) / 0.15) 0%,
+    hsl(var(--primary) / 0.1) 50%,
+    hsl(var(--primary) / 0.15) 100%
+  );
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.3);
+  box-shadow: 
+    0 2px 8px hsl(var(--primary) / 0.2),
+    inset 0 1px 0 hsl(var(--primary) / 0.1);
+}
+
+.btn-ghost.active:hover,
+.btn-ghost[aria-current="page"]:hover {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.2) 0%,
+    hsl(var(--primary) / 0.15) 50%,
+    hsl(var(--primary) / 0.2) 100%
+  );
+  border-color: hsl(var(--primary) / 0.4);
+  box-shadow: 
+    0 4px 12px hsl(var(--primary) / 0.25),
+    inset 0 1px 0 hsl(var(--primary) / 0.15);
+  transform: translateY(-1px);
+}
+
 /* ========================================
    TERTIARY BUTTON - Very Subtle, Minimal Weight
    ======================================== */
@@ -608,9 +1054,9 @@ h6, .ds-h6 {
   will-change: transform, background, border-color;
 }
 
-.ds-checkbox:hover:not(:disabled),
-.ds-checkbox-wrapper:hover .ds-checkbox:not(:disabled),
-.ds-checkbox-wrapper:focus-within .ds-checkbox:not(:disabled) {
+.ds-checkbox:hover:not(:disabled):not(:checked),
+.ds-checkbox-wrapper:hover .ds-checkbox:not(:disabled):not(:checked),
+.ds-checkbox-wrapper:focus-within .ds-checkbox:not(:disabled):not(:checked) {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.5);
   box-shadow: 
@@ -619,14 +1065,21 @@ h6, .ds-h6 {
 }
 
 .ds-checkbox:checked {
-  background: linear-gradient(135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--primary) / 0.9) 100%
-  );
-  border-color: hsl(var(--primary));
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: hsl(var(--primary)) !important;
+  border-width: var(--r-border-width-2) !important;
   box-shadow: 
-    0 2px 8px hsl(var(--primary) / 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 0 0 2px hsl(var(--primary) / 0.3),
+    0 2px 8px hsl(var(--primary) / 0.2),
+    inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.ds-checkbox:checked:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    0 0 0 2px hsl(var(--primary) / 0.4),
+    0 3px 10px hsl(var(--primary) / 0.3),
+    inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .ds-checkbox:checked::after {
@@ -636,7 +1089,7 @@ h6, .ds-h6 {
   top: 50%;
   width: 0.25rem;
   height: 0.5rem;
-  border: 1.5px solid hsl(var(--primary-foreground));
+  border: 1.5px solid hsl(var(--primary));
   border-top: 0;
   border-left: 0;
   transform: translate(-50%, -65%) rotate(45deg) scale(1);
@@ -703,6 +1156,39 @@ h6, .ds-h6 {
   height: 1.5rem;
 }
 
+/* Light Mode - Checkbox */
+html:not(.dark) .ds-checkbox {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+html:not(.dark) .ds-checkbox:hover:not(:disabled):not(:checked),
+html:not(.dark) .ds-checkbox-wrapper:hover .ds-checkbox:not(:disabled):not(:checked) {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+html:not(.dark) .ds-checkbox:checked {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: hsl(var(--primary)) !important;
+  box-shadow: 
+    0 0 0 2px hsl(var(--primary) / 0.2),
+    0 2px 8px hsl(var(--primary) / 0.15),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html:not(.dark) .ds-checkbox:checked::after {
+  border-color: hsl(var(--primary));
+}
+
+html:not(.dark) .ds-checkbox:checked:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 1) !important;
+  box-shadow: 
+    0 0 0 2px hsl(var(--primary) / 0.3),
+    0 3px 10px hsl(var(--primary) / 0.2),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
 /* ========================================
    RADIO GROUP COMPONENT
    ======================================== */
@@ -744,9 +1230,9 @@ h6, .ds-h6 {
   will-change: transform, background, border-color;
 }
 
-.ds-radio:hover:not(:disabled),
-.ds-radio-wrapper:hover .ds-radio:not(:disabled),
-.ds-radio-wrapper:focus-within .ds-radio:not(:disabled) {
+.ds-radio:hover:not(:disabled):not(:checked),
+.ds-radio-wrapper:hover .ds-radio:not(:disabled):not(:checked),
+.ds-radio-wrapper:focus-within .ds-radio:not(:disabled):not(:checked) {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.5);
   box-shadow: 
@@ -755,12 +1241,19 @@ h6, .ds-h6 {
 }
 
 .ds-radio:checked {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: hsl(var(--primary));
-  border-width: var(--r-border-width-2);
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: hsl(var(--primary)) !important;
+  border-width: var(--r-border-width-2) !important;
   box-shadow: 
     0 2px 8px hsl(var(--primary) / 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.ds-radio:checked:hover:not(:disabled) {
+  border-color: hsl(var(--primary) / 0.9) !important;
+  box-shadow: 
+    0 3px 10px hsl(var(--primary) / 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
 
 .ds-radio:checked::after {
@@ -829,6 +1322,27 @@ h6, .ds-h6 {
   height: 1.5rem;
 }
 
+/* Light Mode - Radio */
+html:not(.dark) .ds-radio {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+html:not(.dark) .ds-radio:hover:not(:disabled):not(:checked),
+html:not(.dark) .ds-radio-wrapper:hover .ds-radio:not(:disabled):not(:checked) {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+html:not(.dark) .ds-radio:checked {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: hsl(var(--primary)) !important;
+}
+
+html:not(.dark) .ds-radio:checked:hover:not(:disabled) {
+  border-color: hsl(var(--primary) / 0.9) !important;
+}
+
 /* ========================================
    SWITCH / TOGGLE COMPONENT
    ======================================== */
@@ -881,9 +1395,9 @@ h6, .ds-h6 {
   will-change: left, background;
 }
 
-.ds-switch:hover:not(:disabled),
-.ds-switch-wrapper:hover .ds-switch:not(:disabled),
-.ds-switch-wrapper:focus-within .ds-switch:not(:disabled) {
+.ds-switch:hover:not(:disabled):not(:checked),
+.ds-switch-wrapper:hover .ds-switch:not(:disabled):not(:checked),
+.ds-switch-wrapper:focus-within .ds-switch:not(:disabled):not(:checked) {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
 }
@@ -892,11 +1406,21 @@ h6, .ds-h6 {
   background: linear-gradient(135deg,
     hsl(var(--primary)) 0%,
     hsl(var(--primary) / 0.9) 100%
-  );
-  border-color: hsl(var(--primary));
+  ) !important;
+  border-color: hsl(var(--primary)) !important;
   box-shadow: 
     0 2px 8px hsl(var(--primary) / 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.ds-switch:checked:hover:not(:disabled) {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.95) 0%,
+    hsl(var(--primary) / 0.85) 100%
+  ) !important;
+  box-shadow: 
+    0 3px 10px hsl(var(--primary) / 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
 }
 
 .ds-switch:checked::before {
@@ -925,6 +1449,43 @@ h6, .ds-h6 {
 .ds-switch-wrapper:has(.ds-switch:disabled) {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+/* Light Mode - Switch */
+html:not(.dark) .ds-switch {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+html:not(.dark) .ds-switch::before {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+html:not(.dark) .ds-switch:hover:not(:disabled):not(:checked),
+html:not(.dark) .ds-switch-wrapper:hover .ds-switch:not(:disabled):not(:checked) {
+  background: rgba(0, 0, 0, 0.12);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+html:not(.dark) .ds-switch:checked {
+  background: linear-gradient(135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.9) 100%
+  ) !important;
+  border-color: hsl(var(--primary)) !important;
+}
+
+html:not(.dark) .ds-switch:checked:hover:not(:disabled) {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.95) 0%,
+    hsl(var(--primary) / 0.85) 100%
+  ) !important;
 }
 
 .ds-switch-label {
@@ -1260,7 +1821,7 @@ h6, .ds-h6 {
   border-radius: var(--r-radius-2xl);
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: var(--r-space-6);
-  box-shadow:
+  box-shadow: 
     0 8px 24px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px) saturate(1.25);
@@ -1525,7 +2086,7 @@ h6, .ds-h6 {
 .ds-modal-overlay {
   position: fixed !important;
   inset: 0;
-  z-index: 4000 !important;
+  z-index: var(--r-z-modal-backdrop, 3000) !important;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(12px) saturate(1.2);
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
@@ -1538,7 +2099,7 @@ h6, .ds-h6 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 4001 !important;
+  z-index: var(--r-z-modal, 3001) !important;
   width: auto;
   max-width: 32rem; /* 512px */
   max-height: 90vh;
@@ -1926,7 +2487,7 @@ h6, .ds-h6 {
   top: 16px;
   left: var(--r-space-4);
   right: var(--r-space-4);
-  z-index: 2000;
+  z-index: var(--r-z-navbar, 2000) !important;
   height: auto;
   min-height: 3.5rem;
   border: var(--r-border-width-1) solid rgba(255, 255, 255, 0.1);
@@ -2036,7 +2597,7 @@ h6, .ds-h6 {
     0 10px 40px rgba(0, 0, 0, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  z-index: 1999 !important;
+  z-index: var(--r-z-navbar-mobile, 1990) !important;
   opacity: 0;
   transform: translateY(-20px) scale(0.95);
   pointer-events: none;
@@ -2185,6 +2746,8 @@ h6, .ds-h6 {
   border-radius: var(--r-radius-lg);
   transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
   letter-spacing: -0.02em; /* Tighter spacing for Space Grotesk */
+  min-height: 32px; /* Landscape-oriented bounding box */
+  box-sizing: border-box;
 }
 
 .ds-navbar-brand:hover {
@@ -2200,15 +2763,129 @@ h6, .ds-h6 {
   animation: focus-ring-pulse 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ds-navbar-logo {
+/* Logo styling - supports SVG, img, and text */
+.ds-navbar-logo,
+.ds-navbar-brand svg,
+.ds-navbar-brand img {
+  display: block;
+  height: 24px;
+  width: auto;
+  flex-shrink: 0;
+  transition: all var(--r-transition-fast) var(--r-spring-smooth);
+  object-fit: contain;
+}
+
+/* Large logo for logo-only mode (compact) - landscape-oriented bounding box */
+.ds-navbar-logo-large,
+.ds-navbar-brand-logo-only:not(.ds-navbar-brand-logo-wide) .ds-navbar-logo,
+.ds-navbar-brand-logo-only:not(.ds-navbar-brand-logo-wide) svg,
+.ds-navbar-brand-logo-only:not(.ds-navbar-brand-logo-wide) img {
+  height: 32px;
+  width: auto;
+  min-width: 32px;
+  max-width: 200px; /* Landscape-oriented: wider bounding box for horizontal logos */
+}
+
+/* Wide logo for logo-only mode (stretched to match logo+text width) */
+.ds-navbar-logo-wide,
+.ds-navbar-brand-logo-wide .ds-navbar-logo,
+.ds-navbar-brand-logo-wide svg,
+.ds-navbar-brand-logo-wide img {
+  height: 32px;
+  width: auto;
+  min-width: 32px;
+  max-width: 250px; /* Even wider for landscape logos */
+}
+
+.ds-navbar-brand-logo-only {
+  min-height: 32px;
+  max-width: none; /* Allow full width for landscape logos */
+}
+
+.ds-navbar-brand-logo-wide {
+  min-width: 200px; /* Wider landscape-oriented bounding box */
+  max-width: none;
+  justify-content: flex-start;
+}
+
+.ds-navbar-brand svg {
+  color: currentColor;
+  fill: currentColor;
+}
+
+.ds-navbar-brand img {
+  object-fit: contain;
+}
+
+/* Brand text styling */
+.ds-navbar-brand-text {
+  display: inline-block;
+  font-weight: var(--r-font-weight-bold);
+}
+
+/* Logo-only mode - no gap between logo and edge */
+.ds-navbar-brand-logo-only {
+  gap: 0;
+}
+
+/* Text-only mode */
+.ds-navbar-brand-text-only {
+  gap: 0;
+}
+
+/* Legacy support for text-based logo */
+.ds-navbar-logo:not(svg):not(img) {
   width: 1.5rem;
   height: 1.5rem;
   color: hsl(var(--primary));
-  transition: transform var(--r-transition-fast) var(--r-spring-smooth);
 }
 
-.ds-navbar-brand:hover .ds-navbar-logo {
+.ds-navbar-brand:hover .ds-navbar-logo,
+.ds-navbar-brand:hover svg,
+.ds-navbar-brand:hover img {
   transform: rotate(5deg) scale(1.1);
+}
+
+/* Theme Toggle Styling */
+.ds-theme-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.ds-theme-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--r-space-2);
+  cursor: pointer;
+  padding: var(--r-space-1);
+  border-radius: var(--r-radius-md);
+  transition: all var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-theme-toggle-wrapper:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ds-theme-toggle-icon {
+  display: flex;
+  align-items: center;
+  color: hsl(var(--foreground) / 0.8);
+  transition: color var(--r-transition-fast) var(--r-ease-ios-smooth);
+}
+
+.ds-theme-toggle-wrapper:hover .ds-theme-toggle-icon {
+  color: hsl(var(--foreground));
+}
+
+.ds-theme-toggle-wrapper .ds-switch {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Light mode theme toggle adjustments */
+:root:not(.dark) .ds-theme-toggle-wrapper:hover,
+html:not(.dark) .ds-theme-toggle-wrapper:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .ds-navbar-nav {
@@ -3828,5 +4505,356 @@ h6, .ds-h6 {
   border-radius: 50%;
   animation: spinnerRotate 0.6s linear infinite;
   z-index: 1;
+}
+
+/* ========================================
+   LIGHT MODE - GLASS MORPHISM STYLES
+   Maintains same aesthetic with accessible text
+   ======================================== */
+
+:root:not(.dark),
+html:not(.dark) {
+  /* Ensure proper text contrast in light mode */
+  color-scheme: light;
+}
+
+/* Light Mode - Cards & Surfaces - Softer shadows, light strokes, smooth gradients */
+:root:not(.dark) .ds-card,
+:root:not(.dark) .card-surface,
+html:not(.dark) .ds-card,
+html:not(.dark) .card-surface {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.88) 25%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.88) 75%,
+    rgba(255, 255, 255, 0.92) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: hsl(var(--foreground));
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.03),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(20px) saturate(1.6) brightness(1.02);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6) brightness(1.02);
+}
+
+:root:not(.dark) .ds-card.card-interactive:hover,
+:root:not(.dark) .card-surface.card-surface-interactive:hover,
+html:not(.dark) .ds-card.card-interactive:hover,
+html:not(.dark) .card-surface.card-surface-interactive:hover {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.95) 25%,
+    rgba(255, 255, 255, 0.92) 50%,
+    rgba(255, 255, 255, 0.95) 75%,
+    rgba(255, 255, 255, 0.98) 100%
+  );
+  border-color: hsl(var(--primary) / 0.2);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Light Mode - Navbar - Softer shadows, light strokes */
+:root:not(.dark) .ds-navbar,
+html:not(.dark) .ds-navbar {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.85) 25%,
+    rgba(255, 255, 255, 0.82) 50%,
+    rgba(255, 255, 255, 0.85) 75%,
+    rgba(255, 255, 255, 0.88) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(40px) saturate(1.6) brightness(1.05);
+  -webkit-backdrop-filter: blur(40px) saturate(1.6) brightness(1.05);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.03),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+:root:not(.dark) .ds-navbar.scrolled,
+html:not(.dark) .ds-navbar.scrolled {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.90) 25%,
+    rgba(255, 255, 255, 0.88) 50%,
+    rgba(255, 255, 255, 0.90) 75%,
+    rgba(255, 255, 255, 0.92) 100%
+  );
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Light Mode - Modal - Softer shadows, light strokes */
+:root:not(.dark) .ds-modal-overlay,
+html:not(.dark) .ds-modal-overlay {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px) saturate(1.2) brightness(0.97);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2) brightness(0.97);
+}
+
+:root:not(.dark) .ds-modal,
+html:not(.dark) .ds-modal {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.94) 20%,
+    rgba(255, 255, 255, 0.92) 40%,
+    rgba(255, 255, 255, 0.94) 60%,
+    rgba(255, 255, 255, 0.96) 80%,
+    rgba(255, 255, 255, 0.98) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 2px 6px rgba(0, 0, 0, 0.03);
+  backdrop-filter: saturate(1.6) blur(60px) brightness(1.05);
+  -webkit-backdrop-filter: saturate(1.6) blur(60px) brightness(1.05);
+  color: hsl(var(--foreground));
+}
+
+:root:not(.dark) .ds-modal::before,
+html:not(.dark) .ds-modal::before {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 60%,
+    rgba(255, 255, 255, 0.25) 80%,
+    rgba(255, 255, 255, 0.35) 100%
+  );
+  opacity: 0.5;
+}
+
+/* Light Mode - Modal Cards - Softer shadows, light strokes */
+:root:not(.dark) .ds-modal .ds-card,
+:root:not(.dark) .ds-modal-card,
+html:not(.dark) .ds-modal .ds-card,
+html:not(.dark) .ds-modal-card {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.65) 25%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.65) 75%,
+    rgba(255, 255, 255, 0.7) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.03),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+:root:not(.dark) .ds-modal .ds-card:hover,
+:root:not(.dark) .ds-modal-card:hover,
+html:not(.dark) .ds-modal .ds-card:hover,
+html:not(.dark) .ds-modal-card:hover {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.70) 25%,
+    rgba(255, 255, 255, 0.68) 50%,
+    rgba(255, 255, 255, 0.70) 75%,
+    rgba(255, 255, 255, 0.75) 100%
+  );
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Light Mode - Modal Surface (Highest Elevation) - Softer shadows */
+:root:not(.dark) .ds-modal-surface,
+html:not(.dark) .ds-modal-surface {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.72) 25%,
+    rgba(255, 255, 255, 0.70) 50%,
+    rgba(255, 255, 255, 0.72) 75%,
+    rgba(255, 255, 255, 0.75) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.04),
+    0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Light Mode - Modal Well (Lower Elevation) */
+:root:not(.dark) .ds-modal-well,
+html:not(.dark) .ds-modal-well {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Light Mode - Buttons (Glass Effect) - Same behavior as dark mode */
+:root:not(.dark) .btn-ghost,
+html:not(.dark) .btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: hsl(var(--foreground) / 0.8);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+:root:not(.dark) .btn-ghost:hover:not(:disabled),
+html:not(.dark) .btn-ghost:hover:not(:disabled) {
+  background: linear-gradient(135deg,
+    rgba(0, 0, 0, 0.03) 0%,
+    rgba(0, 0, 0, 0.015) 25%,
+    rgba(0, 0, 0, 0.01) 50%,
+    rgba(0, 0, 0, 0.015) 75%,
+    rgba(0, 0, 0, 0.03) 100%
+  );
+  color: hsl(var(--foreground));
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  transform: translateY(-1px);
+}
+
+:root:not(.dark) .btn-ghost:active:not(:disabled),
+html:not(.dark) .btn-ghost:active:not(:disabled) {
+  transform: translateY(0);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+:root:not(.dark) .btn-ghost.active,
+:root:not(.dark) .btn-ghost[aria-current="page"],
+html:not(.dark) .btn-ghost.active,
+html:not(.dark) .btn-ghost[aria-current="page"] {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.12) 0%,
+    hsl(var(--primary) / 0.08) 25%,
+    hsl(var(--primary) / 0.06) 50%,
+    hsl(var(--primary) / 0.08) 75%,
+    hsl(var(--primary) / 0.12) 100%
+  );
+  color: hsl(var(--primary));
+  border-color: hsl(var(--primary) / 0.25);
+  box-shadow:
+    0 1px 3px hsl(var(--primary) / 0.08);
+}
+
+/* Light Mode - Showcase Items - Softer shadows, smooth gradients */
+:root:not(.dark) .showcase-item.card-surface,
+html:not(.dark) .showcase-item.card-surface {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.94) 20%,
+    rgba(255, 255, 255, 0.92) 40%,
+    rgba(255, 255, 255, 0.94) 60%,
+    rgba(255, 255, 255, 0.96) 80%,
+    rgba(255, 255, 255, 0.98) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.03);
+  backdrop-filter: saturate(1.6) blur(60px) brightness(1.05);
+  -webkit-backdrop-filter: saturate(1.6) blur(60px) brightness(1.05);
+}
+
+:root:not(.dark) .showcase-item.card-surface::before,
+html:not(.dark) .showcase-item.card-surface::before {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 60%,
+    rgba(255, 255, 255, 0.25) 80%,
+    rgba(255, 255, 255, 0.35) 100%
+  );
+  opacity: 0.5;
+}
+
+/* Light Mode - Inputs & Form Elements - Light strokes, softer shadows */
+:root:not(.dark) input[type="text"],
+:root:not(.dark) input[type="email"],
+:root:not(.dark) input[type="password"],
+:root:not(.dark) textarea,
+:root:not(.dark) select,
+html:not(.dark) input[type="text"],
+html:not(.dark) input[type="email"],
+html:not(.dark) input[type="password"],
+html:not(.dark) textarea,
+html:not(.dark) select {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.88) 50%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  border-color: rgba(0, 0, 0, 0.1);
+  color: hsl(var(--foreground));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+:root:not(.dark) input:focus,
+:root:not(.dark) textarea:focus,
+:root:not(.dark) select:focus,
+html:not(.dark) input:focus,
+html:not(.dark) textarea:focus,
+html:not(.dark) select:focus {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.93) 50%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  border-color: hsl(var(--primary) / 0.35);
+  box-shadow: 
+    0 0 0 2px hsl(var(--primary) / 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Light Mode - Dropdowns - Softer shadows, light strokes, smooth gradients */
+:root:not(.dark) .ds-dropdown,
+html:not(.dark) .ds-dropdown {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.94) 25%,
+    rgba(255, 255, 255, 0.92) 50%,
+    rgba(255, 255, 255, 0.94) 75%,
+    rgba(255, 255, 255, 0.96) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+}
+
+/* Light Mode - Text Shadows for Readability */
+:root:not(.dark) .ds-modal-content p,
+:root:not(.dark) .ds-card p,
+html:not(.dark) .ds-modal-content p,
+html:not(.dark) .ds-card p {
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Light Mode - Ensure proper contrast for all text */
+:root:not(.dark),
+html:not(.dark) {
+  --foreground: 220 15% 8%;
+}
+
+:root:not(.dark) h1,
+:root:not(.dark) h2,
+:root:not(.dark) h3,
+:root:not(.dark) h4,
+:root:not(.dark) h5,
+:root:not(.dark) h6,
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) h4,
+html:not(.dark) h5,
+html:not(.dark) h6 {
+  color: hsl(var(--foreground));
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 

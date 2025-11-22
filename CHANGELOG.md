@@ -5,6 +5,146 @@ All notable changes to Rukn Design System will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2025-11-22
+
+### 🎯 Integration Experience Overhaul
+
+Made Rukn Design System **dramatically easier** for designers and engineers to integrate.
+
+### Added
+
+#### Comprehensive Integration Guides
+- ✨ **`INTEGRATION_GUIDE.md`** - Complete integration guide for all frameworks (React, Vue, Angular, Next.js, etc.)
+  - Step-by-step setup for every framework
+  - Theme system documentation
+  - Customization examples
+  - Troubleshooting section
+  
+- ⚡ **`GET_STARTED.md`** - Ultra-simple 3-step quick start guide
+  - Absolute minimum required (2 CSS files)
+  - Copy-paste ready examples
+  - Framework integration snippets
+  
+- 🌓 **`THEME_GUIDE.md`** - Complete theme system documentation
+  - Dark theme as default (optimized for glass morphism)
+  - Light theme instructions
+  - JavaScript theme toggle with localStorage
+  - System preference detection
+  - React, Vue theme toggle examples
+  - Animated theme transitions
+  
+- 📦 **`FILES_TO_COPY.md`** - Visual file structure guide
+  - Clear overview of what files to copy
+  - File sizes and purposes
+  - Download methods
+  - Quick checklist
+  
+- 📋 **`INTEGRATION_SUMMARY.md`** - Printable quick reference card
+  - TL;DR integration steps
+  - Common components cheat sheet
+  - Framework snippets
+  - Customization examples
+  - Troubleshooting tips
+
+#### Ready-to-Use Templates
+- 📝 **`starter-template.html`** - Full-featured starter template
+  - Beautiful hero section
+  - Feature showcase grid
+  - Component examples
+  - Working theme toggle button
+  - Responsive design
+  - LocalStorage theme persistence
+  
+- 📄 **`minimal-example.html`** - Bare minimum example
+  - Just 2 CSS files
+  - Essential components showcase
+  - Simple theme toggle
+  - Perfect for learning
+
+### Changed
+
+#### Documentation Structure
+- 📚 Reorganized README with clearer getting started section
+- 🎯 Added prominent "2-minute setup" messaging
+- 📖 Better categorization of documentation (Getting Started, Templates, Customization, Advanced)
+- ✨ Highlighted dark theme as default with light theme option
+
+#### Quick Start Improvements
+- ⚡ Simplified `QUICK_START.md` with direct links to new guides
+- 🌓 Added clear theme switching documentation
+- 📦 Referenced new template files
+
+#### README Enhancements
+- 🎨 Updated features list to emphasize ease of setup
+- 🚀 Added "2-Minute Setup" as first feature
+- 🌓 Added "Beautiful Dark Theme (default)" and "Light Theme Available"
+- ⚡ Emphasized "Lightweight" and "Zero Config"
+- 📚 Reorganized documentation section with clear categories
+
+### Improved
+
+#### Theme System
+- 🌓 **Dark theme is now prominently marketed as default**
+  - Optimized for glass morphism
+  - Better visual appeal
+  - Reduced eye strain
+- 💡 **Light theme clearly documented as available option**
+  - Simple class toggle
+  - Multiple toggle methods provided
+  - Framework-specific examples
+
+#### Developer Experience
+- ✅ **Crystal-clear integration path**: GET_STARTED.md → 3 steps → Done!
+- 📦 **Visual file structure** shows exactly what to copy
+- 📋 **Multiple learning paths**:
+  - Ultra-quick: GET_STARTED.md (3 steps)
+  - Visual: FILES_TO_COPY.md (what files)
+  - Complete: INTEGRATION_GUIDE.md (all frameworks)
+  - Quick ref: INTEGRATION_SUMMARY.md (cheat sheet)
+- 📝 **Copy-paste ready templates** for immediate use
+- 🎨 **Theme toggle examples** for all major frameworks
+
+#### Discoverability
+- 🔍 Better organization in README
+- 📍 Clear signposting to relevant guides
+- ⚡ Emphasis on "just 2 files" messaging
+- 🎯 Prominent links to starter templates
+
+### Documentation Statistics
+
+| Guide | Purpose | Length |
+|-------|---------|--------|
+| GET_STARTED.md | Quickest start | ~300 lines |
+| FILES_TO_COPY.md | What to copy | ~200 lines |
+| INTEGRATION_GUIDE.md | Complete guide | ~800 lines |
+| THEME_GUIDE.md | Theme system | ~500 lines |
+| INTEGRATION_SUMMARY.md | Quick reference | ~400 lines |
+| starter-template.html | Full template | ~200 lines |
+| minimal-example.html | Minimal example | ~100 lines |
+
+### Breaking Changes
+
+⚠️ **None!** All changes are additive:
+- Existing integrations continue to work
+- New guides supplement existing docs
+- Templates are optional resources
+
+### Migration
+
+No migration needed. New users benefit from improved docs automatically.
+
+### Notes
+
+This release focuses entirely on **developer experience** and **documentation**:
+- No CSS or JavaScript changes
+- No new components
+- Pure documentation and template improvements
+- Makes Rukn **dramatically easier** to integrate
+
+**Goal achieved:** Designers and engineers can now integrate Rukn in **under 2 minutes** with crystal-clear documentation.
+
+---
+
 ## [2.0.0] - 2025-11-05
 
 ### 🚀 MAJOR: Web Components Revolution

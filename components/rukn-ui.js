@@ -25,6 +25,170 @@
  */
 
 /* ========================================
+   COLOR SYSTEM UTILITIES
+   ======================================== */
+
+const PRIMARY_COLOR_STORAGE_KEY = 'rukn-primary-color';
+
+function ruknHexToHsl(hex) {
+  const sanitized = hex.replace('#', '');
+  if (sanitized.length !== 6) {
+    return { h: 0, s: 100, l: 50 };
+  }
+  const bigint = parseInt(sanitized, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+
+  const rNorm = r / 255;
+  const gNorm = g / 255;
+  const bNorm = b / 255;
+
+  const max = Math.max(rNorm, gNorm, bNorm);
+  const min = Math.min(rNorm, gNorm, bNorm);
+  let h;
+  let s;
+  const l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0;
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case rNorm:
+        h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0);
+        break;
+      case gNorm:
+        h = (bNorm - rNorm) / d + 2;
+        break;
+      default:
+        h = (rNorm - gNorm) / d + 4;
+    }
+    h /= 6;
+  }
+
+  return {
+    h: Math.round(h * 360),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100)
+  };
+}
+
+function ruknHslToHexString(hslString) {
+  const [hStr, sStr, lStr] = hslString.split(' ');
+  const h = parseFloat(hStr);
+  const s = parseFloat(sStr);
+  const l = parseFloat(lStr);
+
+  const sNorm = s / 100;
+  const lNorm = l / 100;
+
+  const c = (1 - Math.abs(2 * lNorm - 1)) * sNorm;
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+  const m = lNorm - c / 2;
+
+  let rPrime = 0;
+  let gPrime = 0;
+  let bPrime = 0;
+
+  if (h >= 0 && h < 60) {
+    rPrime = c; gPrime = x; bPrime = 0;
+  } else if (h < 120) {
+    rPrime = x; gPrime = c; bPrime = 0;
+  } else if (h < 180) {
+    rPrime = 0; gPrime = c; bPrime = x;
+  } else if (h < 240) {
+    rPrime = 0; gPrime = x; bPrime = c;
+  } else if (h < 300) {
+    rPrime = x; gPrime = 0; bPrime = c;
+  } else {
+    rPrime = c; gPrime = 0; bPrime = x;
+  }
+
+  const r = Math.round((rPrime + m) * 255);
+  const g = Math.round((gPrime + m) * 255);
+  const b = Math.round((bPrime + m) * 255);
+
+  const toHex = (value) => value.toString(16).padStart(2, '0');
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+function ruknComputeForeground(l) {
+  return l > 55 ? '0 0% 12%' : '0 0% 98%';
+}
+
+function ruknShiftHue(h, shift) {
+  const newHue = (h + shift) % 360;
+  return newHue < 0 ? newHue + 360 : newHue;
+}
+
+function ruknApplyPrimaryColor(hex, persist = false) {
+  if (typeof document === 'undefined') return;
+  const root = document.documentElement;
+  const body = document.body;
+  const { h, s, l } = ruknHexToHsl(hex);
+  const primaryHsl = `${h} ${s}% ${l}%`;
+  root.style.setProperty('--primary', primaryHsl);
+  root.style.setProperty('--primary-foreground', ruknComputeForeground(l));
+  if (body) {
+    body.style.setProperty('--primary', primaryHsl);
+    body.style.setProperty('--primary-foreground', ruknComputeForeground(l));
+  }
+
+  const accentHue = ruknShiftHue(h, 20);
+  const accentLight = Math.min(96, l + 15);
+  const accentSat = Math.max(25, s - 10);
+  root.style.setProperty('--accent', `${accentHue} ${accentSat}% ${accentLight}%`);
+  root.style.setProperty('--accent-foreground', ruknComputeForeground(accentLight));
+  if (body) {
+    body.style.setProperty('--accent', `${accentHue} ${accentSat}% ${accentLight}%`);
+    body.style.setProperty('--accent-foreground', ruknComputeForeground(accentLight));
+  }
+
+  const ringLight = Math.min(98, l + 18);
+  root.style.setProperty('--ring', `${h} ${s}% ${ringLight}%`);
+  if (body) {
+    body.style.setProperty('--ring', `${h} ${s}% ${ringLight}%`);
+  }
+
+  if (persist) {
+    try {
+      window.localStorage.setItem(PRIMARY_COLOR_STORAGE_KEY, hex);
+    } catch (error) {
+      console.warn('Rukn: Unable to persist primary color', error);
+    }
+  }
+}
+
+if (typeof window !== 'undefined') {
+  try {
+    const storedColor = window.localStorage.getItem(PRIMARY_COLOR_STORAGE_KEY);
+    if (storedColor) {
+      ruknApplyPrimaryColor(storedColor, false);
+    }
+  } catch (error) {
+    console.warn('Rukn: Unable to read stored primary color', error);
+  }
+
+  window.ruknSetPrimaryColor = (hex, persist = true) => {
+    ruknApplyPrimaryColor(hex, persist);
+  };
+
+  window.ruknGetPrimaryColor = () => {
+    if (typeof document === 'undefined') {
+      return { hex: '#ff4154', hsl: '352 95% 58%' };
+    }
+    const root = document.documentElement;
+    const currentHsl = getComputedStyle(root).getPropertyValue('--primary').trim();
+    return {
+      hex: ruknHslToHexString(currentHsl),
+      hsl: currentHsl
+    };
+  };
+}
+
+/* ========================================
    BUTTON COMPONENT
    ======================================== */
 
@@ -57,9 +221,37 @@ class RuknButton extends HTMLElement {
     this.innerHTML = `
       <button class="${classes}" ${disabled ? 'disabled' : ''}>
         ${icon ? `<i class="${icon}" style="margin-right: 8px;"></i>` : ''}
+        ${loading ? '<span data-i18n="component.button.loading" style="display: none;">Loading...</span>' : ''}
         <slot></slot>
       </button>
     `;
+    
+    if (loading) {
+      this._applyTranslations();
+    }
+    
+    // Listen for language changes
+    document.addEventListener('rukn:languagechange', () => {
+      if (this.hasAttribute('loading')) {
+        this._applyTranslations();
+      }
+    });
+  }
+  
+  _applyTranslations() {
+    const lang = document.documentElement.lang || 'en';
+    const translations = (typeof window !== 'undefined' && window.ruknTranslations) ? window.ruknTranslations : {};
+    const fallback = translations.en || {};
+    const current = translations[lang] || fallback;
+    
+    this.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (!key) return;
+      const value = current[key] ?? fallback[key];
+      if (value !== undefined) {
+        el.textContent = value;
+      }
+    });
   }
 }
 
@@ -153,7 +345,7 @@ class RuknAlert extends HTMLElement {
             <slot></slot>
           </div>
         </div>
-        ${dismissible ? '<button class="ds-alert-close">✕</button>' : ''}
+        ${dismissible ? '<button class="ds-alert-close" data-i18n-aria-label="component.alert.close" aria-label="Close">✕</button>' : ''}
       </div>
     `;
     
@@ -163,7 +355,27 @@ class RuknAlert extends HTMLElement {
         this.style.animation = 'ds-fade-in 0.2s ease-out reverse';
         setTimeout(() => this.remove(), 200);
       });
+      this._applyTranslations(closeBtn);
     }
+    
+    this._applyTranslations();
+  }
+  
+  _applyTranslations(element = null) {
+    const lang = document.documentElement.lang || 'en';
+    const translations = (typeof window !== 'undefined' && window.ruknTranslations) ? window.ruknTranslations : {};
+    const fallback = translations.en || {};
+    const current = translations[lang] || fallback;
+    
+    const target = element || this;
+    target.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-aria-label');
+      if (!key) return;
+      const value = current[key] ?? fallback[key];
+      if (value !== undefined) {
+        el.setAttribute('aria-label', value);
+      }
+    });
   }
 }
 
@@ -267,9 +479,32 @@ class RuknModal extends HTMLElement {
             <slot></slot>
           </div>
         </div>
-        <button class="ds-modal-close" onclick="this.closest('rukn-modal').close()">✕</button>
+        <button class="ds-modal-close" data-i18n-aria-label="component.modal.close" aria-label="Close" onclick="this.closest('rukn-modal').close()">✕</button>
       </div>
     `;
+    
+    this._applyTranslations();
+    
+    // Listen for language changes
+    document.addEventListener('rukn:languagechange', () => {
+      this._applyTranslations();
+    });
+  }
+  
+  _applyTranslations() {
+    const lang = document.documentElement.lang || 'en';
+    const translations = (typeof window !== 'undefined' && window.ruknTranslations) ? window.ruknTranslations : {};
+    const fallback = translations.en || {};
+    const current = translations[lang] || fallback;
+    
+    this.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-aria-label');
+      if (!key) return;
+      const value = current[key] ?? fallback[key];
+      if (value !== undefined) {
+        el.setAttribute('aria-label', value);
+      }
+    });
   }
   
   open() {

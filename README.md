@@ -1,101 +1,177 @@
 # 🏛️ Rukn Design System
 
-> **Rukn** (Arabic: رُكن, meaning "pillar" or "foundation") — A modern, framework-agnostic CSS design system built with glass morphism and smooth motion principles.
+> **Rukn** (Arabic: رُكن, Urdu: رکن, meaning "pillar" or "foundation") — A modern, framework-agnostic CSS design system built with glass morphism, Web Components, and smooth motion principles.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-BADGE-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE-NAME/deploys)
-[![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/yourusername/rukn)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/mfaizanatiq/RuknDesignSystem)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 ## ✨ Features
 
+- ⚡ **2-Minute Setup** — Just copy 2 CSS files, no build tools or dependencies needed
+- 🌓 **Beautiful Dark Theme** — Optimized glass morphism effects (default theme)
 - 🎨 **150+ Design Tokens** — Comprehensive W3C-compliant CSS variables (`--r-` prefix)
-- 🪟 **Glass Morphism** — Beautiful frosted glass effects with animated light refraction
-- 📱 **Rukn Motion Design** — Smooth easing curves and spring animations
-- 🎯 **Framework Agnostic** — Pure CSS, works with React, Vue, Angular, or vanilla JS
-- 🌓 **Modern UI Components** — Buttons, inputs, cards, modals, drawers, and more
+- 🪟 **Glass Morphism** — Stunning frosted glass effects with animated light refraction
+- 📱 **Rukn Motion Design** — Smooth iOS-inspired easing curves and spring animations
+- 🧩 **Web Components** — Optional vanilla JS components, zero dependencies
+- 🎯 **Framework Agnostic** — Works with React, Vue, Angular, Svelte, or plain HTML
+- 🌓 **Light Theme Available** — Toggle with a single class change
 - 📐 **Complete Layout System** — Responsive grids, flexbox utilities, and containers
-- ♿ **Accessible** — WCAG-compliant with `prefers-reduced-motion` support
-- 🚀 **Zero Dependencies** — Pure CSS, no build step required
-- 📦 **NPM Ready** — Easy integration via `@ruknds/core`
+- ♿ **Accessible** — WCAG 2.1 AA compliant with `prefers-reduced-motion` support
+- 🚀 **Lightweight** — ~30KB gzipped (CSS + optional JS)
+- 🌍 **Multi-language Support** — Built-in Arabic and Urdu support with RTL layout
+- 🎨 **Easy to Customize** — Override any color or token with CSS variables
 
 ## 🚀 Quick Start
 
-### Option 1: CDN (Fastest)
+### ⚡ Get Started in 2 Minutes
+
+**Step 1:** Download the design system
+```bash
+git clone https://github.com/mfaizanatiq/RuknDesignSystem.git
+```
+
+**Step 2:** Copy the `styles/` folder to your project
+
+**Step 3:** Use the [starter template](./starter-template.html) or add to your HTML:
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <!-- Rukn Design System -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My App with Rukn</title>
+  
+  <!-- Rukn Design System CSS -->
   <link rel="stylesheet" href="styles/design-system-variables.css">
   <link rel="stylesheet" href="styles/design-system.css">
+  
+  <!-- Optional: Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
 </head>
 <body>
-  <button class="btn-primary">Hello Rukn!</button>
-  
-  <!-- Optional: For interactive components -->
-  <script src="scripts/component-helpers.js"></script>
+  <!-- Start building! -->
+  <div class="ds-container" style="padding: 2rem;">
+    <h1>Hello Rukn! 🏛️</h1>
+    <button class="btn-primary">Get Started</button>
+    
+    <div class="ds-card" style="margin-top: 2rem; padding: 1.5rem;">
+      <h3>Beautiful Glass Card</h3>
+      <p>With stunning glass morphism effects.</p>
+    </div>
+  </div>
 </body>
 </html>
 ```
 
-### Option 2: NPM
+**That's it!** 🎉
 
-```bash
-npm install @ruknds/core
-```
+### 📖 Complete Integration Guide
 
-```javascript
-// Import in your project
-import '@ruknds/core/design-system-variables.css';
-import '@ruknds/core/design-system.css';
-```
+- **[📘 Integration Guide](./INTEGRATION_GUIDE.md)** - Complete setup guide for all frameworks
+- **[🌓 Theme Guide](./THEME_GUIDE.md)** - How to use dark/light themes
+- **[🚀 Quick Start](./QUICK_START.md)** - 60-second setup
+- **[📝 Starter Template](./starter-template.html)** - Copy-paste ready template
 
-### Option 3: Download
+### 🌓 Theme System
 
-1. Download the `styles/` folder (design-system-variables.css and design-system.css)
-2. Link them in your HTML:
+**Dark theme is default** (optimized for glass morphism)
 
+To enable light theme, remove the `dark` class:
 ```html
-<link rel="stylesheet" href="styles/design-system-variables.css">
-<link rel="stylesheet" href="styles/design-system.css">
+<!-- Dark theme (default) -->
+<html lang="en" class="dark">
+
+<!-- Light theme -->
+<html lang="en">
 ```
+
+**Toggle with JavaScript:**
+```javascript
+document.documentElement.classList.toggle('dark');
+```
+
+See the [Theme Guide](./THEME_GUIDE.md) for advanced theming options.
 
 ## 📚 Documentation
 
-- **[Live Demo](https://YOUR-NETLIFY-URL.netlify.app/)** — Interactive showcase
-- **[Components](https://YOUR-NETLIFY-URL.netlify.app/components.html)** — Full component library
-- **[Quick Start Guide](./QUICK_START.md)** — 60-second setup
-- **[Design Tokens](./docs/DESIGN_TOKENS.md)** — All CSS variables
-- **[Integration Guide](./docs/INTEGRATION.md)** — Framework integration
-- **[Additional Docs](./docs/)** — All documentation
+### 🚀 Getting Started (Pick One)
+- **[⚡ GET STARTED](./GET_STARTED.md)** — **Simplest guide** - 3 steps, you're done!
+- **[📄 Quick Reference](./QUICK_REFERENCE.md)** — **Print this!** One-page cheat sheet
+- **[📦 Files to Copy](./FILES_TO_COPY.md)** — What files you need (just 2!)
+- **[📘 Integration Guide](./INTEGRATION_GUIDE.md)** — Complete guide for all frameworks
+- **[🚀 Quick Start](./QUICK_START.md)** — 60-second overview
+
+### 📝 Templates & Examples
+- **[📄 Minimal Example](./minimal-example.html)** — Absolute minimum (2 CSS files)
+- **[📋 Starter Template](./starter-template.html)** — Full-featured starter
+- **[🧩 Components Showcase](./components.html)** — Live examples of all components
+
+### 🎨 Customization
+- **[🌓 Theme Guide](./THEME_GUIDE.md)** — Dark/Light themes & customization
+- **[🎨 Design Tokens](./foundation.html)** — All CSS variables with live color picker
+
+### 🔧 Advanced
+- **[🌐 Web Components](./components/README.md)** — Optional vanilla JS components
+- **[📁 All Documentation](./docs/)** — Complete docs directory
 
 ## 🎨 Component Showcase
 
-```html
-<!-- Glass Morphism Button -->
-<button class="ds-btn ds-btn-primary">Primary Action</button>
+Rukn provides **ready-to-use CSS classes** - no JavaScript required!
 
+### Buttons & Forms
+
+```html
+<!-- Buttons with Glass Morphism -->
+<button class="btn-primary">Primary Action</button>
+<button class="btn-secondary">Secondary</button>
+<button class="btn-outline">Outline</button>
+
+<!-- Form Inputs -->
+<input type="text" class="ds-input" placeholder="Enter text">
+<textarea class="ds-textarea" placeholder="Enter message"></textarea>
+
+<!-- Form Controls -->
+<label class="ds-checkbox-wrapper">
+  <input type="checkbox" class="ds-checkbox">
+  <span>Accept terms</span>
+</label>
+
+<label class="ds-switch-wrapper">
+  <input type="checkbox" class="ds-switch">
+  <span>Enable feature</span>
+</label>
+```
+
+### Cards & Badges
+
+```html
 <!-- Card with Glass Effect -->
 <div class="ds-card">
-  <h3 class="ds-card-title">Beautiful Card</h3>
-  <p class="ds-card-content">With glass morphism effects</p>
+  <h3>Beautiful Card</h3>
+  <p>With stunning glass morphism effects</p>
 </div>
 
-<!-- Modal with Elevation System -->
-<div class="ds-modal" id="myModal">
-  <div class="ds-modal-content">
-    <h2>Modal Title</h2>
-    <div class="ds-modal-card">
-      <p>Nested card with elevation</p>
-    </div>
-  </div>
-</div>
+<!-- Badges -->
+<span class="ds-badge ds-badge-primary">New</span>
+<span class="ds-badge ds-badge-success">Active</span>
+```
 
-<!-- Icon Placeholder with Refraction -->
-<div class="ds-icon-placeholder ds-icon-placeholder-primary">
-  <svg><!-- Your icon --></svg>
-</div>
+**[See all 50+ components →](./components.html)**
+
+### Web Components (Vanilla JavaScript)
+
+```html
+<!-- Include Web Components -->
+<script src="components/rukn-navbar.js" defer></script>
+<script src="components/rukn-ui.js" type="module"></script>
+
+<!-- Use Custom Elements -->
+<rukn-navbar current="home"></rukn-navbar>
+
+<rukn-button variant="primary">Click Me</rukn-button>
+<rukn-card>Content here</rukn-card>
+<rukn-alert variant="info">This is an alert</rukn-alert>
 ```
 
 ## 🎯 Design Tokens
@@ -106,10 +182,14 @@ Rukn uses W3C-compliant design tokens with the `--r-` prefix:
 /* Typography */
 --r-font-heading: 'Space Grotesk', sans-serif;
 --r-font-body: 'Space Grotesk', sans-serif;
+--r-font-arabic: 'IBM Plex Sans Arabic', sans-serif;
+--r-font-urdu: 'Noto Nastaliq Urdu', serif;
 
 /* Colors */
---r-color-primary: 210 100% 50%;
---r-color-accent: 280 100% 60%;
+--primary: 210 100% 50%;
+--accent: 280 100% 60%;
+--background: 0 0% 3%;
+--foreground: 0 0% 98%;
 
 /* Spacing */
 --r-space-1: 0.25rem;  /* 4px */
@@ -121,6 +201,8 @@ Rukn uses W3C-compliant design tokens with the `--r-` prefix:
 --r-spring-smooth: cubic-bezier(0.5, 1.25, 0.75, 1);
 ```
 
+**Full token reference:** See [foundation.html](./foundation.html) or [docs/DESIGN_TOKENS.md](./docs/DESIGN_TOKENS.md)
+
 ## 🌐 Browser Support
 
 - ✅ Chrome/Edge 88+
@@ -129,77 +211,38 @@ Rukn uses W3C-compliant design tokens with the `--r-` prefix:
 - ✅ iOS Safari 14+
 - ✅ Android Chrome 88+
 
-## 📦 NPM Package
-
-```json
-{
-  "name": "@ruknds/core",
-  "version": "1.3.1",
-  "description": "Modern glass morphism design system with smooth motion",
-  "main": "design-system.css",
-  "types": "types.d.ts"
-}
-```
-
-## 🚀 Deployment
-
-This project is configured for automatic deployment to Netlify:
-
-### Deploy to Netlify (Recommended)
-
-1. **Push to GitHub:**
-```bash
-git add .
-git commit -m "Deploy to Netlify"
-git push origin main
-```
-
-2. **Connect to Netlify:**
-   - Go to [Netlify](https://app.netlify.com)
-   - Import your GitHub repository
-   - Netlify auto-detects configuration
-   - Deploy! 🎉
-
-### Manual Hosting
-
-Simply upload these files to any static hosting:
-- `index.html`
-- `foundation.html`
-- `components.html`
-- `styles/` (CSS files)
-- `scripts/` (JavaScript helpers)
-- `docs/` (Documentation)
-
 ## 🗺️ Project Structure
 
 ```
 RuknDS/
-├── index.html                      # 🏠 Landing page with pricing
+├── index.html                      # 🏠 Landing page
 ├── foundation.html                 # 🎨 Design tokens & layouts
 ├── components.html                 # 🧩 UI components showcase
 ├── example.html                    # 📋 Component examples
 ├── styles/                         # 🎨 Stylesheets
 │   ├── design-system-variables.css # Design tokens (150+)
 │   └── design-system.css           # Component styles
-├── scripts/                        # ⚙️ JavaScript
+├── components/                     # 🧩 Web Components
+│   ├── rukn-navbar.js              # Navigation component
+│   ├── rukn-sidebar.js             # Sidebar component
+│   ├── rukn-footer.js              # Footer component
+│   ├── rukn-ui.js                  # All UI components
+│   └── README.md                   # Components guide
+├── scripts/                         # ⚙️ JavaScript helpers
 │   ├── component-helpers.js        # Component utilities
 │   └── modal-drawer-helpers.js     # Modal/drawer helpers
 ├── docs/                           # 📚 Documentation
 │   ├── DESIGN_TOKENS.md            # Token reference
 │   ├── INTEGRATION.md              # Integration guide
 │   ├── RUKN_DESIGN_LANGUAGE.md     # Design guidelines
-│   ├── UNTITLED_UI_ANALYSIS.md     # Component roadmap
 │   └── ...                         # More guides
-├── package.json                    # 📦 NPM package config
+├── package.json                    # 📦 Package config
 ├── types.d.ts                      # 📘 TypeScript definitions
 ├── LICENSE                         # ⚖️ MIT License
 ├── README.md                       # 📖 This file
-├── QUICK_START.md                  # ⚡ 60-second setup
-├── WHATS_NEW.md                    # 🎉 Changelog
-├── _redirects                      # 🔀 Netlify redirects
-├── netlify.toml                    # ⚙️ Netlify config
-├── robots.txt                      # 🤖 SEO
-└── sitemap.xml                     # 🗺️ SEO
+├── QUICK_START.md                  # ⚡ Quick setup guide
+├── CHANGELOG.md                    # 📝 Version history
+└── netlify.toml                    # ⚙️ Netlify config
 ```
 
 ## 🎨 Why Rukn?
@@ -215,36 +258,40 @@ RuknDS/
 - 🎬 **Rukn Motion** — Smooth, natural animations
 - 📱 **Mobile-First** — Responsive by default
 - ♿ **Accessible** — WCAG 2.1 AA compliant
+- 🌍 **Multi-language** — Arabic and Urdu support with RTL
 
 ### Developer Experience
 - ⚡ **Zero Config** — Just link the CSS
-- 📦 **Tiny Size** — ~70KB gzipped
+- 📦 **Lightweight** — ~70KB gzipped (CSS + JS)
 - 🔧 **Customizable** — Override any token
-- 📚 **Well Documented** — Clear examples
+- 📚 **Well Documented** — Clear examples and guides
+- 🧩 **Web Components** — Native browser standard, no framework needed
 
 ## 🛣️ Roadmap
 
-### ✅ Completed (v1.3.1)
+### ✅ Completed (v2.0.0)
 - Glass morphism design system
 - Rukn motion principles
 - 150+ design tokens
 - Responsive layout system
+- Web Components (navbar, sidebar, footer, UI components)
+- Multi-language support (Arabic, Urdu, RTL)
 - Icon placeholders with refraction
 - Modal elevation system
 - Full navbar variations
 
-### 🚧 In Progress (v1.4.0)
+### 🚧 In Progress
 - Additional form components
 - Data visualization components
 - Advanced animation utilities
-- Theme customization tools
+- NPM package publishing
 
-### 📋 Planned (v2.0.0)
-- Dark mode support
+### 📋 Planned
 - Additional color themes
-- Component variants
+- More component variants
 - Advanced layout patterns
 - Accessibility enhancements
+- Figma design kit
 
 ### 💡 Community Requests
 - More icon sets
@@ -254,29 +301,29 @@ RuknDS/
 
 ## 📝 Changelog
 
-### v1.3.1 (2024-11-05)
+See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
+
+### Recent Highlights
+
+**v2.0.0 (2025-11-05)**
+- ✨ Web Components revolution (12 components)
+- 🌍 Multi-language support (Arabic, Urdu, RTL)
+- 🎨 Primary color picker
+- ♿ Improved accessibility
+- 🐛 Fixed z-index and layout issues
+
+**v1.3.1 (2024-11-05)**
 - ✨ Added glass refraction icon placeholders
 - 🎨 Implemented modal elevation system
 - 🐛 Fixed cursor z-index above modals
 - 📱 Improved mobile navigation
 
-### v1.3.0 (2024-11-04)
-- ✨ Rukn motion design system
-- 🎨 Modern floating navbar
-- 📐 Complete layout system
-- ♿ Reduced motion support
-
-### v1.2.0 (2024-11-03)
-- Initial public release
-- Glass morphism components
-- W3C-compliant tokens
-
 ## 👨‍💻 Author
 
-**Faizan Atiq**
+**M Faizan Atiq**
 - 💼 [LinkedIn](https://www.linkedin.com/in/mfaizanatiq/)
-- 🐙 [GitHub](https://github.com/yourusername)
-- 📧 [Contact](mailto:your.email@example.com)
+- 🐙 [GitHub](https://github.com/mfaizanatiq)
+- 📧 Contact: mfaizanatiq@gmail.com
 
 ## 🤝 Contributing
 
@@ -287,6 +334,8 @@ We welcome contributions! This is a community-driven project.
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+**Repository:** https://github.com/mfaizanatiq/RuknDesignSystem
 
 ## 📄 License
 
@@ -306,6 +355,6 @@ MIT License — see [LICENSE](./LICENSE) for details.
 
 **Built with ❤️ for the open source community**
 
-[Live Demo](https://YOUR-URL.netlify.app) • [Documentation](./QUICK_START.md) • [NPM](https://www.npmjs.com/package/@ruknds/core)
+[GitHub Repository](https://github.com/mfaizanatiq/RuknDesignSystem) • [Documentation](./QUICK_START.md) • [Report Issues](https://github.com/mfaizanatiq/RuknDesignSystem/issues)
 
 </div>

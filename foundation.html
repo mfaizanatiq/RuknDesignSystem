@@ -17,6 +17,9 @@
   <link rel="canonical" href="https://rukn.design/components.html">
   
   <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/design-system-variables.css">
   <link rel="stylesheet" href="styles/design-system.css">
   
@@ -185,6 +188,23 @@
       transition: all var(--r-transition-base) var(--r-ease-ios-smooth);
     }
     
+    /* Light Mode - Sidebar Glass Morphism - Softer shadows, light strokes, smooth gradients */
+    html:not(.dark) .sidebar {
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.90) 0%,
+        rgba(255, 255, 255, 0.88) 25%,
+        rgba(255, 255, 255, 0.85) 50%,
+        rgba(255, 255, 255, 0.88) 75%,
+        rgba(255, 255, 255, 0.90) 100%
+      );
+      backdrop-filter: blur(24px) saturate(1.6) brightness(1.03);
+      -webkit-backdrop-filter: blur(24px) saturate(1.6) brightness(1.03);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.03),
+        0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+    
     /* Sidebar scrollbar */
     .sidebar::-webkit-scrollbar {
       width: 6px;
@@ -200,6 +220,14 @@
       background: rgba(255, 255, 255, 0.3);
     }
     
+    /* Light Mode - Sidebar Scrollbar */
+    html:not(.dark) .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    html:not(.dark) .sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
     .sidebar-section {
       margin-bottom: var(--r-space-8);
     }
@@ -207,6 +235,11 @@
     .sidebar-section:not(:last-child) {
       padding-bottom: var(--r-space-6);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Light Mode - Sidebar Section Borders */
+    html:not(.dark) .sidebar-section:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     }
     
     .sidebar-title {
@@ -219,6 +252,12 @@
       padding: var(--r-space-2) var(--r-space-3);
       background: rgba(255, 255, 255, 0.03);
       border-radius: var(--r-radius-lg);
+    }
+    
+    /* Light Mode - Sidebar Title */
+    html:not(.dark) .sidebar-title {
+      background: rgba(0, 0, 0, 0.03);
+      color: hsl(var(--foreground) / 0.6);
     }
     
     .sidebar-nav {
@@ -264,6 +303,12 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     
+    /* Light Mode - Sidebar Link Hover */
+    html:not(.dark) .sidebar-link:hover {
+      background: rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
     .sidebar-link:active {
       transform: translateX(2px) scale(0.98);
     }
@@ -277,6 +322,13 @@
       box-shadow: 
         0 2px 8px hsl(var(--primary) / 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Light Mode - Sidebar Link Active */
+    html:not(.dark) .sidebar-link.active {
+      box-shadow: 
+        0 2px 8px hsl(var(--primary) / 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
     
     .sidebar-link.active::before {
@@ -567,7 +619,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page="foundation">
   <rukn-navbar current="foundation" search></rukn-navbar>
   
   
@@ -580,16 +632,16 @@
     <!-- Main Content -->
     <main class="main-content">
       <div class="page-header">
-        <h1 style="font-size: var(--r-font-size-4xl); font-weight: var(--r-font-weight-bold); margin-bottom: var(--r-space-3);">
+        <h1 data-i18n="foundation.page.title" class="ds-font-heading" style="font-size: var(--r-font-size-4xl); font-weight: var(--r-font-weight-bold); margin-bottom: var(--r-space-3);">
           Foundation
         </h1>
-        <p style="font-size: var(--font-size-xl); color: hsl(var(--foreground) / 0.7);">
+        <p data-i18n="foundation.page.subtitle" class="ds-font-body" style="font-size: var(--font-size-xl); color: hsl(var(--foreground) / 0.7);">
           Design tokens, typography, spacing, and layout systems that power Rukn
         </p>
         <div style="margin-top: var(--r-space-4); display: flex; gap: var(--r-space-2); flex-wrap: wrap;">
-          <span class="ds-badge ds-badge-primary">150+ Design Tokens</span>
-          <span class="ds-badge ds-badge-success">W3C Compliant</span>
-          <span class="ds-badge ds-badge-neutral">Layout Systems</span>
+          <span class="ds-badge ds-badge-primary" data-i18n="foundation.badge.tokens">150+ Design Tokens</span>
+          <span class="ds-badge ds-badge-success" data-i18n="foundation.badge.compliant">W3C Compliant</span>
+          <span class="ds-badge ds-badge-neutral" data-i18n="foundation.badge.layout">Layout Systems</span>
         </div>
       </div>
       
@@ -597,9 +649,9 @@
         <div class="section-header">
           <h2 class="section-title">
             <i class="ph-fill ph-palette"></i>
-            Colors
+            <span data-i18n="foundation.colors.title">Colors</span>
           </h2>
-          <p class="section-description">Semantic color tokens for consistent theming</p>
+          <p class="section-description" data-i18n="foundation.colors.description">Semantic color tokens for consistent theming</p>
         </div>
         <div class="token-grid">
           <div style="padding: var(--space-6); background: hsl(var(--primary)); border-radius: var(--radius-lg); color: white;">
@@ -665,6 +717,10 @@
             <div>
               <p class="arabic-text inline" style="font-size: var(--font-size-2xl);">رُكن تصميم النظام</p>
               <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">Arabic • --r-font-arabic (Rubik) • 30px</div>
+            </div>
+            <div>
+              <p class="urdu-text inline" style="font-size: var(--font-size-2xl);">رکن ڈیزائن سسٹم</p>
+              <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-top: var(--space-2); font-family: var(--font-mono);">Urdu • --r-font-urdu (Noto Nastaliq Urdu) • 30px</div>
             </div>
           </div>
         </div>
@@ -825,6 +881,27 @@
               <div style="font-family: var(--font-mono); font-size: var(--font-size-xs); color: hsl(var(--muted-foreground)); margin-bottom: var(--space-1);">--r-radius-full</div>
               <div style="font-size: var(--font-size-xs); color: hsl(var(--muted-foreground));">Circle</div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Primary Color Playground -->
+      <section id="color-system" class="section" data-keywords="color primary tokens theme picker">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="ph-fill ph-eyedropper"></i>
+            Primary Color Playground
+          </h2>
+          <p class="section-description">Test how changing the primary hue updates the entire system</p>
+        </div>
+        <div class="card-surface" style="display: flex; flex-direction: column; gap: var(--r-space-6); max-width: 640px;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--r-space-4);">
+            <label for="primaryColorPicker" style="font-weight: var(--r-font-weight-semibold); font-size: var(--font-size-lg);">Pick a new primary color</label>
+            <input type="color" id="primaryColorPicker" value="#ff4154" aria-label="Select primary color" style="width: 52px; height: 52px; border: none; border-radius: var(--r-radius-lg); padding: 0; background: transparent; cursor: pointer;">
+          </div>
+          <div>
+            <p id="primaryColorValue" style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: hsl(var(--muted-foreground));">--primary: 352 95% 58%</p>
+            <p style="font-size: var(--font-size-sm); color: hsl(var(--foreground) / 0.7);">Updates <code style="background: hsl(var(--muted)); padding: 2px 6px; border-radius: 4px;">--primary</code> & <code style="background: hsl(var(--muted)); padding: 2px 6px; border-radius: 4px;">--primary-foreground</code> in real time.</p>
           </div>
         </div>
       </section>
@@ -1392,6 +1469,165 @@
     if (demoSlider && sliderValue) {
       demoSlider.addEventListener('input', (e) => {
         sliderValue.textContent = e.target.value;
+      });
+    }
+
+    // Primary color playground
+    const primaryColorPicker = document.getElementById('primaryColorPicker');
+    const primaryColorValue = document.getElementById('primaryColorValue');
+    const PRIMARY_COLOR_STORAGE_KEY = 'rukn-primary-color';
+
+    function fallbackHexToHsl(hex) {
+      const sanitized = hex.replace('#', '');
+      const bigint = parseInt(sanitized, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+
+      const rNorm = r / 255;
+      const gNorm = g / 255;
+      const bNorm = b / 255;
+
+      const max = Math.max(rNorm, gNorm, bNorm);
+      const min = Math.min(rNorm, gNorm, bNorm);
+      let h;
+      let s;
+      const l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case rNorm:
+            h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0);
+            break;
+          case gNorm:
+            h = (bNorm - rNorm) / d + 2;
+            break;
+          default:
+            h = (rNorm - gNorm) / d + 4;
+        }
+        h /= 6;
+      }
+
+      return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+      };
+    }
+
+    function fallbackHslToHex(hslString) {
+      const [hStr, sStr, lStr] = hslString.split(' ');
+      const h = parseFloat(hStr);
+      const s = parseFloat(sStr);
+      const l = parseFloat(lStr);
+
+      const sNorm = s / 100;
+      const lNorm = l / 100;
+
+      const c = (1 - Math.abs(2 * lNorm - 1)) * sNorm;
+      const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+      const m = lNorm - c / 2;
+
+      let rPrime = 0;
+      let gPrime = 0;
+      let bPrime = 0;
+
+      if (h >= 0 && h < 60) {
+        rPrime = c; gPrime = x; bPrime = 0;
+      } else if (h < 120) {
+        rPrime = x; gPrime = c; bPrime = 0;
+      } else if (h < 180) {
+        rPrime = 0; gPrime = c; bPrime = x;
+      } else if (h < 240) {
+        rPrime = 0; gPrime = x; bPrime = c;
+      } else if (h < 300) {
+        rPrime = x; gPrime = 0; bPrime = c;
+      } else {
+        rPrime = c; gPrime = 0; bPrime = x;
+      }
+
+      const r = Math.round((rPrime + m) * 255);
+      const g = Math.round((gPrime + m) * 255);
+      const b = Math.round((bPrime + m) * 255);
+
+      const toHex = (value) => value.toString(16).padStart(2, '0');
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
+    function fallbackApplyPrimary(hex, persist = true) {
+      const { h, s, l } = fallbackHexToHsl(hex);
+      const primaryHsl = `${h} ${s}% ${l}%`;
+      document.documentElement.style.setProperty('--primary', primaryHsl);
+      document.documentElement.style.setProperty('--primary-foreground', l > 55 ? '0 0% 12%' : '0 0% 98%');
+      document.body.style.setProperty('--primary', primaryHsl);
+      document.body.style.setProperty('--primary-foreground', l > 55 ? '0 0% 12%' : '0 0% 98%');
+
+      const accentHue = (h + 20) % 360;
+      const accentLight = Math.min(96, l + 15);
+      const accentSat = Math.max(25, s - 10);
+      document.documentElement.style.setProperty('--accent', `${accentHue} ${accentSat}% ${accentLight}%`);
+      document.documentElement.style.setProperty('--accent-foreground', accentLight > 55 ? '0 0% 12%' : '0 0% 98%');
+      const ringLight = Math.min(98, l + 18);
+      document.documentElement.style.setProperty('--ring', `${h} ${s}% ${ringLight}%`);
+      document.body.style.setProperty('--accent', `${accentHue} ${accentSat}% ${accentLight}%`);
+      document.body.style.setProperty('--accent-foreground', accentLight > 55 ? '0 0% 12%' : '0 0% 98%');
+      document.body.style.setProperty('--ring', `${h} ${s}% ${ringLight}%`);
+
+      if (persist) {
+        try { window.localStorage.setItem(PRIMARY_COLOR_STORAGE_KEY, hex); } catch (_) {}
+      }
+      return primaryHsl;
+    }
+
+    function updatePrimaryLabel() {
+      if (!primaryColorValue) return;
+      const currentPrimary = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+      primaryColorValue.textContent = `--primary: ${currentPrimary}`;
+    }
+
+    if (primaryColorPicker && primaryColorValue) {
+      let initialHex = '#ff4154';
+      try {
+        const storedHex = window.localStorage.getItem(PRIMARY_COLOR_STORAGE_KEY);
+        if (storedHex) {
+          initialHex = storedHex;
+          if (window.ruknSetPrimaryColor) {
+            window.ruknSetPrimaryColor(storedHex, false);
+          } else {
+            fallbackApplyPrimary(storedHex, false);
+          }
+        }
+      } catch (_) {}
+
+      if (!initialHex && window.ruknGetPrimaryColor) {
+        initialHex = window.ruknGetPrimaryColor().hex;
+      }
+
+      if (!initialHex) {
+        const currentPrimary = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+        initialHex = fallbackHslToHex(currentPrimary);
+      }
+
+      primaryColorPicker.value = initialHex;
+      if (window.ruknSetPrimaryColor) {
+        window.ruknSetPrimaryColor(initialHex, false);
+      } else {
+        fallbackApplyPrimary(initialHex, false);
+      }
+      updatePrimaryLabel();
+
+      primaryColorPicker.addEventListener('input', (event) => {
+        const hex = event.target.value;
+        if (window.ruknSetPrimaryColor) {
+          window.ruknSetPrimaryColor(hex, true);
+        } else {
+          fallbackApplyPrimary(hex, true);
+        }
+        updatePrimaryLabel();
       });
     }
   </script>

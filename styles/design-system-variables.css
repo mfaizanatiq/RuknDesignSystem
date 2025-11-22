@@ -23,7 +23,8 @@
   --r-font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --r-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --r-font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
-  --r-font-arabic: 'Rubik', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --r-font-arabic: 'IBM Plex Sans Arabic', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --r-font-urdu: 'Noto Nastaliq Urdu', 'IBM Plex Sans Arabic', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   
   /* Font Weights */
   --r-font-weight-light: 300;
@@ -40,6 +41,11 @@
   --r-line-height-normal: 1.5;
   --r-line-height-relaxed: 1.625;
   --r-line-height-loose: 2;
+  
+  /* Urdu-specific line heights (Nastaliq script requires more vertical space) */
+  --r-line-height-urdu-base: 1.75;
+  --r-line-height-urdu-heading: 1.6;
+  --r-line-height-urdu-body: 1.8;
   
   /* Letter Spacing */
   --r-letter-spacing-tighter: -0.05em;
@@ -140,13 +146,36 @@
      Z-INDEX TOKENS (W3C Compliant)
      ======================================== */
   
+  --r-z-base: 1;
   --r-z-dropdown: 1000;
   --r-z-sticky: 1020;
   --r-z-fixed: 1030;
-  --r-z-modal-backdrop: 1040;
-  --r-z-modal: 1050;
+  --r-z-navbar: 2000;
+  --r-z-navbar-mobile: 1990;
+  --r-z-modal-backdrop: 3000;
+  --r-z-modal: 3001;
   --r-z-popover: 1060;
+  
   --r-z-tooltip: 1070;
+  
+  /* ========================================
+     SECTION GRADIENT TOKENS (Token-driven for scalability)
+     Uses primary/accent colors for brand consistency
+     ======================================== */
+  --r-section-gradient-dark: linear-gradient(180deg, 
+    transparent 0%, 
+    hsl(var(--primary) / 0.08) 30%,
+    hsl(var(--accent) / 0.06) 50%,
+    hsl(var(--primary) / 0.08) 70%,
+    transparent 100%
+  );
+  --r-section-gradient-light: linear-gradient(180deg, 
+    transparent 0%, 
+    hsl(var(--primary) / 0.04) 30%,
+    hsl(var(--accent) / 0.03) 50%,
+    hsl(var(--primary) / 0.04) 70%,
+    transparent 100%
+  );
   
   /* ========================================
      TRANSITION TOKENS (W3C Compliant - iOS Motion HCI)
@@ -186,6 +215,7 @@
   --font-body: var(--r-font-body);
   --font-mono: var(--r-font-mono);
   --font-arabic: var(--r-font-arabic);
+  --font-urdu: var(--r-font-urdu);
   --font-weight-light: var(--r-font-weight-light);
   --font-weight-normal: var(--r-font-weight-normal);
   --font-weight-medium: var(--r-font-weight-medium);
@@ -308,45 +338,47 @@
   --spacing-2xl: 3rem;      /* 48px */
   
   /* ========================================
-     COLOR SYSTEM - Light Theme
+     COLOR SYSTEM - Light Theme (Glass Morphism Optimized)
      ======================================== */
   
-  /* Base Colors */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  /* Base Colors - Soft light background for glass effects */
+  --background: 220 20% 98%;         /* Soft off-white for glass backdrop */
+  --foreground: 220 15% 8%;           /* Dark text for accessibility */
   
-  /* Card & Popover */
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+  /* Card & Popover - Glass morphism surfaces */
+  --card: 0 0% 100% / 0.7;           /* Semi-transparent white for glass */
+  --card-foreground: 220 15% 8%;      /* Dark text on light glass */
+  --popover: 0 0% 100% / 0.85;        /* More opaque for popovers */
+  --popover-foreground: 220 15% 8%;
   
   /* Primary Brand Color */
-  --primary: 352 95% 58%;            /* Warm Red */
-  --primary-foreground: 210 40% 98%;
+  --primary: 352 95% 58%;             /* Warm Red */
+  --primary-foreground: 0 0% 100%;    /* White text on primary */
   
   /* Secondary Colors */
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 84% 4.9%;
+  --secondary: 220 15% 95%;          /* Light gray for secondary */
+  --secondary-foreground: 220 15% 8%; /* Dark text */
   
   /* Muted/Subdued */
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  --muted: 220 10% 96%;               /* Very light gray */
+  --muted-foreground: 220 10% 40%;   /* Medium gray text */
   
   /* Accent Colors */
-  --accent: 210 40% 96%;
-  --accent-foreground: 222.2 84% 4.9%;
+  --accent: 18 90% 65%;                /* Warm orange accent */
+  --accent-foreground: 0 0% 100%;     /* White text on accent */
   
   /* State Colors */
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --warning: 38 92% 50%;
-  --success: 142.1 76.2% 36.3%;
+  --destructive: 0 84.2% 60.2%;       /* Red for errors */
+  --destructive-foreground: 0 0% 100%;
+  --warning: 38 92% 50%;              /* Yellow for warnings */
+  --warning-foreground: 220 15% 8%;   /* Dark text on yellow */
+  --success: 142.1 76.2% 36.3%;       /* Green for success */
+  --success-foreground: 0 0% 100%;   /* White text on green */
   
-  /* Borders & Inputs */
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  /* Borders & Inputs - Subtle borders for light mode */
+  --border: 220 15% 85% / 0.5;        /* Light gray with transparency */
+  --input: 220 15% 90% / 0.6;         /* Slightly darker for inputs */
+  --ring: 352 95% 58% / 0.4;          /* Primary color for focus ring */
   
   /* Border Radius (W3C Compliant) */
   --r-radius-none: 0;

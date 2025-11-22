@@ -2,83 +2,38 @@
 
 Get up and running in **under 60 seconds**.
 
-## Installation
+---
 
-### NPM (Recommended)
+## ⚡ Super Quick Start
 
+### 1. Download
 ```bash
-npm install @ruknds/core
+git clone https://github.com/mfaizanatiq/RuknDesignSystem.git
 ```
 
-### Yarn
+### 2. Copy Files
+Copy the `styles/` folder to your project:
+- `styles/design-system-variables.css`
+- `styles/design-system.css`
 
-```bash
-yarn add @ruknds/core
-```
+### 3. Use Starter Template
+Copy [starter-template.html](./starter-template.html) or see the basic setup below.
 
-### CDN (No Installation Required)
+---
 
-```html
-<!-- Add to your HTML <head> -->
-<link rel="stylesheet" href="https://unpkg.com/@ruknds/core@latest/design-system.css">
-```
+## 📖 Need More Details?
+
+- **[📘 Complete Integration Guide](./INTEGRATION_GUIDE.md)** - Detailed setup for all frameworks
+- **[🌓 Theme Guide](./THEME_GUIDE.md)** - How to use dark/light themes
+- **[📝 Starter Template](./starter-template.html)** - Ready-to-use HTML template
+
+---
 
 ---
 
 ## Usage
 
-### 1. Import in JavaScript/TypeScript Projects
-
-#### React / Next.js
-
-```jsx
-// In your main App.js or _app.js
-import '@ruknds/core';
-
-function App() {
-  return (
-    <div>
-      <button className="btn-primary">Click Me</button>
-      <div className="ds-card">Hello Rukn!</div>
-    </div>
-  );
-}
-```
-
-#### Vue / Nuxt
-
-```javascript
-// In your main.js
-import '@ruknds/core';
-
-// Or in nuxt.config.js
-export default {
-  css: ['@ruknds/core']
-}
-```
-
-#### Svelte / SvelteKit
-
-```javascript
-// In your +layout.svelte or main component
-<script>
-  import '@ruknds/core';
-</script>
-```
-
-#### Angular
-
-```typescript
-// In angular.json under "styles"
-"styles": [
-  "node_modules/@ruknds/core/design-system.css",
-  "src/styles.css"
-]
-```
-
----
-
-### 2. Import in HTML (CDN)
+### 1. Basic HTML Setup
 
 ```html
 <!DOCTYPE html>
@@ -89,7 +44,8 @@ export default {
   <title>My App with Rukn</title>
   
   <!-- Rukn Design System -->
-  <link rel="stylesheet" href="https://unpkg.com/@ruknds/core@latest/design-system.css">
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
   
   <!-- Optional: Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
@@ -107,6 +63,45 @@ export default {
 </body>
 </html>
 ```
+
+### 2. With Web Components (Optional)
+
+If you want to use the Web Components (navbar, sidebar, etc.):
+
+```html
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My App with Rukn</title>
+  
+  <!-- Rukn Design System CSS -->
+  <link rel="stylesheet" href="styles/design-system-variables.css">
+  <link rel="stylesheet" href="styles/design-system.css">
+  
+  <!-- Rukn Web Components -->
+  <script src="components/rukn-navbar.js" defer></script>
+  <script src="components/rukn-footer.js" defer></script>
+  <script src="components/rukn-ui.js" type="module"></script>
+</head>
+<body>
+  
+  <!-- Use Web Components -->
+  <rukn-navbar current="home"></rukn-navbar>
+  
+  <main>
+    <h1>Your Content</h1>
+    <rukn-button variant="primary">Click Me</rukn-button>
+  </main>
+  
+  <rukn-footer></rukn-footer>
+  
+</body>
+</html>
+```
+
+**Note:** Make sure the `components/` folder is in your project directory.
 
 ---
 
@@ -226,20 +221,32 @@ export default {
 
 ---
 
-## Dark Mode
+## 🌓 Theme System
 
-Rukn is dark mode first. Toggle by adding/removing the `dark` class on `<html>`:
+**Dark theme is the default** (optimized for glass morphism)
 
+### Switch to Light Theme
+
+Simply remove the `dark` class:
+```html
+<!-- Dark theme (default) -->
+<html lang="en" class="dark">
+
+<!-- Light theme -->
+<html lang="en">
+```
+
+### Toggle with JavaScript
 ```javascript
-// Toggle dark mode
+// Toggle between dark/light
 document.documentElement.classList.toggle('dark');
 
-// Force light mode
-document.documentElement.classList.remove('dark');
-
-// Force dark mode
-document.documentElement.classList.add('dark');
+// Set specific theme
+document.documentElement.classList.add('dark');    // Force dark
+document.documentElement.classList.remove('dark'); // Force light
 ```
+
+**[📘 See Theme Guide](./THEME_GUIDE.md)** for advanced theming with localStorage, system preferences, and more.
 
 ---
 
@@ -249,32 +256,50 @@ Override CSS variables in your own stylesheet:
 
 ```css
 :root {
-  --r-color-primary: 280 100% 70%;  /* HSL values */
+  --primary: 280 100% 70%;  /* HSL values */
   --r-font-heading: 'Your Font', sans-serif;
   --r-radius-lg: 16px;
 }
 ```
 
+**See [foundation.html](./foundation.html) for a live color picker and all available tokens.**
+
+---
+
+## Multi-language Support
+
+Rukn supports Arabic and Urdu with automatic RTL layout:
+
+```html
+<!-- Include language fonts -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Use data-i18n attributes for translations -->
+<h1 data-i18n="index.hero.heading">Design System</h1>
+```
+
+The navbar includes a language switcher. See [components/rukn-navbar.js](./components/rukn-navbar.js) for implementation details.
+
 ---
 
 ## Next Steps
 
-- 📚 [View All Components](components.html)
-- 🎨 [Design Tokens Reference](DESIGN_TOKENS.md)
-- 🔧 [Framework Integration Guides](INTEGRATION.md)
-- 💡 [Component Examples](example.html)
+- 📚 [View All Components](./components.html)
+- 🎨 [Design Tokens Reference](./foundation.html)
+- 🧩 [Web Components Guide](./components/README.md)
+- 🔧 [Framework Integration](./docs/INTEGRATION.md)
+- 💡 [Component Examples](./example.html)
 
 ---
 
 ## Need Help?
 
-- 📖 [Full Documentation](README.md)
-- 🐛 [Report Issues](https://github.com/ruknds/core/issues)
-- 💬 [Join Discussions](https://github.com/ruknds/core/discussions)
-- ⭐ [Star on GitHub](https://github.com/ruknds/core)
+- 📖 [Full Documentation](./README.md)
+- 🐛 [Report Issues](https://github.com/mfaizanatiq/RuknDesignSystem/issues)
+- 💬 [GitHub Discussions](https://github.com/mfaizanatiq/RuknDesignSystem/discussions)
+- ⭐ [Star on GitHub](https://github.com/mfaizanatiq/RuknDesignSystem)
 
 ---
 
 **Built with ❤️ by the Rukn Community**  
 MIT Licensed • Free Forever • Open Source
-
